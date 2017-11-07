@@ -75,7 +75,7 @@ $customer->get_our_customers_by_surname();
 
 $customer->getAllCustomers();
 $bookings = new Booking();
-$results  = @$bookings->GetBookings($_GET['customerId']);
+$results  = $bookings->GetBookings($_GET['customerId']);
 foreach ($results as $result):
     echo $result['booking_reference'] . ' - ' . $result['customer_name'] . $result['booking_date'];
 endforeach;

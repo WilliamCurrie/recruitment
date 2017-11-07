@@ -64,15 +64,14 @@ class CustomerController extends Controller
     /**
      * @Route("/new/{firstName}/{secondName}/{address}", name="customer_new")
      * @param Request $request
-     * @param CustomerManager $customerManager
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function newAction(Request $request, CustomerManager $customerManager)
+    public function newAction(Request $request)
     {
         $firstName  = $request->get('firstName');
         $secondName = $request->get('secondName');
         $address    = $request->get('address');
-        $new        = $customerManager->createNew(
+        $new        = $this->get(CustomerManager::class)->createNew(
             $firstName,
             $secondName,
             $address

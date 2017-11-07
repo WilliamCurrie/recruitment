@@ -6,3 +6,8 @@ customer:
     resource: "@AppBundle/Controller/CustomerController.php"
     prefix: /customer
     type:     annotation
+
+booking:
+    resource: "@AppBundle/Controller/BookingController.php"
+    prefix: /booking
+    type:     annotation
