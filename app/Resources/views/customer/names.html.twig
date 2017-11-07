@@ -1,0 +1,31 @@
+{% block body %}
+    <div id="wrapper">
+        <div id="container">
+            <div id="bookings">
+                <h1><span>Customers</span> </h1>
+            </div>
+
+            <div id="list">
+
+                <table>
+                    <thead>
+                    <tr>
+                        <th>First Name</th>
+                        <th>Second Name</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for customer in customers %}
+                        <tr>
+                            <td>{{ customer.getFirstName() }}</td>
+                            <td>{{ customer.getSecondName() }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+
+            </div>
+
+        </div>
+    </div>
+{% endblock %}

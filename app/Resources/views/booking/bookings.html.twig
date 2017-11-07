@@ -1,0 +1,33 @@
+{% block body %}
+    <div id="wrapper">
+        <div id="container">
+            <div id="bookings">
+                <h1><span>Bookings</span> </h1>
+            </div>
+
+            <div id="list">
+
+                <table>
+                    <thead>
+                    <tr>
+                    <th>Booking Ref</th>
+                    <th>Customer</th>
+                    <th>Booking Date</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for booking in bookings %}
+                        <tr>
+                            <td>{{ booking.bookingReference }}</td>
+                            <td>{{ booking.customer.getFullName() }}</td>
+                            <td>{{ booking.bookingDate|date('d/m/Y') }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+
+            </div>
+
+        </div>
+    </div>
+{% endblock %}

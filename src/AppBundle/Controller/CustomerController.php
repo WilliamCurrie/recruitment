@@ -24,18 +24,7 @@ class CustomerController extends Controller
             ->getRepository(Customers::class)
             ->findAll();
 
-        $view = '<table>';
-        foreach ($customers as $customer) {
-            $view .= '<tr>';
-            $view .= '<tr>' . $customer->getFirstName() . '</td>';
-            $view .= '<td>' . $customer->getSecondName() . '</td>';
-            $view .= '</tr>';
-        }
-
-        $view .= '</table>';
-
-        echo $view;
-        die();
+        return $this->render('customer/list.html.twig', ["customers" =>$customers]);
     }
 
 
@@ -48,17 +37,8 @@ class CustomerController extends Controller
         $customers = $this->getDoctrine()
             ->getRepository(Customers::class)
             ->findAll();
-        $view      = '<table>';
-        foreach ($customers as $customer) {
-            $view .= '<tr>';
-            $view .= '<td>';
-            $view .= $customer->getFullName();
-            $view .= '</td>';
-            $view .= '</tr>';
-        }
-        $view .= '</table>';
-        echo $view;
-        die();
+
+        return $this->render('customer/names.html.twig', ["customers" =>$customers]);
     }
 
     /**

@@ -40,6 +40,12 @@ services:
         arguments:
         - AppBundle\Entity\Customers
 
+    app.booking.repository:
+        class: AppBundle\Repository\BookingsRepository
+        factory: ["@doctrine.orm.entity_manager", getRepository]
+        arguments:
+        - AppBundle\Entity\Bookings
+
     AppBundle\Manager\CustomerManager:
         arguments: ["@doctrine.orm.entity_manager", "@app.customer.repository"]
 

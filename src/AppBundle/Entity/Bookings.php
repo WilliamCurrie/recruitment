@@ -12,7 +12,6 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Bookings
 {
-
     /**
      * @ORM\Column(type="integer")
      * @ORM\Id
@@ -59,6 +58,7 @@ class Bookings
     public function setCustomer($customer)
     {
         $this->customer = $customer;
+        return $this;
     }
 
     /**
@@ -75,6 +75,7 @@ class Bookings
     public function setBookingReference($bookingReference)
     {
         $this->bookingReference = $bookingReference;
+        return $this;
     }
 
     /**
@@ -91,8 +92,6 @@ class Bookings
     public function setBookingDate($bookingDate)
     {
         $this->bookingDate = $bookingDate;
+        return $this;
     }
-
-
-
 }

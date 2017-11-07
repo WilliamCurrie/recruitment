@@ -77,6 +77,7 @@ class Customers
     public function setTitle($title)
     {
         $this->title = $title;
+        return $this;
     }
 
     /**
@@ -93,6 +94,7 @@ class Customers
     public function setFirstName($firstName)
     {
         $this->firstName = $firstName;
+        return $this;
     }
 
     /**
@@ -109,6 +111,7 @@ class Customers
     public function setSecondName($secondName)
     {
         $this->secondName = $secondName;
+        return $this;
     }
 
     /**
@@ -125,6 +128,7 @@ class Customers
     public function setTwiterAlias($twiterAlias)
     {
         $this->twiterAlias = $twiterAlias;
+        return $this;
     }
 
 
@@ -142,6 +146,7 @@ class Customers
     public function setAddress($address)
     {
         $this->address = $address;
+        return $this;
     }
 
 
