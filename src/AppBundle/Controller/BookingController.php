@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 
+use AppBundle\Manager\BookingManager;
 use AppBundle\Repository\BookingsRepository;
 use AppBundle\Repository\CustomersRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -19,9 +20,9 @@ class BookingController extends Controller
 
         if (!empty($id)) {
             $customer = $this->getDoctrine()->getRepository(CustomersRepository::class)->find($id);
-            $bookings = $this->getDoctrine()->getRepository(BookingsRepository::class)->findBy(["customer" => $customer]);
+            $bookings = $this->get(BookingManager::class)->findBy(["customer" => $customer]);
         } else {
-            $bookings = $this->getDoctrine()->getRepository(BookingsRepository::class)->findAll();
+            $bookings = $this->get(BookingManager::class)->findAll();
         }
 
         return $this->render('booking/bookings.html.twig', ['bookings' => $bookings]);

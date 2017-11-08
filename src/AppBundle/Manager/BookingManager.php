@@ -2,38 +2,31 @@
 
 namespace AppBundle\Manager;
 
-use AppBundle\Entity\Customers;
-use AppBundle\Repository\CustomersRepository;
+use AppBundle\Entity\Bookings;
+use AppBundle\Repository\BookingsRepository;
 use Doctrine\ORM\EntityManager;
 
-class CustomerManager
+class BookingManager
 {
 
-    protected $customersRepository;
+    protected $bookingsRepository;
 
     protected $entityManager;
 
-    public function __construct(EntityManager $em, CustomersRepository $customersRepository)
+    public function __construct(EntityManager $em, BookingsRepository $bookingsRepository)
     {
         $this->entityManager = $em;
-        $this->customersRepository = $customersRepository;
+        $this->bookingsRepository = $bookingsRepository;
     }
 
 
-    public function findById($id)
+    public function findBy($value = [])
     {
-        return $this->customersRepository->find($id);
+        return $this->bookingsRepository->findBy($value);
     }
 
-    public function createNew($firstName,$secondName,$address){
-
-        $customer = new Customers();
-        $customer->setFirstName($firstName);
-        $customer->setSecondName($secondName);
-        $customer->setAddress($address);
-        $this->entityManager->persist($customer);
-        $this->entityManager->flush();
-        return $customer;
+    public function findAll(){
+        return $this->bookingsRepository->findAll();
     }
 
 }
