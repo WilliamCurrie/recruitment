@@ -1,0 +1,20 @@
+
+{% block body %}
+    <div id="wrapper">
+        <div id="container">
+            <div id="bookings">
+                <h1><span>Add Customer</span> </h1>
+            </div>
+
+            <div id="form">
+            <form method="post" action="{{ path('customer_new') }}">
+                Fisrt Name:<input type="text" id="firstName" name="firstName"> <br />
+                Second Name:<input type="text" id="secondName" name="secondName"><br />
+                Address: <input type="text" id="addressName" name="addressName"><br />
+                <input type="submit" id="Submit" value="Save">
+            </form>
+            </div>
+
+        </div>
+    </div>
+{% endblock %}
