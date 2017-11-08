@@ -7,7 +7,7 @@ use Doctrine\ORM\EntityRepository;
 class CustomersRepository extends EntityRepository
 {
 
-    function findByLastName($secondName)
+    public function findByLastName($secondName)
     {
           $qb = $this->createQueryBuilder('c')
               ->where('secondName = :lastname')->setParameter('lastname', $secondName);
@@ -16,10 +16,12 @@ class CustomersRepository extends EntityRepository
     }
 
 
-    function findAll()
+    public function findAll($sort = false)
     {
-          $qb = $this->createQueryBuilder('c')
-              ->addOrderBy('c.secondName');
+          $qb = $this->createQueryBuilder('c');
+          if($sort){
+              $qb->addOrderBy('c.secondName');
+          }
 
           return $qb->getQuery()->getResult();
     }

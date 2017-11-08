@@ -9,6 +9,7 @@ use AppBundle\Repository\CustomersRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\BrowserKit\Response;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
 class CustomerController extends Controller
@@ -36,18 +37,21 @@ class CustomerController extends Controller
     {
         $customers = $this->getDoctrine()
             ->getRepository(Customers::class)
-            ->findAll();
+            ->findAll(true);
 
         return $this->render('customer/names.html.twig', ["customers" =>$customers]);
     }
 
     /**
+     *
      * @Route("/new/{firstName}/{secondName}/{address}", name="customer_new")
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function newAction(Request $request)
     {
+        //TODO: create a form to send POST values
+
         $firstName  = $request->get('firstName');
         $secondName = $request->get('secondName');
         $address    = $request->get('address');
@@ -57,8 +61,11 @@ class CustomerController extends Controller
             $address
         );
 
-        echo json_encode($new);
-        die();
+        if(!empty($new)){
+            return new \Symfony\Component\HttpFoundation\Response("Success", \Symfony\Component\HttpFoundation\Response::HTTP_OK);
+        }else{
+            return new \Symfony\Component\HttpFoundation\Response("Failure", \Symfony\Component\HttpFoundation\Response::HTTP_BAD_REQUEST);
+        }
     }
 
 }
