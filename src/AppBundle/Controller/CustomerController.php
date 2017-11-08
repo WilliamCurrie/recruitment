@@ -43,18 +43,25 @@ class CustomerController extends Controller
     }
 
     /**
+     * @Route("/form", name="customer_form")
+     */
+    public function newFormAction(){
+
+        return $this->render('customer/form.html.twig');
+    }
+
+    /**
      *
-     * @Route("/new/{firstName}/{secondName}/{address}", name="customer_new")
+     * @Route("/new", name="customer_new", methods="post")
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function newAction(Request $request)
     {
-        //TODO: create a form to send POST values
 
-        $firstName  = $request->get('firstName');
-        $secondName = $request->get('secondName');
-        $address    = $request->get('address');
+        $firstName  = $request->request->get('firstName');
+        $secondName = $request->request->get('secondName');
+        $address    = $request->request->get('address');
         $new        = $this->get(CustomerManager::class)->createNew(
             $firstName,
             $secondName,

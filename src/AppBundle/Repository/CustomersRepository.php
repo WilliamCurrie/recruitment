@@ -7,10 +7,24 @@ use Doctrine\ORM\EntityRepository;
 class CustomersRepository extends EntityRepository
 {
 
+    /**
+     * Normally I would use the "magic" method ->find()
+     *
+     * @param $id
+     * @return array
+     */
+    public function findById($id)
+    {
+        $qb = $this->createQueryBuilder('c')
+            ->where('c.id = :id')->setParameter('id', $id);
+
+        return $qb->getQuery()->getResult();
+    }
+
     public function findByLastName($secondName)
     {
           $qb = $this->createQueryBuilder('c')
-              ->where('secondName = :lastname')->setParameter('lastname', $secondName);
+              ->where('c.secondName = :secondName')->setParameter('secondName', $secondName);
 
           return $qb->getQuery()->getResult();
     }
