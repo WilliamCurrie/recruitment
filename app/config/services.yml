@@ -20,7 +20,7 @@ services:
         resource: '../../src/AppBundle/*'
         # you can exclude directories or files
         # but if a service is unused, it's removed anyway
-        exclude: '../../src/AppBundle/{Entity,Repository,Tests}'
+        exclude: '../../src/AppBundle/{Tests}'
 
     # controllers are imported separately to make sure they're public
     # and have a tag that allows actions to type-hint services
@@ -34,18 +34,18 @@ services:
     #     arguments:
     #         $someArgument: 'some_value'
 
-    app.customer.repository:
-        class: AppBundle\Repository\CustomersRepository
+    AppBundle\Repository\CustomersRepository:
         factory: ["@doctrine.orm.entity_manager", getRepository]
-        arguments:
-        - AppBundle\Entity\Customers
+        arguments: ['AppBundle\Entity\Customers']
 
-    app.booking.repository:
-        class: AppBundle\Repository\BookingsRepository
+    AppBundle\Repository\BookingsRepository:
         factory: ["@doctrine.orm.entity_manager", getRepository]
-        arguments:
-        - AppBundle\Entity\Bookings
+        arguments: ['AppBundle\Entity\Bookings']
 
     AppBundle\Manager\CustomerManager:
-        arguments: ["@doctrine.orm.entity_manager", "@app.customer.repository"]
+        arguments: ['@doctrine.orm.entity_manager', '@AppBundle\Repository\CustomersRepository']
+        public: true
 
+    AppBundle\Manager\BookingManager:
+        arguments: ['@doctrine.orm.entity_manager', '@AppBundle\Repository\BookingsRepository']
+        public: true
