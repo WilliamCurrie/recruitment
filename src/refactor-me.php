@@ -72,19 +72,8 @@ class Customer
      */
     public function listByLastname()
     {
-        //function sortname($a, $b) {
-        //	$a = $a['second_name'];
-        //	$b = $b['second_name'];
-        //	if ($a == $b) return 0;
-        //	return ($a < $b) ? -1 : 1;
-        //}
-        //$data = $this->data;
-        //usort( $data, 'sortname' );
-
-        ///*
         $sql  = 'SELECT first_name, second_name FROM customers ORDER BY second_name';
         $data = $this->conn->getAll( $sql );
-        //*/
 
         $ret = [];
 
