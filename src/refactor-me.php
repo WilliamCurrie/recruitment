@@ -181,12 +181,9 @@ class Booking
     {
         $ret = [];
 
-        /* use rolled function */
-        //$data = $this->lookup( $id );
-
         if( !empty( $id ) )
         {
-            $sql  = 'SELECT * FROM bookings WHERE customerID = :id';
+            $sql  = 'SELECT * FROM bookings WHERE customerID = :id ORDER BY booking_date DESC';
             $val  = ['id' => $id];
             $data = $this->conn->getAll( $sql, $val );
 
