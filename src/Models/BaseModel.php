@@ -85,7 +85,6 @@ abstract class BaseModel
     {
         $this->prepareSave($array);
         $statement = $this->db->prepare($this->query);
-        print_r($this->query);
         $statement->execute($this->data);
     }
 
@@ -112,12 +111,11 @@ abstract class BaseModel
             }
             if (in_array($key, $this->fillable)) {
                 $this->query .= '?';
-                $this->data = ['12341234', '12341234'];
+                $this->data[] = $value;
             }
             $first = false;
         }
         $this->query .= ')';
-
     }
 
     public function open()
@@ -128,8 +126,7 @@ abstract class BaseModel
     public function findById($id)
     {
         if (is_int($id)) {
-            $this->query .= "where id = :$id";
-            $this->data[':id'] = $id;
+            $this->where('id', '=', $id);
         }
     }
 }
