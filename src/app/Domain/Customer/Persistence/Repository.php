@@ -10,10 +10,15 @@ interface Repository
     public function insert(Customer $customer): void;
 
     /**
-     * @param int|null $id
-     * @param string|null $orderBy
+     * @param int $id
      * @throws NotFoundException
+     * @return Customer
+     */
+    public function getById(int $id): Customer;
+
+    /**
+     * @param string|null $orderBy
      * @return array|Customer[]
      */
-    public function find(int $id = null, string $orderBy = null): array;
+    public function get(string $orderBy = null): array;
 }

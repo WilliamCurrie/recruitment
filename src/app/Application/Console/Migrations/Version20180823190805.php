@@ -15,6 +15,7 @@ final class Version20180823190805 extends AbstractMigration
     {
         $table = $schema->createTable('customers');
         $table->addColumn('id', Type::INTEGER)->setAutoincrement(true);
+        $table->addColumn('title', Type::STRING);
         $table->addColumn('first_name', Type::STRING);
         $table->addColumn('last_name', Type::STRING);
         $table->addColumn('address', Type::STRING)->setNotnull(false);

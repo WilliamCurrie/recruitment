@@ -3,6 +3,8 @@
 namespace Wranx\Bootstrap;
 
 use DI\ContainerBuilder;
+use function DI\get;
+//use function DI\object;
 use Doctrine\DBAL\Schema\AbstractSchemaManager;
 use Illuminate\Database\Connection;
 use Illuminate\Database\MySqlConnection;
@@ -33,6 +35,7 @@ class ContainerFactory
     {
         return array_merge(
             $this->defineFramework(),
+            $this->defineDomain(),
             $this->defineConnections(),
             $this->defineConfig()
         );
@@ -53,6 +56,13 @@ class ContainerFactory
             ContainerInterface::class => \DI\factory(function (ContainerInterface $container) {
                 return $container;
             }),
+        ];
+    }
+
+    private function defineDomain(): array
+    {
+        return [
+            \Wranx\Domain\Customer\Persistence\Repository::class => get(\Wranx\Domain\Customer\Persistence\Illuminate\IlluminateRepository::class),
         ];
     }
 
