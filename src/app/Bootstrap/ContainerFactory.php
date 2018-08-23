@@ -1,15 +1,95 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: joesweeny
- * Date: 23/08/18
- * Time: 19:38
- */
 
 namespace Wranx\Bootstrap;
 
+use DI\ContainerBuilder;
+use Doctrine\DBAL\Schema\AbstractSchemaManager;
+use Illuminate\Database\Connection;
+use Illuminate\Database\MySqlConnection;
+use Psr\Container\ContainerInterface;
 
 class ContainerFactory
 {
+    private $config;
 
+    public function create(Config $config): ContainerInterface
+    {
+        $this->config = $config;
+
+        return (new ContainerBuilder)
+            ->useAutowiring(true)
+            ->ignorePhpDocErrors(true)
+            ->useAnnotations(false)
+            ->writeProxiesToFile(false)
+            ->addDefinitions($this->getDefinitions())
+            ->build();
+    }
+
+    /**
+     * @return array
+     * @throws \UnexpectedValueException
+     */
+    protected function getDefinitions(): array
+    {
+        return array_merge(
+            $this->defineFramework(),
+            $this->defineConnections(),
+            $this->defineConfig()
+        );
+    }
+
+    private function defineConfig(): array
+    {
+        return [
+            Config::class => \DI\factory(function () {
+                return $this->config;
+            }),
+        ];
+    }
+
+    private function defineFramework(): array
+    {
+        return [
+            ContainerInterface::class => \DI\factory(function (ContainerInterface $container) {
+                return $container;
+            }),
+        ];
+    }
+
+    private function defineConnections(): array
+    {
+        return [
+            AbstractSchemaManager::class => \DI\factory(function (ContainerInterface $container) {
+                return $container->get(Connection::class)->getDoctrineSchemaManager();
+            }),
+
+            Connection::class => \DI\factory(function (ContainerInterface $container) {
+
+                $config = $container->get(Config::class);
+
+                $dsn = $config->get('database.default.pdo.dsn');
+
+                if (substr($dsn, 0, 5) === 'mysql') {
+                    return new MySqlConnection($container->get(\PDO::class));
+                }
+
+                throw new \RuntimeException("Unrecognised DNS {$dsn}");
+            }),
+
+            \Doctrine\DBAL\Driver\Connection::class => \DI\factory(function (ContainerInterface $container) {
+                return $container->get(Connection::class)->getDoctrineConnection();
+            }),
+
+            \PDO::class => \DI\factory(function (ContainerInterface $container) {
+                $config = $container->get(Config::class);
+                $pdo = new \PDO(
+                    $config->get('database.default.pdo.dsn'),
+                    $config->get('database.default.pdo.user'),
+                    $config->get('database.default.pdo.password')
+                );
+                $pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
+                return $pdo;
+            }),
+        ];
+    }
 }

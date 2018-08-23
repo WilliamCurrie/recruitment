@@ -1,6 +1,6 @@
 <?php
 
-namespace GamePlatform\Bootstrap;
+namespace Wranx\Bootstrap;
 
 use Adam\Bag\Bag;
 

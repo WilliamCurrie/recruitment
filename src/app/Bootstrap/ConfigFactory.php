@@ -1,15 +1,24 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: joesweeny
- * Date: 23/08/18
- * Time: 19:43
- */
 
 namespace Wranx\Bootstrap;
 
-
 class ConfigFactory
 {
-
+    /**
+     * @return Config
+     */
+    public static function create(): Config
+    {
+        return new Config([
+            'database' => [
+                'default' => [
+                    'pdo' => [
+                        'dsn' => getenv('DB_DSN') ?: 'mysql:host=database;dbname=test',
+                        'user' => getenv('DB_USER') ?: 'root',
+                        'password' => getenv('DB_PASSWORD') ?: 'password'
+                    ]
+                ]
+            ],
+        ]);
+    }
 }
