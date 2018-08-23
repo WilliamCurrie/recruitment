@@ -1,15 +1,19 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: joesweeny
- * Date: 23/08/18
- * Time: 20:18
- */
 
 namespace Wranx\Domain\Customer\Persistence;
 
+use Wranx\Domain\Customer\Entity\Customer;
+use Wranx\Framework\NotFoundException;
 
-class Repository
+interface Repository
 {
+    public function insert(Customer $customer): void;
 
+    /**
+     * @param int|null $id
+     * @param string|null $orderBy
+     * @throws NotFoundException
+     * @return array|Customer[]
+     */
+    public function find(int $id = null, string $orderBy = null): array;
 }
