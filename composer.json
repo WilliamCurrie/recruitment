@@ -1,0 +1,24 @@
+{
+  "name": "joesweeny/recruitment",
+  "type": "project",
+  "authors": [
+    {
+      "name": "Joe Sweeny",
+      "email": "joesweeny84@hotmail.com"
+    }
+  ],
+  "require": {
+
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^7.3"
+  },
+  "config": {
+    "vendor-dir": "src/vendor"
+  },
+  "autoload": {
+    "psr-4": {
+      "Wranx\\": ["src/app/", "tests/"]
+    }
+  }
+}
