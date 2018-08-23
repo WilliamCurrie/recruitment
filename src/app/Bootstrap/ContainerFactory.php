@@ -4,7 +4,6 @@ namespace Wranx\Bootstrap;
 
 use DI\ContainerBuilder;
 use function DI\get;
-//use function DI\object;
 use Doctrine\DBAL\Schema\AbstractSchemaManager;
 use Illuminate\Database\Connection;
 use Illuminate\Database\MySqlConnection;
@@ -63,6 +62,8 @@ class ContainerFactory
     {
         return [
             \Wranx\Domain\Customer\Persistence\Repository::class => get(\Wranx\Domain\Customer\Persistence\Illuminate\IlluminateRepository::class),
+
+            \Wranx\Domain\Booking\Persistence\Repository::class => get(\Wranx\Domain\Booking\Persistence\Illuminate\IlluminateRepository::class),
         ];
     }
 
