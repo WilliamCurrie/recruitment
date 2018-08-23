@@ -1,6 +1,6 @@
 <?php
 
-namespace Wranx\Framework;
+namespace Wranx\Framework\Exception;
 
 class NotFoundException extends \Exception
 {

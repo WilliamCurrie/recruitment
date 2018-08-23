@@ -5,7 +5,7 @@ namespace Wranx\Domain\Customer\Persistence\Illuminate;
 use Illuminate\Database\Connection;
 use Wranx\Domain\Customer\Entity\Customer;
 use Wranx\Domain\Customer\Persistence\Repository;
-use Wranx\Framework\NotFoundException;
+use Wranx\Framework\Exception\NotFoundException;
 
 class IlluminateRepository implements Repository
 {

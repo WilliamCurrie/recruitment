@@ -7,6 +7,7 @@ use Psr\Container\ContainerInterface;
 use Wranx\Bootstrap\ConfigFactory;
 use Wranx\Bootstrap\ContainerFactory;
 use Wranx\Domain\Customer\Entity\Customer;
+use Wranx\Framework\Exception\NotFoundException;
 use Wranx\Testing\RunsMigrations;
 
 class RepositoryIntegrationTest extends TestCase
@@ -50,5 +51,11 @@ class RepositoryIntegrationTest extends TestCase
         $this->assertEquals('Sweeny', $fetched->getLastName());
         $this->assertEquals('1 Upton Park, East London, E6', $fetched->getAddress());
         $this->assertNull($fetched->getTwitterHandle());
+    }
+
+    public function test_exception_is_thrown_if_attempting_to_find_a_customer_that_does_not_exist()
+    {
+        $this->expectException(NotFoundException::class);
+        $this->repository->getById(100);
     }
 }

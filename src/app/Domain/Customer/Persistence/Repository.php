@@ -3,7 +3,7 @@
 namespace Wranx\Domain\Customer\Persistence;
 
 use Wranx\Domain\Customer\Entity\Customer;
-use Wranx\Framework\NotFoundException;
+use Wranx\Framework\Exception\NotFoundException;
 
 interface Repository
 {
