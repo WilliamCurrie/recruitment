@@ -7,6 +7,7 @@ use Psr\Container\ContainerInterface;
 use Wranx\Bootstrap\ConfigFactory;
 use Wranx\Bootstrap\ContainerFactory;
 use Wranx\Domain\Booking\Entity\Booking;
+use Wranx\Framework\Exception\NotFoundException;
 use Wranx\Testing\RunsMigrations;
 
 class RepositoryIntegrationTest extends TestCase
@@ -43,5 +44,11 @@ class RepositoryIntegrationTest extends TestCase
         $this->assertEquals(10, $fetched->getCustomerId());
         $this->assertEquals('REF123', $fetched->getReference());
         $this->assertEquals(new \DateTimeImmutable('2018-08-23'), $fetched->getDate());
+    }
+
+    public function test_exception_is_thrown_if_attempting_to_retrieve_a_booking_that_does_not_exist()
+    {
+        $this->expectException(NotFoundException::class);
+        $this->repository->getByCustomerId(10);
     }
 }
