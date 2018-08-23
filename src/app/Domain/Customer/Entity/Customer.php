@@ -5,6 +5,10 @@ namespace Wranx\Domain\Customer\Entity;
 class Customer
 {
     /**
+     * @var int
+     */
+    private $id;
+    /**
      * @var string
      */
     private $title;
@@ -29,7 +33,7 @@ class Customer
         string $title,
         string $firstName,
         string $lastName,
-        string $address,
+        string $address = null,
         string $twitter = null
     ) {
         $this->title = $title;
@@ -54,7 +58,7 @@ class Customer
         return $this->lastName;
     }
 
-    public function getAddress(): string
+    public function getAddress(): ?string
     {
         return $this->address;
     }
@@ -62,5 +66,16 @@ class Customer
     public function getTwitterHandle(): ?string
     {
         return $this->twitter;
+    }
+
+    public function setId(int $id): self
+    {
+        $this->id = $id;
+        return $this;
+    }
+
+    public function getId(): ?int
+    {
+        return $this->id;
     }
 }
