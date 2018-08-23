@@ -4,6 +4,10 @@ services:
   app:
     build:
       context: .
+    environment:
+      - DB_DSN=mysql:host=database;dbname=test
+      - DB_USER=testuser
+      - DB_PASSWORD=password
     volumes:
       - ./:/var/www/test
     working_dir: /var/www/test
