@@ -57,7 +57,6 @@
             url: "/api/data",
             success: function(data)
             {
-                console.log(data.bookings);
                 $.each(data.customers, function(i, item) {
                     var tr = $('<tr>').append(
                         $('<td>').text(item.id),
