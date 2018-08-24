@@ -7,7 +7,10 @@ use function DI\get;
 use Doctrine\DBAL\Schema\AbstractSchemaManager;
 use Illuminate\Database\Connection;
 use Illuminate\Database\MySqlConnection;
+use Illuminate\Database\SQLiteConnection;
 use Psr\Container\ContainerInterface;
+use Wranx\Application\Http\App\Routing\RouteMapper;
+use Wranx\Framework\Routing\Router;
 
 class ContainerFactory
 {
@@ -55,6 +58,11 @@ class ContainerFactory
             ContainerInterface::class => \DI\factory(function (ContainerInterface $container) {
                 return $container;
             }),
+
+            Router::class => \DI\decorate(function (Router $router, ContainerInterface $container) {
+                return $router->addRoutes($container->get(RouteMapper::class))
+                    ->addRoutes($container->get(\Wranx\Application\Http\Api\Routing\RouteMapper::class));
+            }),
         ];
     }
 
@@ -82,6 +90,10 @@ class ContainerFactory
 
                 if (substr($dsn, 0, 5) === 'mysql') {
                     return new MySqlConnection($container->get(\PDO::class));
+                }
+
+                if (substr($dsn, 0, 6) === 'sqlite') {
+                    return new SQLiteConnection($container->get(\PDO::class));
                 }
 
                 throw new \RuntimeException("Unrecognised DNS {$dsn}");

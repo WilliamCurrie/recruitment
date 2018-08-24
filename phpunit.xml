@@ -13,9 +13,9 @@
             <directory suffix="Test.php">./tests/Application</directory>
         </testsuite>
 
-        <!--<testsuite name="Boundary">-->
-            <!--<directory suffix="Test.php">./tests/Boundary</directory>-->
-        <!--</testsuite>-->
+        <testsuite name="Boundary">
+            <directory suffix="Test.php">./tests/Boundary</directory>
+        </testsuite>
 
         <testsuite name="Domain">
             <directory suffix="Test.php">./tests/Domain</directory>

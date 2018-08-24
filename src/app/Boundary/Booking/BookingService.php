@@ -4,7 +4,6 @@ namespace Wranx\Boundary\Booking;
 
 use Wranx\Domain\Booking\Entity\Booking;
 use Wranx\Domain\Booking\Persistence\Repository;
-use Wranx\Framework\Exception\NotFoundException;
 
 class BookingService
 {
@@ -20,17 +19,13 @@ class BookingService
 
     /**
      * @param int $customerId
-     * @return null|\stdClass
+     * @return array|\stdClass
      */
-    public function getBookingForCustomer(int $customerId): ?\stdClass
+    public function getBookingsForCustomer(int $customerId): array
     {
-        try {
-            $booking = $this->repository->getByCustomerId($customerId);
-
+        return array_map(function (Booking $booking) {
             return $this->toScalarObject($booking);
-        } catch (NotFoundException $e) {
-            return null;
-        }
+        }, $this->repository->getByCustomerId($customerId));
     }
 
     private function toScalarObject(Booking $booking): \stdClass
@@ -39,7 +34,7 @@ class BookingService
             'id' => $booking->getId(),
             'customer_id' => $booking->getCustomerId(),
             'booking_reference' => $booking->getReference(),
-            'date' => $booking->getDate()->format(\DATE_ATOM),
+            'booking_date' => $booking->getDate()->format(\DATE_ATOM),
         ];
     }
 }

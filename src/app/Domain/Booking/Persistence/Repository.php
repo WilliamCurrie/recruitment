@@ -3,7 +3,6 @@
 namespace Wranx\Domain\Booking\Persistence;
 
 use Wranx\Domain\Booking\Entity\Booking;
-use Wranx\Framework\Exception\NotFoundException;
 
 interface Repository
 {
@@ -11,8 +10,7 @@ interface Repository
 
     /**
      * @param int $customerId
-     * @throws NotFoundException
-     * @return Booking
+     * @return array|Booking[]
      */
-    public function getByCustomerId(int $customerId): Booking;
+    public function getByCustomerId(int $customerId): array;
 }

@@ -4,6 +4,7 @@ namespace Wranx\Domain\Customer\Persistence;
 
 use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;
+use Wranx\Bootstrap\Config;
 use Wranx\Bootstrap\ConfigFactory;
 use Wranx\Bootstrap\ContainerFactory;
 use Wranx\Domain\Customer\Entity\Customer;
@@ -24,6 +25,7 @@ class RepositoryIntegrationTest extends TestCase
         $this->container = $this->runMigrations(
             (new ContainerFactory)->create(ConfigFactory::create())
         );
+        $this->container->get(Config::class)->set('database.default.pdo.dsn', 'sqlite::memory:');
         $this->repository = $this->container->get(Repository::class);
     }
 
@@ -43,9 +45,9 @@ class RepositoryIntegrationTest extends TestCase
 
         $this->repository->insert($customer);
 
-        $fetched = $this->repository->getById(1);
+        $fetched = $this->repository->getById(6);
 
-        $this->assertEquals(1, $fetched->getId());
+        $this->assertEquals(6, $fetched->getId());
         $this->assertEquals('Mr', $fetched->getTitle());
         $this->assertEquals('Joe', $fetched->getFirstName());
         $this->assertEquals('Sweeny', $fetched->getLastName());

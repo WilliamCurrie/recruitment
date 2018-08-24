@@ -5,7 +5,6 @@ namespace Wranx\Domain\Booking\Persistence\Illuminate;
 use Illuminate\Database\Connection;
 use Wranx\Domain\Booking\Entity\Booking;
 use Wranx\Domain\Booking\Persistence\Repository;
-use Wranx\Framework\Exception\NotFoundException;
 
 class IlluminateRepository implements Repository
 {
@@ -30,21 +29,19 @@ class IlluminateRepository implements Repository
 
     /**
      * @param int $customerId
-     * @throws NotFoundException
-     * @return Booking
+     * @return array|Booking[]
      */
-    public function getByCustomerId(int $customerId): Booking
+    public function getByCustomerId(int $customerId): array
     {
-        if (!$row = $this->connection->table('bookings')->where('customer_id', $customerId)->first()) {
-            throw new NotFoundException("Booking with Customer ID {$customerId} does not exist");
-        }
+        return array_map(function (\stdClass $row) {
+            $booking = new Booking(
+                $row->customer_id,
+                $row->booking_reference,
+                new \DateTimeImmutable($row->booking_date)
+            );
 
-        $booking = new Booking(
-            $row->customer_id,
-            $row->booking_reference,
-            new \DateTimeImmutable($row->booking_date)
-        );
+            return $booking->setId($row->id);
+        }, $this->connection->table('bookings')->where('customer_id', $customerId)->get()->toArray());
 
-        return $booking->setId($row->id);
     }
 }

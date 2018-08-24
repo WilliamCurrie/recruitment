@@ -4,6 +4,7 @@ namespace Wranx\Domain\Booking\Persistence;
 
 use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;
+use Wranx\Bootstrap\Config;
 use Wranx\Bootstrap\ConfigFactory;
 use Wranx\Bootstrap\ContainerFactory;
 use Wranx\Domain\Booking\Entity\Booking;
@@ -24,6 +25,7 @@ class RepositoryIntegrationTest extends TestCase
         $this->container = $this->runMigrations(
             (new ContainerFactory)->create(ConfigFactory::create())
         );
+        $this->container->get(Config::class)->set('database.default.pdo.dsn', 'sqlite::memory:');
         $this->repository = $this->container->get(Repository::class);
     }
 
@@ -40,15 +42,9 @@ class RepositoryIntegrationTest extends TestCase
 
         $fetched = $this->repository->getByCustomerId(10);
 
-        $this->assertEquals(1, $fetched->getId());
-        $this->assertEquals(10, $fetched->getCustomerId());
-        $this->assertEquals('REF123', $fetched->getReference());
-        $this->assertEquals(new \DateTimeImmutable('2018-08-23'), $fetched->getDate());
-    }
-
-    public function test_exception_is_thrown_if_attempting_to_retrieve_a_booking_that_does_not_exist()
-    {
-        $this->expectException(NotFoundException::class);
-        $this->repository->getByCustomerId(10);
+        $this->assertEquals(5, $fetched[0]->getId());
+        $this->assertEquals(10, $fetched[0]->getCustomerId());
+        $this->assertEquals('REF123', $fetched[0]->getReference());
+        $this->assertEquals(new \DateTimeImmutable('2018-08-23'), $fetched[0]->getDate());
     }
 }
