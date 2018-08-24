@@ -1,11 +1,13 @@
 # Submission Notes
 Please accept this pull request as my test submission. Just a couple of notes to make:
 
-1) The database migrations are run as part of the `docker-compose up` command but there is a `wait-for-it.sh` script
+1) Run `composer install --ignore-platform-reqs` to install the project dependencies
+
+2) The database migrations are run as part of the `docker-compose up` command but there is a `wait-for-it.sh` script
 included to wait for the database service to complete initialization before running the commands. The expected data will
 not display in the browser until all services are fully running
 
-2) To run the test suite execute `docker-compose run --rm app /var/www/test/src/vendor/bin/phpunit`
+3) To run the test suite execute `docker-compose run --rm app /var/www/test/src/vendor/bin/phpunit`
 
 # Recruitment Exercise
 Please review src/refactor-me.php which contains code that desperately needs improving.  There are a number of bugs and design flaws in it that need addressing.
