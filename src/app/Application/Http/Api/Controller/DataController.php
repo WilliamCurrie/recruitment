@@ -2,7 +2,6 @@
 
 namespace Wranx\Application\Http\Api\Controller;
 
-use Customer;
 use Wranx\Boundary\Booking\BookingService;
 use Wranx\Boundary\Customer\CustomerService;
 use Zend\Diactoros\Response\JsonResponse;
