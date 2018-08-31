@@ -1,4 +1,5 @@
 <?php
+require_once dirname($_SERVER["DOCUMENT_ROOT"]) . '/autoload.php';
 class Customer extends Base
 {
 
@@ -7,11 +8,11 @@ class Customer extends Base
   public $last_name;
   public $address;
 
-  function saveCustomer() {
+  public function saveCustomer() {
     $this->_db->query('INSERT INTO customers (first_name, second_name) VALUES (\''.$this->first_name.'\', \''.$this->last_name.'\', \''.$this->address.'\')');
   }
 
-  function getOurCustomerBySurname() {
+  public function getOurCustomersBySurname() {
     $res = $this->_db->query('SELECT * FROM customers ORDER BY second_name');
     while($result = $res->fetch_assoc()) {
       echo($this->formatNames($result['first_name'], $result['second_name']));
@@ -24,13 +25,13 @@ class Customer extends Base
   }
 
 
-  function findById(string   $id) {
+  public function findById(string $id) {
     $res = $this->_db->query('SELECT * FROM customers WHERE id = \''.$id.'\'');
     return $res;
   }
 
   //Get all the customers from the database and output them
-  function getAllCustomers() {
+  public function getAllCustomers() {
     $res = $this->_db->query('SELECT * FROM customers');
     print '<table>';
     while ($result = $res->fetch_assoc()){

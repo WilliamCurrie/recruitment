@@ -5,14 +5,19 @@ class Config {
  }
 
  public function init() {
+   //Database
+   define('DB_HOST', 'database');
+   define('DB_USER', 'testuser');
+   define('DB_PASS', 'password');
+   define('DB_NAME', 'test');
    define('DB_PORT', 3306);
- }
 
- public static function autoload($class_name) {
-   require_once dirname($_SERVER["DOCUMENT_ROOT"]) . '/app/' . $class_name . '.class.php';
+   //Paths
+   define('CONFIG_PATH', dirname($_SERVER["DOCUMENT_ROOT"]) . '/config');
+   define('RESOUCES_PATH', dirname($_SERVER["DOCUMENT_ROOT"]) . '/resources');
+   define('CSS_PATH', '/css');
+   define('JS_PATH', '/js');
  }
 
 }
-$config = new Config();
-spl_autoload_register(array('Config','autoload'));
  ?>
