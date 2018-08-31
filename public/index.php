@@ -1,3 +1,6 @@
+<?php
+require dirname($_SERVER["DOCUMENT_ROOT"]) . '/config/Config.class.php';
+ ?>
 <!doctype html>
 <html lang="en">
   <head>
