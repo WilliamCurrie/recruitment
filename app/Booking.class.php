@@ -1,20 +1,20 @@
 <?php
 class Booking extends Base {
 
-  public function GetBookings($id = false)
+  public function getBookings($id = false)
   {
-    $sql = "SELCT * FROM bookings";
+    $sql = "SELECT * FROM bookings";
     if ($id !== false ) {
-      $sql .= " WHERE customerID=" . $id;
+      $sql .= " WHERE customer_id=" . $id;
     }
 
     $res = $this->_db->query($sql);
 
     while ($result = $res->fetch_assoc()){
-      $User = User::findById($result['customerID']);
-      $return[$result['id']]['customer_name'] = $User->first_name . ' ' . $User->last_name;
+      $user = User::findById($result['customer_id']);
+      $return[$result['id']]['customer_name'] = $user->first_name . ' ' . $user->last_name;
       $return[$result['id']]['booking_reference'] = $result['booking_reference'];
-      $return[$result['id']]['booking_date'] = date('D dS M Y', result['booking_date']);
+      $return[$result['id']]['booking_date'] = date('D dS M Y', $result['booking_date']);
     }
 
     return $return;

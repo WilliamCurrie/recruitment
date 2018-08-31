@@ -3,24 +3,23 @@ class Customer extends Base
 {
 
   public $title;
-  public $firstName;
+  public $first_name;
   public $last_name;
   public $address;
 
   function saveCustomer() {
-    $this->_db->query('INSERT INTO customers (first_name, second_name) VALUES (\''.$this->firstName.'\', \''.$this->last_name.'\', \''.$this->address.'\')');
+    $this->_db->query('INSERT INTO customers (first_name, second_name) VALUES (\''.$this->first_name.'\', \''.$this->last_name.'\', \''.$this->address.'\')');
   }
 
-  function get_our_customers_by_surname() {
+  function getOurCustomerBySurname() {
     $res = $this->_db->query('SELECT * FROM customers ORDER BY second_name');
-    while($result=$res->fetch_assoc()) {
+    while($result = $res->fetch_assoc()) {
       echo($this->formatNames($result['first_name'], $result['second_name']));
     }
   }
 
-  public function formatNames($firstName, $surname) {
-    $full_name = $firstName .= ' ';
-    $full_name .= $surname;
+  public function formatNames($first_name, $surname) {
+    $full_name = $first_name . ' ' . $surname;
     return $full_name;
   }
 
@@ -35,9 +34,9 @@ class Customer extends Base
     $res = $this->_db->query('SELECT * FROM customers');
     print '<table>';
     while ($result = $res->fetch_assoc()){
-      echo '<TR>';
-      echo '<TD>'.$result['first_name'].'</ td>';
-      echo '<td>'.$result['second_name'].'</ TD>';
+      echo '<tr>';
+      echo '<td>'.$result['first_name'].'</ td>';
+      echo '<td>'.$result['second_name'].'</td>';
       echo '</tr>';
     }
     echo('</table>');
