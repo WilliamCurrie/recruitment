@@ -1,0 +1,14 @@
+{
+    "name": "adambicknell/wranx",
+    "description": "Recruitment Test for Wranx",
+    "authors": [
+        {
+            "name": "Adam Bicknell",
+            "email": "hello@adambicknell.co.uk"
+        }
+    ],
+    "require": {},
+    "require-dev": {
+       "phpunit/phpunit": "3.7.*"
+    }
+}
