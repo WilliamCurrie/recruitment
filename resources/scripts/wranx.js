@@ -20,7 +20,8 @@ $(function(){
         data: formData, // our data object
         dataType: 'json', // what type of data do we expect back from the server
         encode: true
-      }).done(function(data) {
+      }).done(function(json) {
+        var data = JSON.parse(json) ;
         var $innerWrapH2 = $('.inner-wrapper h2');
         $innerWrapH2.text(data.message);
         if(data.result == 'success') {
