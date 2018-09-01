@@ -19,10 +19,23 @@ $(function(){
         type: 'POST',
         url: 'ajax/AddCustomer.ajax.php',
         data: formData, // our data object
-        dataType: 'json', // what type of data do we expect back from the server
-        encode: true
-      }).done(function(data) {
-        console.log(data);
+      }).done(function(json) {
+        var data = JSON.parse(json) ;
+        var $innerWrapH2 = $('.inner-wrapper h2');
+        $innerWrapH2.text(data.message);
+        if(data.result == 'success') {
+          $innerWrapH2.css('color', 'green');
+        } else {
+          $innerWrapH2.css('color', 'red');
+          if(data.message == 'No unique id.') {
+            location.reload();
+          }
+        }
+
+        setTimeout(function() {
+            $innerWrapH2.text('Add Customer').css('color', '#fff');
+        }, 5000)
+
       });
       event.preventDefault();
     });
