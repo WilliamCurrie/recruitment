@@ -22,6 +22,7 @@ $(function(){
         encode: true
       }).done(function(json) {
         var data = JSON.parse(json) ;
+        console.log(data);
         var $innerWrapH2 = $('.inner-wrapper h2');
         $innerWrapH2.text(data.message);
         if(data.result == 'success') {
