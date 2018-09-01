@@ -19,7 +19,7 @@ class Booking extends Base {
       $user = $customer->findById($booking['customer_id']);
       $bks[$booking['id']]['customer_name'] = $user->first_name . ' ' . $user->second_name;
       $bks[$booking['id']]['booking_reference'] = $booking['booking_reference'];
-      $bks[$booking['id']]['booking_date'] = date('D dS M Y', $booking['booking_date']);
+      $bks[$booking['id']]['booking_date'] = date('l jS \of F Y', strtotime($booking['booking_date']));
     }
     return $bks;
   }

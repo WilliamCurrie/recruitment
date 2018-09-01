@@ -17,21 +17,23 @@
     <?php
     $bookings = new Booking();
     $results = $bookings->getBookings($_GET['customer_id']);
-    foreach ($results as $result):
-      ?>
-      <tr>
-        <th>
-          <?php echo $result['booking_reference']; ?>
-        </th>
-        <th>
-          <?php echo $result['customer_name']; ?>
-        </th>
-        <th>
-          <?php echo $result['booking_date']; ?>
-        </th>
-      </tr>
-      <?php
-    endforeach;
+    if(count($results) > 0) {
+      foreach ($results as $result):
+        ?>
+        <tr>
+          <th>
+            <?php echo $result['booking_reference']; ?>
+          </th>
+          <th>
+            <?php echo $result['customer_name']; ?>
+          </th>
+          <th>
+            <?php echo $result['booking_date']; ?>
+          </th>
+        </tr>
+        <?php
+      endforeach;
+    }
     ?>
   </tbody>
 </table>
