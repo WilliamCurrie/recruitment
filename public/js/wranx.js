@@ -10,7 +10,9 @@ $(function(){
       var formData = {
         'unique_id': $('input[name=unique_id]').val(),
         'first_name': $('input[name=first_name]').val(),
-        'last_name': $('input[name=last_name]').val()
+        'second_name': $('input[name=second_name]').val(),
+        'address': $('textarea[name=address]').val(),
+        'twitter_alias': $('input[name=twitter_alias]').val()
       };
 
       $.ajax({

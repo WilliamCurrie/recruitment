@@ -2,19 +2,42 @@
 require_once dirname($_SERVER["DOCUMENT_ROOT"]) . '/autoload.php';
 class Customer extends Base
 {
-  public $title;
+  // public $title; // Dropping title as not in database and unable to determine title from names alone for existing data.
   public $first_name;
   public $second_name;
   public $address;
 
   public function saveCustomer() {
-    $this->_db->query('INSERT INTO customers (first_name, second_name) VALUES (\''.$this->first_name.'\', \''.$this->second_name.'\', \''.$this->address.'\')');
+
+    if($this->first_name != null) {
+      $this->first_name = $this->sanitise($this->first_name);
+    }
+    if($this->second_name != null) {
+      $this->second_name = $this->sanitise($this->second_name);
+    }
+    if($this->address != null) {
+      $this->address = $this->sanitise($this->address);
+    }
+    if($this->twitter_alias != null) {
+      $this->twitter_alias = $this->sanitise($this->twitter_alias);
+    }
+
+    $query = $this->_db->prepare("INSERT INTO customers (`first_name`, `second_name`, `address`, `twitter_alias`) VALUES (?,?,?,?)");
+    $query->bind_param("ssss", $this->first_name, $this->second_name, $this->address, $this->twitter_alias);
+    $query->execute();
+
+    if($query->affected_rows === 0) {
+      error_log("No rows updated when trying to add new customer: $this->first_name, $this->second_name, $this->address, $this->twitter_alias");
+      return false;
+    }
+
+    return true;
   }
 
   public function getAllCustomers($order_by = false) {
     $sql = 'SELECT * FROM customers';
     if($order_by) {
-      $escaped_order_by = mysqli_real_escape_string($order_by);
+      $escaped_order_by = $this->sanitise($order_by);
       $sql .= " ORDER BY {$escaped_order_by}";
     }
     return $this->_db->query($sql);
@@ -52,5 +75,7 @@ class Customer extends Base
     error_log("Could not find customer with ID of $id");
     return false;
   }
+
+
 }
 ?>

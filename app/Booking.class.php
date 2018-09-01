@@ -6,7 +6,7 @@ class Booking extends Base {
   {
     $sql = "SELECT * FROM bookings";
     if ($id !== false ) {
-      $sql .= " WHERE customer_id = " . $id;
+      $sql .= " WHERE customer_id = " . $this->sanitise($id);
     }
     $res = $this->_db->query($sql);
     $bookings = $this->formatBookings($res);
