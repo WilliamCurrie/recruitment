@@ -15,7 +15,7 @@ gulp.task('image', function () {
 });
 
 gulp.task('scripts', function() {
-    gulp.src(['./resources/scripts/vendor/jquery.js', './resources/scripts/wranx.js'])
+    gulp.src(['./resources/scripts/wranx.js'])
         .pipe(browserify())
         .pipe(concat('wranx.js'))
         .pipe(gulp.dest('./public/js'))
