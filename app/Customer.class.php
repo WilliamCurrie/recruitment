@@ -22,8 +22,11 @@ class Customer extends Base
     $res = $this->_db->query($sql);
 
     $customers = array();
+    $counter = 0;
     while($result = $res->fetch_assoc()) {
-      $customers[] = $this->formatNames($result['first_name'], $result['second_name']);
+      $customers[$counter]['id'] = $result['id'];
+      $customers[$counter]['name'] = $this->formatNames($result['first_name'], $result['second_name']);
+      $counter++;
     }
     return $customers;
 
