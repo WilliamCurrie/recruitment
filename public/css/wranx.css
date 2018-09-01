@@ -1558,7 +1558,8 @@ input[type="button"].btn-block {
 
 html, body {
   height: 100%;
-  font-family: 'Arial'; }
+  font-family: 'Arial';
+  background: #6FCDD5; }
 
 .outer-wrapper {
   display: table;
@@ -1568,7 +1569,21 @@ html, body {
     display: table-cell;
     vertical-align: middle;
     padding: 15px; }
-    .outer-wrapper .inner-wrapper .login-btn {
-      position: fixed;
-      top: 15px;
-      right: 15px; }
+
+a {
+  text-decoration: none; }
+  a.btn-info {
+    background-color: #ED960D;
+    border-color: #ED960D; }
+
+table {
+  background: #eee;
+  margin-top: 20px; }
+
+h1 {
+  font-size: 3.75rem; }
+
+h1, h2, h3, h4, p {
+  color: #fff;
+  text-align: center;
+  font-family: arial, sans-serif; }

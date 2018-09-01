@@ -1,4 +1,9 @@
 <a href="/" class="btn btn-md btn-success">View Customers</a>
+<?php 
+$bookings = new Booking();
+$results = $bookings->getBookings($_GET['customer_id']);
+if(count($results) > 0) {
+ ?>
 <table class="table table-responsive table-striped">
   <thead>
     <tr>
@@ -15,9 +20,6 @@
   </thead>
   <tbody>
     <?php
-    $bookings = new Booking();
-    $results = $bookings->getBookings($_GET['customer_id']);
-    if(count($results) > 0) {
       foreach ($results as $result):
         ?>
         <tr>
@@ -33,6 +35,8 @@
         </tr>
         <?php
       endforeach;
+    } else {
+      echo "<p>Sorry, this customer has no bookings</p>";
     }
     ?>
   </tbody>
