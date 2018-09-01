@@ -24,8 +24,10 @@ $(function(){
         var $innerWrapH2 = $('.inner-wrapper h2');
         $innerWrapH2.text(data.message);
         if(data.result == 'success') {
+          console.log('test1');
           $innerWrapH2.css('color', 'green');
         } else {
+          console.log('test2');
           $innerWrapH2.css('color', 'red');
         }
 
