@@ -6,20 +6,22 @@ class Booking extends Base {
   {
     $sql = "SELECT * FROM bookings";
     if ($id !== false ) {
-      $sql .= " WHERE customer_id=" . $id;
+      $sql .= " WHERE customer_id = " . $id;
     }
-
     $res = $this->_db->query($sql);
+    $bookings = $this->formatBookings($res);
+    return $bookings;
+  }
 
-    while ($result = $res->fetch_assoc()){
-      $customer = new Customer();
-      $user = $customer->findById($result['customer_id']);
-      $return[$result['id']]['customer_name'] = $user->first_name . ' ' . $user->last_name;
-      $return[$result['id']]['booking_reference'] = $result['booking_reference'];
-      $return[$result['id']]['booking_date'] = date('D dS M Y', $result['booking_date']);
+  public function formatBookings($bookings) {
+    $customer = new Customer();
+    while ($booking = $bookings->fetch_assoc()){
+      $user = $customer->findById($booking['customer_id']);
+      $bks[$booking['id']]['customer_name'] = $user->first_name . ' ' . $user->second_name;
+      $bks[$booking['id']]['booking_reference'] = $booking['booking_reference'];
+      $bks[$booking['id']]['booking_date'] = date('D dS M Y', $booking['booking_date']);
     }
-
-    return $return;
+    return $bks;
   }
 
 }
