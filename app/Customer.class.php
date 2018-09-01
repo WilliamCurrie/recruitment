@@ -12,11 +12,21 @@ class Customer extends Base
     $this->_db->query('INSERT INTO customers (first_name, second_name) VALUES (\''.$this->first_name.'\', \''.$this->last_name.'\', \''.$this->address.'\')');
   }
 
-  public function getOurCustomersBySurname() {
-    $res = $this->_db->query('SELECT * FROM customers ORDER BY second_name');
-    while($result = $res->fetch_assoc()) {
-      echo($this->formatNames($result['first_name'], $result['second_name']));
+  public function getAllCustomers($order_by = false) {
+    $sql = 'SELECT * FROM customers';
+
+    if($order_by) {
+      $sql .= " ORDER BY {$order_by}";
     }
+
+    $res = $this->_db->query($sql);
+
+    $customers = array();
+    while($result = $res->fetch_assoc()) {
+      $customers[] = $this->formatNames($result['first_name'], $result['second_name']);
+    }
+    return $customers;
+
   }
 
   public function formatNames($first_name, $surname) {
@@ -30,18 +40,6 @@ class Customer extends Base
     return $res;
   }
 
-  //Get all the customers from the database and output them
-  public function getAllCustomers() {
-    $res = $this->_db->query('SELECT * FROM customers');
-    print '<table>';
-    while ($result = $res->fetch_assoc()){
-      echo '<tr>';
-      echo '<td>'.$result['first_name'].'</ td>';
-      echo '<td>'.$result['second_name'].'</td>';
-      echo '</tr>';
-    }
-    echo('</table>');
-  }
 
 }
 ?>

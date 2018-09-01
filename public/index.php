@@ -26,11 +26,31 @@ if(!array_key_exists('unique_id', $_SESSION)) {
 
 
     <?php
-
     $customer = new Customer();
-    $customer->getOurCustomersBySurname();
+    $customers = $customer->getAllCustomers();
+    print_r($customers);
+      ?>
+      <table class="table table-responsive table-striped">
+          <thead>
+            <th>
+              Customer Name
+            </th>
+            <th>
+              Actions
+            </th>
+          </thead>
+          <tbody>
+            <?php foreach($customers as $cust) : ?>
+            <tr>
+              <td>
+                <?php echo $cust; ?>
+              </td>
+            </tr>
+          <?php endforeach; ?>
+          </tbody>
+      </table>
+      <?php
 
-    $customer->getAllCustomers();
     $bookings = new Booking();
 
     if(isset($_GET['customer_id'])){
