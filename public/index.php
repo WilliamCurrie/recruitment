@@ -25,7 +25,7 @@ if(!array_key_exists('unique_id', $_SESSION)) {
         <div class="inner-wrapper">
           <h1>Simple Database App</h1>
           <?php
-          if(isset($_GET['customer_id'])) {
+          if(isset($_GET['customer_id']) && $_GET['customer_id'] > 0) {
             include(dirname($_SERVER["DOCUMENT_ROOT"]) . '/app/views/ViewBookings.view.php');
           } else if(isset($_GET['add_customer'])) {
             include(dirname($_SERVER["DOCUMENT_ROOT"]) . '/app/views/AddCustomer.view.php');

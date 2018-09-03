@@ -1,12 +1,15 @@
 <?php
-require_once dirname($_SERVER["DOCUMENT_ROOT"]) . '/autoload.php';
+require_once __DIR__ . '/../config/Config.class.php';
 
 class Base {
 
   protected $_db;
 
-  public function __construct() {
-    $this->connectToDB();
+  public function __construct($isTest = false) {
+    new Config();
+    if(!$isTest) {
+      $this->connectToDB();
+    }
   }
 
   public function connectToDB() {

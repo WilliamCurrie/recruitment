@@ -8,6 +8,7 @@ $(function(){
     $('#add_customer_submit').on('click', function(event){
       var formData = {
         'unique_id': $('input[name=unique_id]').val(),
+        'title': $('select[name=title]').val(),
         'first_name': $('input[name=first_name]').val(),
         'second_name': $('input[name=second_name]').val(),
         'address': $('textarea[name=address]').val(),

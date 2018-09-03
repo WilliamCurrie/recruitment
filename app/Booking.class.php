@@ -1,5 +1,8 @@
 <?php
-require_once dirname($_SERVER["DOCUMENT_ROOT"]) . '/autoload.php';
+if(!class_exists('Base')) {
+  require_once dirname($_SERVER["DOCUMENT_ROOT"]) . '/autoload.php';
+}
+
 class Booking extends Base {
 
   public function getBookings($id = false)

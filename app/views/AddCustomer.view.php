@@ -3,6 +3,17 @@
 <form id="add_customer" role="form">
   <input type="hidden" id="unique_id" name="unique_id" value="<?php echo $_SESSION['unique_id']; ?>">
   <div class="form-group">
+    <label for="title">Title</label>
+    <select type="select" class="form-control" id="title" name="title">
+      <option value="">Select Title</option>
+      <option value="Mr." >Mr.</option>
+      <option value="Mrs." >Mrs.</option>
+      <option value="Ms." >Ms.</option>
+      <option value="Miss." >Miss.</option>
+      <option value="Dr." >Dr.</option>
+    </select>
+  </div>
+  <div class="form-group">
     <label for="first_name">First Name</label>
     <input maxlength="30" type="text" class="form-control" id="first_name" name="first_name" placeholder="Enter first name">
   </div>

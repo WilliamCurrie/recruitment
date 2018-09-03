@@ -1,14 +1,20 @@
 <?php
-require_once dirname($_SERVER["DOCUMENT_ROOT"]) . '/autoload.php';
+if(!class_exists('Base')) {
+  require_once dirname($_SERVER["DOCUMENT_ROOT"]) . '/autoload.php';
+}
+
 class Customer extends Base
 {
-  // public $title; // Dropping title as not in database and unable to determine title from names alone for existing data.
+  public $title;
   public $first_name;
   public $second_name;
   public $address;
 
   public function saveCustomer() {
 
+    if($this->title != null) {
+      $this->title = $this->sanitise($this->title);
+    }
     if($this->first_name != null) {
       $this->first_name = $this->sanitise($this->first_name);
     }
@@ -22,12 +28,12 @@ class Customer extends Base
       $this->twitter_alias = $this->sanitise($this->twitter_alias);
     }
 
-    $query = $this->_db->prepare("INSERT INTO customers (`first_name`, `second_name`, `address`, `twitter_alias`) VALUES (?,?,?,?)");
-    $query->bind_param("ssss", $this->first_name, $this->second_name, $this->address, $this->twitter_alias);
+    $query = $this->_db->prepare("INSERT INTO customers (`title`, `first_name`, `second_name`, `address`, `twitter_alias`) VALUES (?,?,?,?,?)");
+    $query->bind_param("sssss", $this->title, $this->first_name, $this->second_name, $this->address, $this->twitter_alias);
     $query->execute();
 
     if($query->affected_rows === 0) {
-      error_log("No rows updated when trying to add new customer: $this->first_name, $this->second_name, $this->address, $this->twitter_alias");
+      error_log("No rows updated when trying to add new customer: $this->title, $this->first_name, $this->second_name, $this->address, $this->twitter_alias");
       return false;
     }
 

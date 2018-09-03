@@ -8,6 +8,16 @@ if($_POST['unique_id'] === $_SESSION['unique_id']) {
 
   $customer = new Customer();
 
+  if(array_key_exists('title', $_POST) && $_POST['title'] != null) {
+    $customer->title = $_POST['title'];
+  } else {
+    echo json_encode(array(
+      'result' => 'error',
+      'message' => 'No title.',
+    ));
+    exit;
+  }
+
   if(array_key_exists('first_name', $_POST) && $_POST['first_name'] != null) {
     $customer->first_name = $_POST['first_name'];
   } else {
@@ -36,6 +46,7 @@ if($_POST['unique_id'] === $_SESSION['unique_id']) {
   echo json_encode(array(
     'result' => 'success',
     'message' => 'Customer added.',
+    'title' => $customer->title,
     'first_name' => $customer->first_name,
     'second_name' => $customer->second_name,
     'address' => $customer->address,
