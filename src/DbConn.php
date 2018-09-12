@@ -1,7 +1,7 @@
 <?php 
+//    **** DB NAME IS test1
 
-
-//'localhost', 'testuser', 'password', 'test', DB_PORT
+//'localhost', 'testuser', 'password', 'test1', DB_PORT
 DEFINE ('DB_USER', 'root');
 //  BLANK for local dev env
 DEFINE ('DB_PASSWORD', '');

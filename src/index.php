@@ -36,14 +36,7 @@ $customer->get_our_customers_by_surname();
 
 $customer->getAllCustomers();
 
-/*
-
-$bookings = new Booking($dbc);
-
-    $results = $bookings->GetBookings(1);
-    foreach ($results as $res):
-       echo "<p />"  . $res['booking_reference'] . ' - '. $res['customer_name'] . $res['booking_date'];
-    endforeach;*/
+mysqli_close($dbc);
 ?>
 
 <form action="GetBooking.php" method="post">
