@@ -1,0 +1,22 @@
+<style> 
+
+
+
+p {
+    color: red;
+}
+
+tr{
+	color: blue;
+	font-family: verdana;
+    font-size: 200%;
+
+}
+
+input[type="text"] {
+    width: 150px;
+    display: block;
+    margin-bottom: 10px;
+    background-color: yellow;
+}
+</style>
