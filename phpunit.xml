@@ -16,6 +16,9 @@
     <testsuites>
         <testsuite name="Recruit me">
             <directory>tests</directory>
+            <file>DbTest</file>
+            <file>CustomerRepositoryTest</file>
+            <file>CustomerTest</file>
         </testsuite>
     </testsuites>
 </phpunit>
