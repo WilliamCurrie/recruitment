@@ -5,7 +5,7 @@ namespace RecruitMe;
 /**
  * Db class.
  */
-class MySql
+class Db
 {
     /**
      * Reference to the MySql instance.
