@@ -1,6 +1,10 @@
 SET NAMES utf8;
 SET FOREIGN_KEY_CHECKS = 0;
 
+CREATE DATABASE IF NOT EXISTS test;
+USE test
+GRANT ALL PRIVILEGES ON test.* TO 'testuser'@'localhost' IDENTIFIED BY 'password';
+
 -- ----------------------------
 --  Table structure for `customers`
 -- ----------------------------
