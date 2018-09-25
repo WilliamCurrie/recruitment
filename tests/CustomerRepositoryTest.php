@@ -6,14 +6,11 @@ use RecruitJordi\CustomerRepository;
 
 class CustomerRepositoryTest extends RepositoryTestCase
 {
-	/**
-     * @test
-     */
-	public function new()
+	public static function setUpBeforeClass()
 	{
-		$customerRepository = new CustomerRepository(self::$db);
+		parent::setUpBeforeClass();
 
-		$this->assertInstanceOf(CustomerRepository::class, $customerRepository);
+		self::csvLoad(self::DATA_FOLDER.'/customers.csv');
 	}
 
 	/**
@@ -34,8 +31,8 @@ class CustomerRepositoryTest extends RepositoryTestCase
 	{
 		$id = 1;
 		$customer = (new CustomerRepository(self::$db))->fetchById($id);
-		$csvRow = $this->csvRowById($id);
+		$csvRows = $this->csvRows(['id' => $id]);
 
-		$this->assertEquals($customer, $csvRow);
+		$this->assertEquals($customer, current($csvRows));
 	}
 }
