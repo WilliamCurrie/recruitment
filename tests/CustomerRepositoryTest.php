@@ -9,7 +9,11 @@ use RecruitMe\Db;
 
 class CustomerRepositoryTest extends TestCase
 {
+	const DATA_FOLDER = __DIR__.'/data';
+
 	private static $db;
+
+	private static $data = [];
 
 	public static function setUpBeforeClass()
 	{
@@ -17,6 +21,12 @@ class CustomerRepositoryTest extends TestCase
 		$dotenv->load();
 
 		self::$db = Db::getInstance();
+
+		$rows = array_map('str_getcsv', file(self::DATA_FOLDER."/customers.csv"));
+		$header = array_shift($rows);
+		foreach ($rows as $row) {
+			self::$data[] = array_combine($header, $row);
+		}
 	}
 
 	/**
@@ -30,12 +40,31 @@ class CustomerRepositoryTest extends TestCase
 	}
 
 	/**
-     * @test
-     */
+	 * @test
+	 */
 	public function fetchAll()
 	{
-        $customers = (new CustomerRepository(self::$db))->fetchAll();
+		$customers = (new CustomerRepository(self::$db))->fetchAll();
 
-        $this->assertEquals(4, count($customers));
+		$this->assertEquals(4, count($customers));
+		$this->assertEquals($customers, self::$data);
+	}
+
+	/**
+	 * @test
+	 */
+	public function fetchById()
+	{
+		$customer = (new CustomerRepository(self::$db))->fetchById(1);
+		$item = [];
+		foreach (self::$data as $key => $value)
+		{
+			if ($value['id'] == 1) {
+				$item = $value;
+				break;
+			}
+		}
+
+		$this->assertEquals($customer, $item);
 	}
 }
