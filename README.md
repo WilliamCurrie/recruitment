@@ -24,7 +24,8 @@ DB_PORT=3306
 ## Run the App
 
     http://localhost:8080/
-    ![index.php](/resources/screencapture.png?raw=true)
+
+![index.php](/resources/screencapture.png?raw=true)
 
 ## Run the Tests
 
