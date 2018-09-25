@@ -5,10 +5,9 @@ Make sure to create an `.env` file in your app's root folder:
 ```
 APP_ENV=dev
 
-DB_DRIVER=mysql
 DB_HOST=127.0.0.1
-DB_USER=testuser
-DB_PASSWORD=password
+DB_USER=root
+DB_PASSWORD=verysecret
 DB_NAME=test
 DB_PORT=33061
 ```

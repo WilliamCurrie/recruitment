@@ -1,6 +1,12 @@
 <?php
 define('DB_PORT', 3306);
 
+$db = new \mysqli('127.0.0.1', 'testuser', 'password', 'test', DB_PORT);
+
+echo 'foo';
+
+exit;
+
 class Customer
 {
 
