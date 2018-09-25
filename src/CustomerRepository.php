@@ -11,7 +11,7 @@ class CustomerRepository extends AbstractRepository
         $this->table = 'customers';
     }
 
-    public function fetchById($id)
+    public function fetchById($id): array
     {
         $sql = "SELECT * FROM {$this->table} WHERE id = $id";
 

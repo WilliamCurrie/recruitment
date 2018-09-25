@@ -8,12 +8,12 @@ class AbstractRepository
 
     protected $table;
 
-	public function __construct($db)
+	public function __construct(Db $db)
 	{
 		$this->db = $db;
 	}
 
-	public function fetchAll()
+	public function fetchAll(): array
 	{
 		$sql = "SELECT * FROM {$this->table}";
 
