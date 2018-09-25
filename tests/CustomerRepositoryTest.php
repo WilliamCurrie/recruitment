@@ -2,33 +2,10 @@
 
 namespace RecruitMe\Tests;
 
-use Dotenv\Dotenv;
-use PHPUnit\Framework\TestCase;
 use RecruitMe\CustomerRepository;
-use RecruitMe\Db;
 
-class CustomerRepositoryTest extends TestCase
+class CustomerRepositoryTest extends RepositoryTestCase
 {
-	const DATA_FOLDER = __DIR__.'/data';
-
-	private static $db;
-
-	private static $data = [];
-
-	public static function setUpBeforeClass()
-	{
-		$dotenv = new Dotenv(__DIR__.'/../');
-		$dotenv->load();
-
-		self::$db = Db::getInstance();
-
-		$rows = array_map('str_getcsv', file(self::DATA_FOLDER."/customers.csv"));
-		$header = array_shift($rows);
-		foreach ($rows as $row) {
-			self::$data[] = array_combine($header, $row);
-		}
-	}
-
 	/**
      * @test
      */
@@ -47,7 +24,7 @@ class CustomerRepositoryTest extends TestCase
 		$customers = (new CustomerRepository(self::$db))->fetchAll();
 
 		$this->assertEquals(4, count($customers));
-		$this->assertEquals($customers, self::$data);
+		$this->assertEquals($customers, self::$csv);
 	}
 
 	/**
@@ -55,16 +32,10 @@ class CustomerRepositoryTest extends TestCase
 	 */
 	public function fetchById()
 	{
-		$customer = (new CustomerRepository(self::$db))->fetchById(1);
-		$item = [];
-		foreach (self::$data as $key => $value)
-		{
-			if ($value['id'] == 1) {
-				$item = $value;
-				break;
-			}
-		}
+		$id = 1;
+		$customer = (new CustomerRepository(self::$db))->fetchById($id);
+		$csvRow = $this->csvRowById($id);
 
-		$this->assertEquals($customer, $item);
+		$this->assertEquals($customer, $csvRow);
 	}
 }
