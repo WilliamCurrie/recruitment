@@ -71,7 +71,7 @@ class Db
      * @param string
      * @return false|mysqli_result
      */
-    public function query($sql)
+    public function query(string $sql)
     {
         return $this->mysqli->query($sql);
     }
@@ -82,7 +82,7 @@ class Db
      * @param string
      * @return string
      */
-    public function escape($data)
+    public function escape(string $data): string
     {
         return $this->mysqli->real_escape_string($data);
     }

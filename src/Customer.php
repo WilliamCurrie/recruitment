@@ -14,27 +14,27 @@ class Customer
 
     private $db;
 
-    public function __construct($db)
+    public function __construct(Db $db)
     {
         $this->db = $db;
     }
 
-    public function setFirstName($firstName): void
+    public function setFirstName(string $firstName): void
     {
         $this->firstName = $this->db->escape($firstName);
     }
 
-    public function setLastName($lastName): void
+    public function setLastName(string $lastName): void
     {
         $this->lastName = $this->db->escape($lastName);
     }
 
-    public function setAddress($address): void
+    public function setAddress(string $address): void
     {
         $this->address = $this->db->escape($address);
     }
 
-    public function setTwitterAlias($twitterAlias): void
+    public function setTwitterAlias(string $twitterAlias): void
     {
         $this->twitterAlias = $this->db->escape($twitterAlias);
     }

@@ -4,14 +4,14 @@ namespace RecruitJordi;
 
 class CustomerRepository extends AbstractRepository
 {
-    public function __construct($db)
+    public function __construct(Db $db)
     {
         parent::__construct($db);
 
         $this->table = 'customers';
     }
 
-    public function fetchById($id): array
+    public function fetchById(int $id): array
     {
         $sql = "SELECT * FROM {$this->table} WHERE id = $id";
 
