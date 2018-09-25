@@ -6,12 +6,11 @@
 >
     <php>
         <env name="APP_ENV" value="test"/>
-        <env name="DB_DRIVER" value="mysql"/>
-        <env name="DB_HOST" value="127.0.0.1"/>
+        <env name="DB_HOST" value="mysql"/>
         <env name="DB_USER" value="testuser"/>
         <env name="DB_PASSWORD" value="password"/>
         <env name="DB_NAME" value="test"/>
-        <env name="DB_PORT" value="33061"/>
+        <env name="DB_PORT" value="3306"/>
     </php>
     <testsuites>
         <testsuite name="Recruit me">

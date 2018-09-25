@@ -12,9 +12,21 @@ DB_NAME=test
 DB_PORT=3306
 ```
 
-## Docker
-We have included a docker setup to allow you to get up and running quickly with this example, though you are under no obligation to use this.  After you have installed docker and forked the repository you will need to:
+## Start the Docker Services
 
-* Run `docker-compose up`
-* The sample sql should automatically run
-* Visit http://localhost:8080 in your browser
+    docker-compose up --build
+
+## Bootstrap the Test Database
+
+    sudo docker exec -it recruitment_mysql /bin/bash
+    mysql -u root -p test < tests/data/init.sql
+
+## Run the App
+
+    http://localhost:8080/
+    ![index.php](/resources/screencapture.png?raw=true)
+
+## Run the Tests
+
+    sudo docker exec -it recruitment_app /bin/bash
+    vendor/bin/phpunit

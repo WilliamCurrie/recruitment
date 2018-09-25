@@ -1,12 +1,15 @@
 app:
     build: .
+    container_name: recruitment_app
     links:
         - mysql
     volumes:
         - ./:/var/www/recruitment
+    working_dir: /var/www/recruitment
 
 nginx:
     image: nginx:latest
+    container_name: recruitment_nginx
     ports:
         - "8080:80"
     volumes:
@@ -17,6 +20,7 @@ nginx:
 
 mysql:
     image: mysql:5.7
+    container_name: recruitment_mysql
     volumes:
         - ./tests/data:/tests/data
     environment:
