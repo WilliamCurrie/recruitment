@@ -20,28 +20,26 @@ class RepositoryTestCase extends TestCase
         $dotenv->load();
 
         self::$db = Db::getInstance();
-        self::csvLoad();
     }
 
-    protected static function csvLoad()
+    protected static function csvLoad($filename)
     {
-        $rows = array_map('str_getcsv', file(self::DATA_FOLDER.'/customers.csv'));
+        $rows = array_map('str_getcsv', file($filename));
         $header = array_shift($rows);
         foreach ($rows as $row) {
             self::$csv[] = array_combine($header, $row);
         }
     }
 
-    protected function csvRowById($id)
+    protected function csvRows($data)
     {
-        $row = [];
+        $rows = [];
         foreach (self::$csv as $key => $value) {
-            if ($value['id'] == 1) {
-                $row = $value;
-                break;
+            if ($value[key($data)] == current($data)) {
+                $rows[] = $value;
             }
         }
 
-        return $row;
+        return $rows;
     }
 }
