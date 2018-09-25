@@ -1,6 +1,6 @@
 <?php
 
-namespace RecruitMe;
+namespace RecruitJordi;
 
 class CustomerRepository
 {

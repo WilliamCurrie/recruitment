@@ -1,8 +1,8 @@
 <?php
 
-namespace RecruitMe\Tests;
+namespace RecruitJordi\Tests;
 
-use RecruitMe\CustomerRepository;
+use RecruitJordi\CustomerRepository;
 
 class CustomerRepositoryTest extends RepositoryTestCase
 {

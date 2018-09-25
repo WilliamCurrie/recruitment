@@ -1,10 +1,10 @@
 <?php
 
-namespace RecruitMe\Tests;
+namespace RecruitJordi\Tests;
 
 use Dotenv\Dotenv;
 use PHPUnit\Framework\TestCase;
-use RecruitMe\Db;
+use RecruitJordi\Db;
 
 class RepositoryTestCase extends TestCase
 {

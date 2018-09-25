@@ -17,12 +17,12 @@
   },
   "autoload": {
     "psr-4": {
-      "RecruitMe\\": "src/"
+      "RecruitJordi\\": "src/"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "RecruitMe\\Tests\\": "tests/"
+      "RecruitJordi\\Tests\\": "tests/"
     }
   }
 }
