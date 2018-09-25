@@ -5,11 +5,11 @@ Make sure to create an `.env` file in your app's root folder:
 ```
 APP_ENV=dev
 
-DB_HOST=127.0.0.1
-DB_USER=root
-DB_PASSWORD=verysecret
+DB_HOST=mysql
+DB_USER=testuser
+DB_PASSWORD=password
 DB_NAME=test
-DB_PORT=33061
+DB_PORT=3306
 ```
 
 ## Docker

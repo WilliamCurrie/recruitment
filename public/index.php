@@ -2,6 +2,8 @@
 
 use Dotenv\Dotenv;
 use RecruitJordi\BookingRepository;
+use RecruitJordi\Customer;
+use RecruitJordi\CustomerRepository;
 use RecruitJordi\Db;
 
 require_once __DIR__ . '/../vendor/autoload.php';
@@ -9,85 +11,129 @@ require_once __DIR__ . '/../vendor/autoload.php';
 $dotenv = new Dotenv(__DIR__.'/../');
 $dotenv->load();
 
-// echo getenv('DB_USER'); exit;
+$db = Db::getInstance();
 
-/* $foo = new \MySQLI(
-    getenv('DB_HOST'),
-    getenv('DB_USER'),
-    getenv('DB_PASSWORD'),
-    getenv('DB_NAME'),
-    getenv('DB_PORT')
-); */
-
-Db::getInstance();
-
-// $bookings = (new BookingRepository(Db::getInstance()))->fetchAll();
+if ($_POST) {
+    $customer = new Customer($db);
+    $customer->setFirstName($_POST['first_name']);
+    $customer->setLastName($_POST['last_name']);
+    $customer->setAddress($_POST['address']);
+    $customer->setTwitterAlias($_POST['twitter_alias']);
+    $customer->save();
+}
 ?>
-
 
 <!doctype html>
 <html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>My Simple  App</title>
-</head>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>My Simple  App</title>
+    </head>
 
-<body>
-<h1>Simple Database App</h1>
-<table>
-   <caption>Passagers du vol 377</caption>
+    <body>
+        <h1>Simple Database App</h1>
 
-   <thead> <!-- Passengers of flight 377 -->
-       <tr>
-           <th>Name</th>
-           <th>Age</th>
-           <th>Country</th>
-       </tr>
-   </thead>
+        <h2>Customers</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Address</th>
+                    <th>Twitter Alias</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                foreach ((new CustomerRepository($db))->fetchAll() as $customer) { ?>
+                    <tr>
+                        <td><?php echo $customer['first_name']; ?></td>
+                        <td><?php echo $customer['last_name']; ?></td>
+                        <td><?php echo $customer['address']; ?></td>
+                        <td><?php echo $customer['twitter_alias']; ?></td>
+                    </tr>
+                <?php
+                } ?>
+            </tbody>
+        </table>
 
-   <tfoot> <!-- Table footer -->
-       <tr>
-           <th>Name</th>
-           <th>Age</th>
-           <th>Country</th>
-       </tr>
-   </tfoot>
+        <h2>Bookings</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Booking Id</th>
+                    <th>Reference</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                foreach ((new BookingRepository($db))->fetchAll() as $booking) { ?>
+                    <tr>
+                        <td><?php echo $booking['id']; ?></td>
+                        <td><?php echo $booking['reference']; ?></td>
+                        <td><?php echo $booking['date']; ?></td>
+                    </tr>
+                <?php
+                } ?>
+            </tbody>
+        </table>
 
-   <tbody> <!-- Table body -->
-       <tr>
-           <td>Carmen</td>
-           <td>33 years old</td>
-           <td>Spain</td>
-      </tr>
-      <tr>
-           <td>Michelle</td>
-           <td>26 years</td>
-           <td>United States</td>
-       </tr>
-       <tr>
-           <td>François</td>
-           <td>43 years old</td>
-           <td>France</td>
-       </tr>
-       <tr>
-           <td>Martine</td>
-           <td>34 years old</td>
-           <td>France</td>
-       </tr>
-       <tr>
-           <td>Jonathan</td>
-           <td>13 years old</td>
-           <td>Australia</td>
-       </tr>
-       <tr>
-           <td>Xu</td>
-           <td>19 years old</td>
-           <td>China</td>
-       </tr>
-   </tbody>
-</table>
+        <h2>Bookings by Customer</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Booking Id</th>
+                    <th>Reference</th>
+                    <th>Date</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Address</th>
+                    <th>Twitter Alias</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                foreach ((new BookingRepository($db))->fetchByCustomerId(1) as $booking) { ?>
+                    <tr>
+                        <td><?php echo $booking['booking_id']; ?></td>
+                        <td><?php echo $booking['booking_reference']; ?></td>
+                        <td><?php echo $booking['booking_date']; ?></td>
+                        <td><?php echo $booking['customer_first_name']; ?></td>
+                        <td><?php echo $booking['customer_last_name']; ?></td>
+                        <td><?php echo $booking['customer_address']; ?></td>
+                        <td><?php echo $booking['customer_twitter_alias']; ?></td>
+                    </tr>
+                <?php
+                } ?>
+            </tbody>
+        </table>
 
-</body>
+        <hr />
+
+        <h2>New Customer</h2>
+        <form method="post">
+            <div>
+                <label for="first_name">First Name:</label>
+                <input type="text" id="first_name" name="first_name" required>
+            </div>
+            <div>
+                <label for="last_name">Last Name:</label>
+                <input type="text" id="last_name" name="last_name" required>
+            </div>
+            <div>
+                <label for="address">Address:</label>
+                <input type="text" id="address" name="address" required>
+            </div>
+            <div>
+                <label for="twitter_alias">Twitter Alias:</label>
+                <input type="text" id="twitter_alias" name="twitter_alias">
+            </div>
+            <div>
+                <button type="submit">Accept</button>
+            </div>
+        </form>
+    </body>
 </html>
