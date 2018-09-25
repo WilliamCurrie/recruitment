@@ -1,9 +1,9 @@
 <?php
 
 use Dotenv\Dotenv;
-use RecruitJordi\BookingRepository;
-use RecruitJordi\Customer;
-use RecruitJordi\CustomerRepository;
+use RecruitJordi\Entity\Customer as CustomerEntity;
+use RecruitJordi\Repository\Booking as BookingRepository;
+use RecruitJordi\Repository\Customer as CustomerRepository;
 use RecruitJordi\Db;
 
 require_once __DIR__ . '/../vendor/autoload.php';
@@ -14,7 +14,7 @@ $dotenv->load();
 $db = Db::getInstance();
 
 if ($_POST) {
-    $customer = new Customer($db);
+    $customer = new CustomerEntity($db);
     $customer->setFirstName($_POST['first_name']);
     $customer->setLastName($_POST['last_name']);
     $customer->setAddress($_POST['address']);

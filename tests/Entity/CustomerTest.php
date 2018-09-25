@@ -1,32 +1,20 @@
 <?php
 
-namespace RecruitJordi\Tests;
+namespace RecruitJordi\Tests\Entity;
 
-use Dotenv\Dotenv;
-use PHPUnit\Framework\TestCase;
-use RecruitJordi\Customer;
-use RecruitJordi\Db;
+use RecruitJordi\Tests\AbstractEntityTestCase;
+use RecruitJordi\Entity\Customer as CustomerEntity;
 
-class CustomerTest extends TestCase
+class CustomerTest extends AbstractEntityTestCase
 {
-	private static $db;
-
-	public static function setUpBeforeClass()
-	{
-		$dotenv = new Dotenv(__DIR__.'/../');
-		$dotenv->load();
-
-		self::$db = Db::getInstance();
-	}
-
 	/**
      * @test
      */
 	public function new()
 	{
-		$customer = new Customer(self::$db);
+		$customer = new CustomerEntity($this->db);
 
-		$this->assertInstanceOf(Customer::class, $customer);
+		$this->assertInstanceOf(CustomerEntity::class, $customer);
 	}
 
 	/**
@@ -39,7 +27,7 @@ class CustomerTest extends TestCase
 		$address = '1101 St John Street';
 		$twitterAlias = '@bob_smith';
 
-		$customer = new Customer(self::$db);
+		$customer = new CustomerEntity($this->db);
 		$customer->setFirstName($firstName);
 		$customer->setLastName($lastName);
 		$customer->setAddress($address);
@@ -47,7 +35,7 @@ class CustomerTest extends TestCase
 		$customer->save();
 
 		$sql = "SELECT * FROM customers WHERE address = '$address' ORDER BY ID DESC";
-		$row = self::$db->query($sql)->fetch_assoc();
+		$row = $this->db->query($sql)->fetch_assoc();
 
 		$this->assertEquals($firstName, $row['first_name']);
 		$this->assertEquals($lastName, $row['last_name']);

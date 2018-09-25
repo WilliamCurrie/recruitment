@@ -1,15 +1,16 @@
 <?php
 
-namespace RecruitJordi\Tests;
+namespace RecruitJordi\Tests\Repository;
 
-use RecruitJordi\BookingRepository;
+use RecruitJordi\Repository\Booking as BookingRepository;
+use RecruitJordi\Tests\AbstractRepositoryTestCase;
 
-class BookingRepositoryTest extends RepositoryTestCase
+class BookingTest extends AbstractRepositoryTestCase
 {
 	public function __construct()
 	{
 		parent::__construct();
-		
+
 		$this->csvLoad(self::DATA_FOLDER.'/bookings_join_customers.csv');
 	}
 

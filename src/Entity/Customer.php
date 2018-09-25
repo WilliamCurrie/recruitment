@@ -1,8 +1,10 @@
 <?php
 
-namespace RecruitJordi;
+namespace RecruitJordi\Entity;
 
-class Customer
+use RecruitJordi\AbstractEntity;
+
+class Customer extends AbstractEntity
 {
     private $firstName;
 
@@ -11,13 +13,6 @@ class Customer
     private $address;
 
     private $twitterAlias;
-
-    private $db;
-
-    public function __construct(Db $db)
-    {
-        $this->db = $db;
-    }
 
     public function setFirstName(string $firstName): void
     {

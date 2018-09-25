@@ -1,8 +1,11 @@
 <?php
 
-namespace RecruitJordi;
+namespace RecruitJordi\Repository;
 
-class CustomerRepository extends AbstractRepository
+use RecruitJordi\AbstractRepository;
+use RecruitJordi\Db;
+
+class Customer extends AbstractRepository
 {
     public function __construct(Db $db)
     {

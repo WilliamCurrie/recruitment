@@ -6,7 +6,7 @@ use Dotenv\Dotenv;
 use PHPUnit\Framework\TestCase;
 use RecruitJordi\Db;
 
-class RepositoryTestCase extends TestCase
+class AbstractRepositoryTestCase extends TestCase
 {
     const DATA_FOLDER = __DIR__.'/data';
 

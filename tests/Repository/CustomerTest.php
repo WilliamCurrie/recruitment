@@ -1,10 +1,11 @@
 <?php
 
-namespace RecruitJordi\Tests;
+namespace RecruitJordi\Tests\Repository;
 
-use RecruitJordi\CustomerRepository;
+use RecruitJordi\Repository\Customer as CustomerRepository;
+use RecruitJordi\Tests\AbstractRepositoryTestCase;
 
-class CustomerRepositoryTest extends RepositoryTestCase
+class CustomerTest extends AbstractRepositoryTestCase
 {
 	public function __construct()
 	{

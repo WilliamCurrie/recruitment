@@ -13,11 +13,11 @@
         <env name="DB_PORT" value="3306"/>
     </php>
     <testsuites>
-        <testsuite name="Recruit me">
-            <directory>tests</directory>
-            <file>DbTest</file>
-            <file>CustomerRepositoryTest</file>
-            <file>CustomerTest</file>
+        <testsuite name="Tests">
+            <file>tests/DbTest.php</file>
+            <file>tests/Repository/BookingTest.php</file>
+            <file>tests/Repository/CustomerTest.php</file>
+            <file>tests/Entity/CustomerTest.php</file>
         </testsuite>
     </testsuites>
 </phpunit>
