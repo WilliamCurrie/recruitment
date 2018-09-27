@@ -1,0 +1,28 @@
+<?php
+
+namespace RecruitJordi\Tests\Repository;
+
+use RecruitJordi\Repository\Booking as BookingRepository;
+use RecruitJordi\Tests\AbstractRepositoryTestCase;
+
+class BookingTest extends AbstractRepositoryTestCase
+{
+	public function __construct()
+	{
+		parent::__construct();
+
+		$this->csvLoad(self::DATA_FOLDER.'/bookings_join_customers.csv');
+	}
+
+	/**
+	 * @test
+	 */
+	public function fetchByCustomerId()
+	{
+		$id = 1;
+		$bookings = (new BookingRepository($this->db))->fetchByCustomerId($id);
+		$csvRows = $this->csvRows(['customer_id' => $id]);
+
+		$this->assertEquals($bookings, $csvRows);
+	}
+}

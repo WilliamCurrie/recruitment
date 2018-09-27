@@ -1,16 +1,33 @@
-# Recruitment Exercise
-Please review src/refactor-me.php which contains code that desperately needs improving.  There are a number of bugs and design flaws in it that need addressing.
+# Set Up
 
-The task is to refactor this code so that it is functional and also much improved from its current state.  Feel free to refactor as much as you like but we'd ask that you don't use a full framework for your test, though we're happy for you to pull in selected components/libraries.  We want you to consider how the code can be improved; is it maintainable, how can it be made to adhere to best practice. 
+Make sure to create an `.env` file in your app's root folder:
 
-Note, to do well in this test you will need to refactor the code into multiple files.  We would anticipate that a good submission should take no longer than 2-4 hours though better submissions are likely to be towards the end of that.  If you are completing this and applying for a senior role we would expect some automated tests to be included with the submission.
+```
+APP_ENV=dev
 
-To complete the exercise, please fork this repository and work directly in your fork. Once you've finished create a Pull Request back to this repository so we can view the diff.
+DB_HOST=mysql
+DB_USER=testuser
+DB_PASSWORD=password
+DB_NAME=test
+DB_PORT=3306
+```
 
-## Docker
-We have included a docker setup to allow you to get up and running quickly with this example, though you are under no obligation to use this.  After you have installed docker and forked the repository you will need to:
+## Start the Docker Services
 
-* Run `docker-compose up` 
-* The sample sql should automatically run 
-* Visit http://localhost:8080 in your browser
+    docker-compose up --build
 
+## Bootstrap the Test Database
+
+    sudo docker exec -it recruitment_mysql /bin/bash
+    mysql -u root -p test < tests/data/init.sql
+
+## Run the App
+
+    http://localhost:8080/
+
+![index.php](/resources/screencapture.png?raw=true)
+
+## Run the Tests
+
+    sudo docker exec -it recruitment_app /bin/bash
+    vendor/bin/phpunit

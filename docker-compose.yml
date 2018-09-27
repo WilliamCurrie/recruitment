@@ -1,35 +1,30 @@
-version: '3'
-
-services:
-  app:
-    build:
-      context: .
+app:
+    build: .
+    container_name: recruitment_app
+    links:
+        - mysql
     volumes:
-      - ./:/var/www/test
-    working_dir: /var/www/test
+        - ./:/var/www/recruitment
+    working_dir: /var/www/recruitment
 
-  nginx:
-    image: nginx:1.13
+nginx:
+    image: nginx:latest
+    container_name: recruitment_nginx
     ports:
-      - 8080:80
-    depends_on:
-      - app
+        - "8080:80"
     volumes:
-      - ./:/var/www/test
-      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+        - ./:/var/www/recruitment
+        - ./docker/nginx/conf.d:/etc/nginx/conf.d/
+    links:
+        - app
 
-  database:
+mysql:
     image: mysql:5.7
+    container_name: recruitment_mysql
     volumes:
-      - dbdata:/var/lib/mysql
-      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
-    ports:
-      - "33061:3306"
+        - ./tests/data:/tests/data
     environment:
-      - "MYSQL_DATABASE=test"
-      - "MYSQL_USER=testuser"
-      - "MYSQL_PASSWORD=password"
-      - "MYSQL_ROOT_PASSWORD=verysecret"
-
-volumes:
-  dbdata: ~
+        - MYSQL_DATABASE=test
+        - MYSQL_USER=testuser
+        - MYSQL_PASSWORD=password
+        - MYSQL_ROOT_PASSWORD=verysecret

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit
+    backupGlobals="false"
+    colors="true"
+    bootstrap="vendor/autoload.php"
+>
+    <php>
+        <env name="APP_ENV" value="test"/>
+        <env name="DB_HOST" value="mysql"/>
+        <env name="DB_USER" value="testuser"/>
+        <env name="DB_PASSWORD" value="password"/>
+        <env name="DB_NAME" value="test"/>
+        <env name="DB_PORT" value="3306"/>
+    </php>
+    <testsuites>
+        <testsuite name="Tests">
+            <file>tests/DbTest.php</file>
+            <file>tests/Repository/BookingTest.php</file>
+            <file>tests/Repository/CustomerTest.php</file>
+            <file>tests/Entity/CustomerTest.php</file>
+        </testsuite>
+    </testsuites>
+</phpunit>
