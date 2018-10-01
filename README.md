@@ -14,3 +14,7 @@ We have included a docker setup to allow you to get up and running quickly with 
 * The sample sql should automatically run 
 * Visit http://localhost:8080 in your browser
 
+------------------------------------------------------------------------------------------------------------------------------------
+
+Didn't manage to run on Docker as their site wont allow me to download package for Windows(might be temprorary issue).
+Just create new database named "customers" and insert the .sql file to make project work.
