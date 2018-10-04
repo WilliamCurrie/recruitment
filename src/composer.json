@@ -1,0 +1,6 @@
+{
+  "require": {
+    "doctrine/orm": "*",
+    "zendframework/zend-view": "^2.10"
+  }
+}
