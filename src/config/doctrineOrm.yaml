@@ -1,0 +1,37 @@
+doctrine:
+  connection:
+    orm_default:
+      driverClass:        'Doctrine\DBAL\Driver\PDOMySql\Driver'
+      params:
+        driver    : pdo_mysql
+        user      : testuser
+        password  : password
+        dbname    : test
+        host      : '127.0.0.1'
+        port      : 33061
+        charset   : utf8
+  configuration:
+    orm_default:
+      metadata_cache:     'array'
+      driver:             'orm_default'
+      generate_proxies:   1
+      proxy_dir:          'data/DoctrineORMModule/Proxy'
+      proxy_namespace:    'DoctrineORMModule\Proxy'
+    orm_manager:
+      metadata_cache:     '\Doctrine\Common\Cache\ArrayCache'
+      paths:              ['lib/Booking','lib/Customer']
+  driver:
+    orm_driver:
+      class:              Doctrine\ORM\Mapping\Driver\AnnotationDriver
+      cache:              array
+      paths:              ['lib/Booking','lib/Customer']
+    orm_default:
+      User\Model':		'orm_driver'
+  documentmanager:
+    odm_default:
+      connection:           orm_default
+      configuration:        orm_default
+      eventmanager:         orm_default
+  eventmanager:
+    odm_default:
+      subscribers:          []

@@ -1,83 +1,153 @@
 <?php
-set_time_limit(-1);
-error_reporting(E_ERROR | E_USER_ERROR | E_PARSE | E_CORE_ERROR |E_COMPILE_ERROR | E_RECOVERABLE_ERROR);
-ini_set("display_errors", 1);
 
 use Zend\View\Renderer\PhpRenderer;
 use Zend\View\Resolver;
 use Zend\View\Model\ViewModel;
 
+/**
+ * Class recruitmentLoader
+ */
 class recruitmentLoader
 {
 
-  protected $config = null;
+  /**
+   * @var \Config\Config
+   */
+    protected $_config;
 
-  public function __construct()
-  {
-    $this->registerLoader();
-    $this->setPhpRenderer();
-  }
+    /**
+   * @var \Request\Request
+   */
+    protected $_request;
 
-  public function registerLoader()
-  {
-    $fullPath = substr(__DIR__,0,strrpos(__DIR__, '/')+1);
-    $this->fullPath = $fullPath;
+  /**
+   * @var \Response\Response
+   */
+    protected $_response;
 
-    spl_autoload_register( function ($className)
+  /**
+   * recruitmentLoader constructor.
+   */
+    public function __construct()
     {
-      $fullPath = substr(__DIR__,0,strrpos(__DIR__, '/')+1);
-
-      $className = ltrim($className, '\\');
-      $fileName  = 'lib/';
-      $namespace = '';
-      if ($lastNsPos = strrpos($className, '\\')) {
-        $namespace = substr($className, 0, $lastNsPos);
-
-        $className = substr($className, $lastNsPos + 1);
-        $namespace = explode("\\", $namespace);
-        $fileName  .= str_replace('\\', DIRECTORY_SEPARATOR, $namespace[0].DIRECTORY_SEPARATOR);
-      }
-      $fileName .= str_replace('_', DIRECTORY_SEPARATOR, $className) . '.php';
-      require $fullPath.$fileName;
-    });
-
-    if (file_exists("{$fullPath}vendor/autoload.php")) {
-      $loader = include "{$fullPath}vendor/autoload.php";
+      $this->registerLoader();
+      $this->registerConfig();
+      $this->setRequestManager();
+      $this->setResponseManager();
+      $this->init();
     }
-  }
 
-  public function setPhpRenderer()
-  {
-    $renderer = new PhpRenderer();
 
-    $resolver = new Resolver\AggregateResolver();
+  /**
+   * @return \recruitmentLoader
+   */
+    public function init():self
+    {
+      $controller = new \Main\Controller\IndexController($this);
+      $this->getResponseManager()->getHandler()->setContent($this->getResponseManager()->render($controller->indexAction()))->send();
 
-    $renderer->setResolver($resolver);
+      return $this;
+    }
 
-    $map = new Resolver\TemplateMapResolver([
-      'layout'      => __DIR__ . '/view/layout.phtml',
-      'index/index' => __DIR__ . '/view/main/index/index.phtml',
-    ]);
-    $stack = new Resolver\TemplatePathStack([
-      'script_paths' => [
-        'view'
-      ],
-    ]);
+  /**
+   * @return \recruitmentLoader
+   */
+    public function registerConfig():self
+    {
+        $this->setConfig(new Config\Config());
+        $this->getConfig()->setStorageHandler()->registerConfigs();
 
-// Attach resolvers to the aggregate:
-    $resolver
-      ->attach($map)    // this will be consulted first, and is the fastest lookup
-      ->attach($stack)  // filesystem-based lookup
-      ->attach(new Resolver\RelativeFallbackResolver($map)) // allow short template names
-      ->attach(new Resolver\RelativeFallbackResolver($stack));
+      return $this;
+    }
 
-    $model    = new ViewModel();
-    $model->setVariable('foo', 'bar');
-// or
-    $model = new ViewModel(['foo' => 'bar']);
+  /**
+   * @param \Config\Config|NULL $config
+   * @return \recruitmentLoader
+   */
+    public function setConfig(\Config\Config $config = null):self
+    {
+        if($config)
+        {
+            $this->_config = $config;
+            return $this;
+        }
 
-    $model->setTemplate('index/index');
-    $renderer->render($model);
-  }
+        $this->_config = new Config\Config();
+        $this->getConfig()->setStorageHandler()->registerConfigs();
+        return $this;
+    }
+
+  /**
+   * @return \Config\Config
+   */
+    public function getConfig():\Config\Config
+    {
+        return $this->_config;
+    }
+
+  /**
+   * @param \Request\Request|NULL $request
+   * @return \recruitmentLoader
+   */
+    public function setRequestManager(\Request\Request $request = null):self
+    {
+        $this->_request = ($request)?$request:new \Request\Request($this);
+        return $this;
+    }
+
+  /**
+   * @return \Request\Request
+   */
+    public function getRequestManager():\Request\Request
+    {
+        return $this->_request;
+    }
+
+  /**
+   * @param \Response\Response|NULL $response
+   * @return \recruitmentLoader
+   */
+    public function setResponseManager(\Response\Response $response = null ):self
+    {
+        $this->_response = ($response)?$response:new \Response\Response($this);
+        return $this;
+    }
+
+  /**
+   * @return \Response\Response
+   */
+    public function getResponseManager():\Response\Response
+    {
+        return $this->_response;
+    }
+
+
+    public function registerLoader()
+    {
+        $fullPath = substr(__DIR__,0,strrpos(__DIR__, '/')+1);
+        $this->fullPath = $fullPath;
+
+          spl_autoload_register( function ($className)
+          {
+              $fullPath = substr(__DIR__,0,strrpos(__DIR__, '/')+1);
+
+              $className = ltrim($className, '\\');
+              $fileName  = 'lib/';
+              $namespace = '';
+              if ($lastNsPos = strrpos($className, '\\')) {
+                  $namespace = substr($className, 0, $lastNsPos);
+
+                  $className = substr($className, $lastNsPos + 1);
+                  $namespace = explode("\\", $namespace);
+                  $fileName  .= str_replace('\\', DIRECTORY_SEPARATOR, $namespace[0].DIRECTORY_SEPARATOR);
+              }
+              $fileName .= str_replace('_', DIRECTORY_SEPARATOR, $className) . '.php';
+              require $fullPath.$fileName;
+          });
+
+        if (file_exists("{$fullPath}vendor/autoload.php")) {
+          $loader = include "{$fullPath}vendor/autoload.php";
+        }
+    }
 
 }

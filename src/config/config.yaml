@@ -1,0 +1,3 @@
+configs :
+  DoctrineORM   : 'doctrineOrm.yaml'
+  Local        : 'local.yaml'

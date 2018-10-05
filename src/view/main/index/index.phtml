@@ -1,1 +1,32 @@
-Test
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>My Simple  App</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+<h1>Simple Database App</h1>
+<?=$customer->getFirstName()?> <?=$customer->getSecondName()?>
+
+<div>
+  <?php foreach($customersByName as $user):?>
+    <div><?=$user->getFirstName()?> <?=$user->getSecondName()?></div>
+  <?php endforeach;?>
+</div>
+<div>
+<?php if(isset($bookings) && count($bookings)):?>
+  <h2>Bookings</h2>
+  <?php foreach($bookings as $booking):?>
+    <div><?=$booking->getBookingReference()?> - <?=$customers[$booking->getCustomerid()]->getFirstName()?> <?=$customers[$booking->getCustomerid()]->getSecondname()?> - <?=$booking->getBookingDate()->format('Y-m-d H:i:s')?></div>
+  <?php endforeach;?>
+<?php endif;?>
+</div>
+</body>
+</html>
+
+<?php ?>

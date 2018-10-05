@@ -10,11 +10,11 @@ class Customer
     public $address;
 
     function saveCustomer(){
-        $db = new mysqli('database', 'testuser', 'password', 'test', DB_PORT);
+        $db = new mysqli('127.0.0.1', 'testuser', 'password', 'test', DB_PORT);
         $db->query('INSERT INTO customers (first_name, second_name) VALUES (\''.$this->firstName.'\', \''.$this->last_name.'\', \''.$this->address.'\')');
     }
     function get_our_customers_by_surname(){
-        $db = new \mysqli('database', 'testuser', "password", 'test', DB_PORT);
+        $db = new \mysqli('127.0.0.1', 'testuser', "password", 'test', DB_PORT);
         $res = $db->query('SELECT * FROM customers ORDER BY second_name');
     while($result=$res->fetch_assoc()){
         echo($this->formatNames($result['first_name'], $result['second_name']));
