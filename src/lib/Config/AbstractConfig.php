@@ -160,9 +160,9 @@ abstract class AbstractConfig
     }
 
   /**
-   * @return \Config\AbstractConfig
+   * @return $this
    */
-    public function readData():self
+    public function readData()
     {
         $this->setConfig($this->getStorageHandler()->fromFile($this->getFile()));
 

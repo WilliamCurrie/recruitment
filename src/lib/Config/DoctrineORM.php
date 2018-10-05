@@ -8,9 +8,9 @@ namespace Config;
 class DoctrineORM extends AbstractConfig
 {
   /**
-   * @return \Config\DoctrineORM
+   * @return $this
    */
-    public function readData():self
+    public function readData()
     {
         $config = $this->getStorageHandler()->fromFile($this->getFile());
 
