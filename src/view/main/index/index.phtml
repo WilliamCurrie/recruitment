@@ -22,7 +22,7 @@
 <?php if(isset($bookings) && count($bookings)):?>
   <h2>Bookings</h2>
   <?php foreach($bookings as $booking):?>
-    <div><?=$booking->getBookingReference()?> - <?=$customers[$booking->getCustomerid()]->getFirstName()?> <?=$customers[$booking->getCustomerid()]->getSecondname()?> - <?=$booking->getBookingDate()->format('Y-m-d H:i:s')?></div>
+    <div><?=$booking->getBookingReference()?> - <?=$customers[$booking->getCustomerid()]->getFirstName()?> <?=$customers[$booking->getCustomerid()]->getSecondName()?> - <?=$booking->getBookingDate()->format('Y-m-d H:i:s')?></div>
   <?php endforeach;?>
 <?php endif;?>
 </div>
