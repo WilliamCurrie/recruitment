@@ -9,10 +9,10 @@ CREATE TABLE `customers` (
   `id` int(10) NOT NULL auto_increment,
   `first_name` varchar(30) NOT NULL,
   `second_name` varchar(30) NOT NULL,
-  `address` varchar(255) NULL,
+  `address` varchar(255) NULL, 
   `twitter_alias` varchar(255) NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=0 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `bookings`
@@ -24,7 +24,7 @@ CREATE TABLE `bookings` (
   `booking_reference` varchar(15) NOT NULL,
   `booking_date` DATETIME NOT NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=0 DEFAULT CHARSET=utf8;
 
 INSERT INTO `customers` (id, first_name, second_name, address) VALUES
 (1, 'Jim', 'Edwards', '23 Where I live, Liverpool, L1 3TF'),
@@ -37,3 +37,11 @@ INSERT INTO `bookings` (customerID, booking_reference, booking_date) VALUES
 (1, 'JE125', '2017-03-02'),
 (4, 'LT478', '2017-02-15'),
 (4, 'LT791', '2017-04-01');
+
+ALTER `bookings` ADD CONSTRAINT `fk_customers_bookings` FOREIGN KEY (customerID) REFERENCES customers (id) 
+ON DELETE CASCADE 
+ON UPDATE NO ACTION;
+
+ALTER TABLE `bookings` ADD CONSTRAINT `customer_booking_reference` UNIQUE KEY(`customerID`,`booking_reference`);
+
+SET FOREIGN_KEY_CHECKS = 1;
