@@ -14,3 +14,23 @@ We have included a docker setup to allow you to get up and running quickly with 
 * The sample sql should automatically run 
 * Visit http://localhost:8080 in your browser
 
+## Todo / Explaination
+Added Composer to use some strong, well tested dependencies and brought in PHPUnit Testing. I'm using Eloquent to handle the Database connection as this has been developed for years it's likely there are less bugs and more thoughts about how the data should be dealt with and cleaned to prevent SQL Injection, creating a custom Database Connector could be dangerous as a foundation.
+
+I basically have refactored the code into a MVC basic framework, it uses Blade to offer a CLEAN frontend view to help prevent future developers inserting PHP code and ensuring everything conforms to a controller.
+
+I have added a few basic PHP Unit Tests, however these are bare minimum and I would of liked to add more but based on time constraints I was unable to.
+
+I removed a lot of the old code as eloquent handles it quite well. 
+
+You'll notice I didn't change the database structure as if the data is already structured in this way in a live environment it *could* cause data loss and issues, I would normally always plan how to migrate / reorganise data within a database.
+
+I've also moved all code "Below-Root" so they cannot be executed by browsers.
+
+Added a "Create Booking" option.
+
+If I have more time I would:
+- Setup Migrations to ensure all environments have the same database structure as it will also aid the development process as the software gets bigger.
+- More Unit Tests
+- Cleaner Directory Structure
+- Create functions to structure the creates on the Models.
