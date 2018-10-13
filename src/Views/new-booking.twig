@@ -1,0 +1,46 @@
+{% extends 'layout.twig' %}
+{% block content %}
+    <h3>New Booking</h3>
+    <div class="row">
+        <form class="col s12" novalidate method="post">
+            <div class="row">
+                <div class="input-field col s12">
+                    <input id="first-name" type="text" name="firstname" value="{{  customer.fullName() }}" readonly disabled>
+                    <label for="first-name">Fist Name</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <input id="address" type="text" name="address" value="{{  customer.address }}" readonly disabled>
+                    <label for="address">Address</label>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="input-field col s6">
+                    <input id="booking-date" name="booking_date" type="date" class="datepicker" required>
+                    <label>Booking date(*)</label>
+                    <label id="booking-date-error" class="error no-display" for="booking-date"></label>
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div class="col s12">
+                    <input name="submit" type="submit" value="Book" class="btn waves-effect waves-light right">
+                </div>
+            </div>
+        </form>
+    </div>
+{% endblock %}
+
+{% block js %}
+    <script>
+        (function ($) {
+            $(document).ready(function () {
+                $('form').validate();
+                $('.error').hide();
+            });
+        })(jQuery)
+    </script>
+{% endblock %}

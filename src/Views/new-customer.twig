@@ -1,0 +1,54 @@
+{% extends 'layout.twig' %}
+{% block content %}
+    <h3>Add new customer</h3>
+    <div class="row">
+        <form class="col s12" action="" method="post" novalidate>
+            <div class="row">
+                <div class="input-field col s12">
+                    <input placeholder="Customer First Name" id="first-name" type="text" name="firstname" class="validate" required>
+                    <label for="first-name">Fist Name (*)</label>
+                    <label id="first-name-error" class="error no-display" for="first-name"></label>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="input-field col s12">
+                    <input placeholder="Customer Surname" id="surname" type="text" name="surname" class="validate" required>
+                    <label for="surname">Surname (*)</label>
+                    <label id="surname-error" class="error no-display" for="surname"></label>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="input-field col s12">
+                    <input placeholder="Customer Address" id="address" type="text" name="address">
+                    <label for="address">Address</label>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="input-field col s12">
+                    <input placeholder="Customer Twitter Alias" id="twitter-alias" type="text" name="twitter_alias">
+                    <label for="twitter-alias">Twitter Alias</label>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col s12">
+                    <input name="submit" type="submit" value="Save" class="btn waves-effect waves-light right">
+                </div>
+            </div>
+        </form>
+    </div>
+{% endblock %}
+
+{% block js %}
+<script>
+    (function ($) {
+        $(document).ready(function () {
+            $('form').validate();
+            $('.error').hide();
+        });
+    })(jQuery)
+</script>
+{% endblock %}

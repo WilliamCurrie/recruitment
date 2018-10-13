@@ -1,0 +1,25 @@
+{
+  "name": "recruitment/demo",
+  "license": "MIT",
+  "type": "project",
+  "autoload": {
+    "psr-4": {
+      "Booking\\": "src/"
+    }
+  },
+  "require": {
+    "php": ">=7.0",
+    "php-di/php-di": "^6.0",
+    "nikic/fast-route": "~0.5.0",
+    "twig/twig": "^1.18",
+    "mnapoli/silly": "^1.7",
+    "slim/pdo": "~1.10",
+    "vlucas/phpdotenv": "^2.5"
+  },
+
+  "scripts": {
+    "post-install-cmd": [
+      "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
+    ]
+  }
+}

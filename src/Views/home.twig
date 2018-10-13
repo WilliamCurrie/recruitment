@@ -1,0 +1,48 @@
+{% extends 'layout.twig' %}
+{% block content %}
+    <h3>Welcome to the Demo Booking!</h3>
+    <div class="row">
+        <a class="btn waves-effect waves-light" href="/new-customer">Add New Customer</a>
+
+        <form class="right search-form" action="" method="get">
+            <input name="search" type="text" value="{{ search }}" placeholder="Search By Surname">
+            <input name="submit" type="submit" value="Search" class="btn waves-effect waves-light right">
+        </form>
+    </div>
+
+    <table class="responsive-table">
+     <tr>
+         <th>Customer Name</th>
+         <th>Address</th>
+         <th>Twitter Alias</th>
+         <th>&nbsp;</th>
+     </tr>
+     {% for customer in customerCollections %}
+         <tr>
+             <td> {{  customer.fullName() }}</td>
+             <td> {{ customer.address  }}</td>
+             <td> {{  customer.twitterAlias  }}</td>
+             <td><a class="btn-small waves-effect waves-light" href="/new-booking/{{ customer.id }}">New Booking</a></td>
+         </tr>
+     {% endfor %}
+    </table>
+
+    <h5>List of bookings:</h5>
+
+    <table class="responsive-table">
+        <tr>
+            <th>Customer Name</th>
+            <th>Booking Reference</th>
+            <th>Booking Date</th>
+        </tr>
+        {% for customer in customerCollections %}
+            {% for booking in customer.getBookings() %}
+                <tr>
+                    <td> {{ customer.fullName() }}</td>
+                    <td> {{ booking.bookingReference  }}</td>
+                    <td> {{ booking.getBookingDate()  }}</td>
+                </tr>
+            {% endfor %}
+        {% endfor %}
+    </table>
+{% endblock %}
