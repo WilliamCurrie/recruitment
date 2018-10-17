@@ -1,0 +1,17 @@
+# behat.yml
+default:
+  autoload:
+    '': "%paths.base%/tests/features/bootstrap"
+
+  suites:
+    default:
+      paths:
+          - "%paths.base%/tests/features"
+  # ...
+  extensions:
+    Behat\MinkExtension:
+      # please change the following to meet the right url
+      base_url:  'http://localhost'
+      sessions:
+        default:
+          goutte: ~
