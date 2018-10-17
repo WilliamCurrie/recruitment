@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>My Simple App</title>
+    <style>
+        table td {
+            padding: 4px 12px;
+            border: 1px solid lightgrey;
+        }
+    </style>
+</head>
+<body>
+<h1 align="center">Simple Database App</h1>
+<div align="center">
+    <a href="/customer/create"> Create new customer</a>
+</div>
+<br />
+<table align="center">
+    <tr>
+        <td>Reference</td>
+        <td>Booking date</td>
+        <td>Customer Name</td>
+        <td>Customer Address</td>
+    </tr>
+    {% for booking in bookings %}
+        <tr>
+            <td>{{ booking.reference }}</td>
+            <td>{{ booking.for_date|date("d M Y") }}</td>
+            <td>{{ attribute(customerNames, booking.customer_id) }}</td>
+            <td>{{ attribute(customerAddresses, booking.customer_id) }}</td>
+        </tr>
+    {% endfor %}
+</table>
+</body>
+</html>
