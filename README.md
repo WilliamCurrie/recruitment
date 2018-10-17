@@ -1,3 +1,18 @@
+# Please review my latest refactored functionality
+
+Attempts for:
+
+-   Single Responsibility classes
+-   Persistent DBMS connection
+-   Methods by interface
+-   Improve environment variables repo
+-   Base utility classes
+-   REST alike structure
+-   Introduce relevant templating structure
+-   Simple validation
+-   Simple behaviour tests
+-   SQL Improvements
+
 # Recruitment Exercise
 Please review src/refactor-me.php which contains code that desperately needs improving.  There are a number of bugs and design flaws in it that need addressing.
 
@@ -7,10 +22,4 @@ Note, to do well in this test you will need to refactor the code into multiple f
 
 To complete the exercise, please fork this repository and work directly in your fork. Once you've finished create a Pull Request back to this repository so we can view the diff.
 
-## Docker
-We have included a docker setup to allow you to get up and running quickly with this example, though you are under no obligation to use this.  After you have installed docker and forked the repository you will need to:
-
-* Run `docker-compose up` 
-* The sample sql should automatically run 
-* Visit http://localhost:8080 in your browser
 
