@@ -1,0 +1,109 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+
+    <title>Recruitment test</title>
+    <meta name="description" content="Test">
+    <meta name="author" content="Sergio Lopez">
+
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="js/vue.js"></script>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <script defer src="js/jquery-3.3.1.js"></script>
+    <script defer src="js/bootstrap.min.js"></script>
+    <script defer src="js/popper.min.js"></script>
+</head>
+<body>
+    <div id="app" class="container-fluid">
+        <h1>Customers</h1>
+        <div class="row">
+            <div class="col-sm">
+                Name
+            </div>
+            <div class="col-sm">
+                Address
+            </div>
+            <div class="col-sm">
+                Twitter alias
+            </div>
+            <div class="col-sm">
+                Actions
+            </div>
+        </div>
+        <div class="row border p-2" v-for="(customer, index) in customers">
+            <div class="col-sm">
+                <span v-show="!isInEdit(index)" v-text="customer.first_name + ' ' +customer.second_name"></span>
+                <input v-show="isInEdit(index)" type="text" v-model="customer.first_name" placeholder="First Name" @keydown.enter="saveCustomer()">
+                <input v-show="isInEdit(index)" type="text" v-model="customer.second_name" placeholder="Second Name" @keydown.enter="saveCustomer()">
+            </div>
+            <div class="col-sm">
+                <span v-show="!isInEdit(index)" v-text="customer.address"></span>
+                <input v-show="isInEdit(index)" type="text" v-model="customer.address" placeholder="Address" @keydown.enter="saveCustomer()">
+            </div>
+            <div class="col-sm">
+                <span v-show="!isInEdit(index)">
+                    <a v-if="customer.twitter_alias" :href="'https://twitter.com/' + customer.twitter_alias" target="_blank" v-text="'@'+customer.twitter_alias"></a>
+                </span>
+                <input v-show="isInEdit(index)" type="text" v-model="customer.twitter_alias" placeholder="Twitter alias" @keydown.enter="saveCustomer()">
+            </div>
+            <div class="col-sm">
+                <button v-show="!isInEdit(index)" type="button" @click="editCustomer(index)" class="btn btn-primary btn-sm">Edit</button>
+                <button v-show="isInEdit(index)" type="button" @click="saveCustomer()" class="btn btn-primary btn-sm">Save</button>
+                <button v-show="isInEdit(index)" type="button" @click="cancelEditing()" class="btn btn-warning btn-sm">Cancel</button>
+                <button v-show="!isInEdit(index)" type="button" @click="showBookings(customer.id)" class="btn btn-info btn-sm" data-toggle="modal" data-target="#base-modal">Bookings</button>
+                <button v-show="!isInEdit(index)" type="button" @click="deleteCustomer(customer)" class="btn btn-danger btn-sm">Delete</button>
+            </div>
+        </div>
+        <div>
+            <button type="button" @click="newCustomer()" class="btn btn-primary btn-sm">New Customer</button>
+        </div>
+        <!-- Modal -->
+        <div class="modal fade" id="base-modal" tabindex="-1" role="dialog" aria-labelledby="modalTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalTitle">Bookings</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="container" v-if="bookings.length">
+                            <div class="row">
+                                <div class="col-sm-3 text-center" >
+                                    Booking Reference
+                                </div>
+                                <div class="col-sm text-center">
+                                    Booking Date
+                                </div>
+                                <div class="col-sm text-center">
+                                    Actions
+                                </div>
+                            </div>
+                            <div class="row border p-1 m-1" v-for="item in bookings">
+                                <div class="col-sm-3 text-center" v-text="item.booking_reference">
+                                </div>
+                                <div class="col-sm text-center" v-text="item.booking_date.date.substr(0,10)">
+                                </div>
+                                <div class="col-sm text-center">
+                                    <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" @click="deleteBooking(item)">Cancel Booking</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div v-else>
+                            <strong>No Bookings</strong>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" @click="newBooking(bookings[0].customer_id)">New</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script defer src="js/app.js"></script>
+</body>
+</html>
