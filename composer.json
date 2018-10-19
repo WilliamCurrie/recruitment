@@ -1,0 +1,8 @@
+{
+    "require-dev": {
+        "phpunit/phpunit": "6.0"
+    },
+    "require": {
+        "fzaninotto/faker": "^1.8"
+    }
+}
