@@ -11,13 +11,13 @@ class Customer
 
     function saveCustomer(){
         $db = new mysqli('database', 'testuser', 'password', 'test', DB_PORT);
-        $db->query('INSERT INTO customers (first_name, second_name) VALUES (\''.$this->firstName.'\', \''.$this->last_name.'\', \''.$this->address.'\')');
+        $db->query('INSERT INTO customers (customer_first_name, customer_second_name) VALUES (\''.$this->firstName.'\', \''.$this->last_name.'\', \''.$this->address.'\')');
     }
     function get_our_customers_by_surname(){
         $db = new \mysqli('database', 'testuser', "password", 'test', DB_PORT);
-        $res = $db->query('SELECT * FROM customers ORDER BY second_name');
+        $res = $db->query('SELECT * FROM customers ORDER BY customer_second_name');
     while($result=$res->fetch_assoc()){
-        echo($this->formatNames($result['first_name'], $result['second_name']));
+        echo($this->formatNames($result['customer_first_name'], $result['customer_second_name']));
     }
     }
 
@@ -34,14 +34,14 @@ class Customer
     function findById(string   $id)
     {
         $db = new \mysqli('127.0.0.1', 'testuser', 'password', 'test', DB_PORT);
-        $res = $db->query('SELECT * FROM customers WHERE id = \''.$id.'\'');
+        $res = $db->query('SELECT * FROM customers WHERE customer_id = \''.$id.'\'');
         mysqli_close ($db);
         return $res;
     }
 
             //Get all the customers from the database and output them
             function getAllCustomers(){
-                $db = new \mysqli('127.0.0.1', 'testuser', 'password', 'test', DB_PORT);
+                $db = new \mysqli('database', 'testuser', 'password', 'test', DB_PORT);
 
 
 
@@ -50,8 +50,8 @@ class Customer
                 print '<table>';
                 while ($result = $res->fetch_assoc()){
                     echo '<TR>';
-                    echo '<TD>'.$result['first_name'].'</ td>';
-                    echo '<td>'.$result['second_name'].'</ TD>';
+                    echo '<TD>'.$result['customer_first_name'].'</ td>';
+                    echo '<td>'.$result['customer_second_name'].'</ TD>';
                     echo '</tr>';
                 }
 
@@ -74,9 +74,9 @@ class Booking {
 
     public function GetBookings($id = false)
     {
-        $sql = "SELCT * FROM bookings";
+        $sql = "SELECT * FROM bookings";
         if ($id !== false ) {
-            $sql .= " WHERE customerID=" . $id;
+            $sql .= " WHERE booking_customer_id=" . $id;
         }
 
 
@@ -84,7 +84,7 @@ class Booking {
         $res = $db->query($sql);
 
         while ($result = $res->fetch_assoc()){
-         $User = User::findById($result['customerID']);
+         $User = User::findById($result['booking_customer_id']);
             $return[$result['id']]['customer_name'] = $User->first_name . ' ' . $User->last_name;
             $return[$result['id']]['booking_reference'] = $result['booking_reference'];
             $return[$result['id']]['booking_date'] = date('D dS M Y', result['booking_date']);

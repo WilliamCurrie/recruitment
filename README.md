@@ -14,3 +14,11 @@ We have included a docker setup to allow you to get up and running quickly with 
 * The sample sql should automatically run 
 * Visit http://localhost:8080 in your browser
 
+
+## Notes Nicky
+* Run `php vendor/bin/doctrine orm:schema-tool:update --force` to update the database according to the new schema
+* Created front end folder. Run `ng serve` (from within the directory) to server it. Access it from http://localhost:4200.
+* To Do: Dockerize the front end
+* I would have use Doctrine Fixtures, but that would require CREATE permisions for the test user in the test database, which does not have
+* ToDo: prepare the front end environments and to use a DIST file
+* ToDo: make it pretty (CSS-it)

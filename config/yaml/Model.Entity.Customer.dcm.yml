@@ -1,0 +1,32 @@
+Model\Entity\Customer:
+    type: entity
+    table: customers
+    id:
+        id:
+            type: integer
+            column: customer_id
+            generator:
+                strategy: AUTO
+    fields:
+        firstName:
+            column: customer_first_name
+            type: string
+            length: 30
+            nullable: false
+        secondName:
+            column: customer_second_name
+            type: string
+            length: 30
+            nullable: false
+        address:
+            column: customer_address
+            type: string
+            length: 255
+            nullable: true
+        twitterAlias:
+            column: customer_twitter_alias
+            type: string
+            length: 255
+            nullable: true
+
+

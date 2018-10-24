@@ -1,0 +1,33 @@
+Model\Entity\Booking:
+    type: entity
+    table: bookings
+    id:
+        id:
+            column: booking_id
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        reference:
+            column: booking_reference
+            type: string
+            length: 15
+            nullable: false
+        date:
+            column: booking_date
+            type: datetime
+            nullable: false
+        customerId:
+            column: booking_customer_id
+            type: integer
+            nullable: false
+    manyToOne:
+        customer:
+            targetEntity: Model\Entity\Customer
+            joinColumn:
+                name: booking_customer_id
+                referencedColumnName: customer_id
+    # It is not clear from the application requirements, but I feel like booking reference should be UNIQUE
+    uniqueConstraints:
+        bookingReferenceUniqueIdx:
+            columns: [booking_reference]

@@ -1,0 +1,21 @@
+<h1>Get Bookings By Customer</h1>
+<label for="customer-select">Choose a Customer:</label>
+
+<select id="customer-select" #customerDropdown (change)="getBookingsForClient(customerDropdown.value)">
+    <option value="">--Please choose a customer--</option>
+
+    <option *ngFor="let customer of allCustomers" [value]="customer.customer_id">{{customer.customer_first_name}} {{customer.customer_second_name}}</option>
+
+</select>
+
+<div *ngFor="let booking of allBookings">
+    <p>Booking</p>
+    <pre>
+        Details      : {{booking.booking_details}}
+    </pre>
+</div>
+
+<div [hidden]="!error"
+     class="alert alert-danger">
+    Unable to complete the request
+</div>

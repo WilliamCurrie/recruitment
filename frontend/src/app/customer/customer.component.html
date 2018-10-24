@@ -1,0 +1,10 @@
+<h1>Customers Directory</h1>
+<div *ngFor="let customer of allCustomers">
+    <p>Customer</p>
+    <pre>
+        First Name   : {{customer.customer_first_name}}
+        Second Name  : {{customer.customer_second_name}}
+        Address      : {{customer.customer_address}}
+        Twitter Alias: {{customer.customer_twitter_alias}}
+    </pre>
+</div>

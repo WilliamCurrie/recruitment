@@ -1,0 +1,24 @@
+<?php
+
+namespace Model\Entity;
+
+/**
+ * Customers
+ */
+class Customers
+{
+    /**
+     * @var int
+     */
+    private $customer_id;
+
+    /**
+     * Get customerId.
+     *
+     * @return int
+     */
+    public function getCustomerId()
+    {
+        return $this->customer_id;
+    }
+}
