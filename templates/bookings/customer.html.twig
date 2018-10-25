@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <h1>Bookings for: {{ customer }}</h1>
+
+    <table cellpadding="10" border="1">
+        <thead>
+            <tr>
+                <th>Reference</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for booking in customer.bookings %}
+            <tr>
+                <td>{{ booking.reference }}</td>
+                <td>{{ booking.date|date('Y-m-d H:i:s') }}</td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="2">This customer has no bookings.</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+echo "Creating docker container and detaching"
+docker-compose up -d
+
+echo "Creating database and importing legacy MySQL data"
+docker exec -it test_app php bin/console doctrine:schema:create
+docker exec -it test_app php bin/console doctrine:database:import docker/sql/init.sql

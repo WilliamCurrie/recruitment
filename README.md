@@ -1,16 +1,35 @@
-# Recruitment Exercise
-Please review src/refactor-me.php which contains code that desperately needs improving.  There are a number of bugs and design flaws in it that need addressing.
+# Setup:
 
-The task is to refactor this code so that it is functional and also much improved from its current state.  Feel free to refactor as much as you like but we'd ask that you don't use a full framework for your test, though we're happy for you to pull in selected components/libraries.  We want you to consider how the code can be improved; is it maintainable, how can it be made to adhere to best practice. 
+- First run: `bash setup`, this will start the docker containers detached and generate the database + import the `init.sql` file
+> This setup is for local, an ECS or deployed environment wouldn't use it.
 
-Note, to do well in this test you will need to refactor the code into multiple files.  We would anticipate that a good submission should take no longer than 2-4 hours though better submissions are likely to be towards the end of that.  Please note that submissions with automated tests are preferred. 
+After this you can continue to use:
 
-To complete the exercise, please fork this repository and work directly in your fork. Once you've finished create a Pull Request back to this repository so we can view the diff.
+- `docker-compose up` / `docker-compose down`
 
-## Docker
-We have included a docker setup to allow you to get up and running quickly with this example, though you are under no obligation to use this.  After you have installed docker and forked the repository you will need to:
+Access via: http://localhost:8080/
 
-* Run `docker-compose up` 
-* The sample sql should automatically run 
-* Visit http://localhost:8080 in your browser
+## Tests
 
+- php bin/phpunit
+
+OR
+
+- docker exec -it test_app php bin/phpunit
+
+```
+➜  josh.freeman git:(master) ✗ php bin/phpunit
+#!/usr/bin/env php
+PHPUnit 6.5.13 by Sebastian Bergmann and contributors.
+
+Testing Symfony FrameworkBundle Test Suite
+.............                                                     13 / 13 (100%)
+
+Time: 53 ms, Memory: 6.00MB
+
+OK (13 tests, 32 assertions)
+```
+
+## Note
+
+This demo will import the original `init.sql` data during docker-compose.

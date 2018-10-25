@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <h1>Customers</h1>
+
+    <table cellpadding="10" border="1">
+        <thead>
+            <tr>
+                <th>Full Name</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Twitter</th>
+                <th>Num of Bookings</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for customer in customers %}
+            <tr>
+                <td>{{ customer }}</td>
+                <td>{{ customer.firstName }}</td>
+                <td>{{ customer.secondName }}</td>
+                <td>{{ customer.twitterAlias }}</td>
+                <td>{{ customer.bookings|length|number_format }}</td>
+                <td>
+                    <a href="{{ path('customer_bookings', { customer: customer.id }) }}">View Bookings</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">You have no customers</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <br>
+
+    <p><a href="{{ path('customers_create') }}">Would you like to create one?</a> (This will create a random user on-demand)</p>
+
+{% endblock %}
