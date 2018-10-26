@@ -1,3 +1,9 @@
+#IMPORTANT NOTE
+* `$customer->get_our_customers_by_surname()` and `$customer->getAllCustomers()` have been refactored into a single `$customer->getCustomers()` method. This method takes one optional array parameter which is used to filter the results.
+
+* You will notice the `phpunit.xml` file has some database environment variables defined which are different from docker configuration. Needed to do that to be able to run some tests.
+
+
 # Recruitment Exercise
 Please review src/refactor-me.php which contains code that desperately needs improving.  There are a number of bugs and design flaws in it that need addressing.
 
