@@ -19,11 +19,6 @@ abstract class AbstractRepository
     protected $db;
 
     /**
-     * @return mixed
-     */
-    abstract function save();
-
-    /**
      * @param array $results
      *
      * @return mixed

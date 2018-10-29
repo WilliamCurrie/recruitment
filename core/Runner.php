@@ -23,6 +23,8 @@ class Runner
         $dispatcher = FastRoute\simpleDispatcher(function(FastRoute\RouteCollector $r) {
             $r->addRoute('GET', '/customers', 'Customer:getAll');
             $r->addRoute('GET', '/customer/{id:\d+}', 'Customer:get');
+            $r->addRoute('GET', '/customer/create', 'Customer:create');
+            $r->addRoute('POST', '/customer/create', 'Customer:save');
             $r->addRoute('GET', '/bookings/customer/{id:\d+}', 'Booking:getByCustomerId');
             $r->addRoute('GET', '/bookings', 'Booking:getAll');
             $r->addRoute('GET', '/', 'Index:index');

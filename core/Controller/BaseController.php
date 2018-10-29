@@ -20,8 +20,11 @@ class BaseController
     /** @var Container */
     protected $container;
 
-    /** @var array */
-    protected $parameters;
+    /** @var array  */
+    protected $postVars = [];
+
+    /** @var array  */
+    protected $getVars = [];
 
 
     /**
@@ -34,6 +37,8 @@ class BaseController
 
         $containerBuilder = new ContainerBuilder();
         $this->container = $containerBuilder->build();
+
+        $this->processParameters();
     }
 
     /**
@@ -48,5 +53,18 @@ class BaseController
     protected function render(string $templateName, array $variables = [])
     {
         return $this->twig->render($templateName, $variables);
+    }
+
+    private function processParameters()
+    {
+        foreach ($_GET as $key => $value)
+        {
+            $this->getVars[$key] = $value;
+        }
+
+        foreach ($_POST as $key => $value)
+        {
+            $this->postVars[$key] = $value;
+        }
     }
 }

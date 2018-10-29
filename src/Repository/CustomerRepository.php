@@ -3,6 +3,8 @@
 namespace App\Repository;
 
 use App\Entity\Customer;
+use Aura\SqlQuery\QueryFactory;
+use Core\Error\MissingEntityDetailException;
 use Core\Model\ModelInterface;
 use Core\Repository\AbstractRepository;
 use Core\Repository\RepositoryInterface;
@@ -16,9 +18,52 @@ class CustomerRepository extends AbstractRepository implements RepositoryInterfa
 {
     protected $table = 'customers';
 
-    public function save()
+    /**
+     * @param array $data
+     *
+     * @return ModelInterface
+     * @throws MissingEntityDetailException
+     */
+    public function create(array $data): ModelInterface
     {
-        //@todo add functionality
+        if (!isset($data['firstName']) || !isset($data['lastName']) || !isset($data['address']))
+        {
+            throw new MissingEntityDetailException('You must provide a firstName, lastName and address to create a customer');
+        }
+
+        $queryFactory = new QueryFactory('mysql');
+
+        $insert = $queryFactory->newInsert();
+        $insert->into($this->table)
+            ->cols([
+                'first_name',
+                'last_name',
+                'address',
+                'twitter_alias',
+            ])
+            ->bindValues([
+                'first_name' => $data['firstName'],
+                'last_name' => $data['lastName'],
+                'address' => $data['address'],
+                'twitter_alias' => $data['twitterAlias'] ?? null
+            ]);
+
+
+        $sth = $this->db->prepare($insert->getStatement());
+
+        $sth->execute($insert->getBindValues());
+
+        // get the last insert ID
+        $name = $insert->getLastInsertIdName('id');
+        $id = $this->db->lastInsertId($name);
+
+        return $this->hydrateObject([
+            'id' => $id,
+            'first_name' => $data['firstName'],
+            'last_name' => $data['lastName'],
+            'address' => $data['address'],
+            'twitterAlias' => $data['twitterAlias'],
+        ]);
     }
 
     /**

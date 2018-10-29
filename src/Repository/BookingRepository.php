@@ -49,7 +49,7 @@ class BookingRepository extends AbstractRepository implements RepositoryInterfac
         return $return;
     }
 
-    public function save()
+    public function create(array $data): ModelInterface
     {
         //@todo add functionality
     }

@@ -12,6 +12,13 @@ use Core\Model\ModelInterface;
 interface RepositoryInterface
 {
     /**
+     * @param array $data
+     *
+     * @return ModelInterface
+     */
+    public function create(array $data): ModelInterface;
+
+    /**
      * @param array $results
      *
      * @return ModelInterface

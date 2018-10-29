@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Core\Error\MissingEntityDetailException;
 use Core\Model\ModelInterface;
 
 /**
@@ -13,9 +14,6 @@ class Customer implements ModelInterface
 {
     /** @var integer */
     private $id;
-
-    /** @var string */
-    private $title;
 
     /** @var string */
     private $firstName;
@@ -134,22 +132,29 @@ class Customer implements ModelInterface
      */
     public function getFormattedName(): string
     {
+
         return sprintf('%s %s', $this->firstName, $this->lastName);
     }
 
     /**
      * @param array $row
      *
-     * @return Customer
+     * @return Customer|mixed
+     * @throws MissingEntityDetailException
      */
     public static function hydrate(array $row)
     {
+        if (!isset($row['id']) ||  !isset($row['first_name']) || !isset($row['last_name']) || !isset($row['address']))
+        {
+            throw new MissingEntityDetailException('You must provide a first_name, last_name and address to create a customer');
+        }
+
         $customer = new Customer();
         $customer->setFirstName($row['first_name'])
             ->setLastName($row['last_name'])
             ->setAddress($row['address'])
             ->setTwitterAlias($row['twitter_alias'] ?? null)
-            ->setId($row['id']);
+            ->setId($row['id'] ?? null);
 
         return $customer;
     }

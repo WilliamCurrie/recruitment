@@ -13,10 +13,42 @@ use Core\Controller\BaseController;
  */
 class CustomerController extends BaseController
 {
+    /**
+     * @throws \Twig_Error_Loader
+     * @throws \Twig_Error_Runtime
+     * @throws \Twig_Error_Syntax
+     */
     public function createAction()
     {
-        //@todo add functionality
-        echo '501 Not Implemented';
+        return $this->render('customers/create.html.twig');
+    }
+
+    /**
+     * @return string
+     * @throws \Core\Error\MissingEntityDetailException
+     * @throws \DI\DependencyException
+     * @throws \DI\NotFoundException
+     * @throws \Twig_Error_Loader
+     * @throws \Twig_Error_Runtime
+     * @throws \Twig_Error_Syntax
+     */
+    public function saveAction()
+    {
+        /** @var CustomerRepository $customerRepo */
+        $customerRepo = $this->container->get('\\App\Repository\\CustomerRepository');
+
+        /** @var Customer $customer */
+        $customer = $customerRepo->create([
+            'firstName' => $this->postVars['firstName'],
+            'lastName' => $this->postVars['lastName'],
+            'address' => $this->postVars['address'],
+            'twitterAlias' => $this->postVars['twitterAlias'] ?? null,
+        ]);
+
+        //return self::getAllAction();
+
+        header("Location: /customer/{$customer->getId()}");
+        exit();
     }
 
     /**

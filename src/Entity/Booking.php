@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Core\Error\MissingEntityDetailException;
 use Core\Model\ModelInterface;
 use phpDocumentor\Reflection\Types\Integer;
 
@@ -107,11 +108,16 @@ class Booking implements ModelInterface
     /**
      * @param array $row
      *
-     * @return Booking
-     *
+     * @return Booking|mixed
+     * @throws MissingEntityDetailException
      */
     public static function hydrate(array $row)
     {
+        if (!isset($row['id']) ||  !isset($row['customer_id']) || !isset($row['date']) || !isset($row['reference']))
+        {
+            throw new MissingEntityDetailException('You must provide a id, customer_id, date and reference to create a booking');
+        }
+
         $date = new \DateTime($row['date']);
 
         $customer = new Booking();
