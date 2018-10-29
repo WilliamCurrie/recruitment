@@ -57,7 +57,8 @@ class BookingRepository extends AbstractRepository implements RepositoryInterfac
     /**
      * @param array $results
      *
-     * @return array|mixed
+     * @return ModelInterface
+     * @throws \Core\Error\MissingEntityDetailException
      */
     public function hydrateObject(array $results): ModelInterface
     {

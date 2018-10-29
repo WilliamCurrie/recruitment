@@ -113,15 +113,15 @@ class Booking implements ModelInterface
      */
     public static function hydrate(array $row)
     {
-        if (!isset($row['id']) ||  !isset($row['customer_id']) || !isset($row['date']) || !isset($row['reference']))
+        if (!isset($row['id']) ||  !isset($row['customerId']) || !isset($row['date']) || !isset($row['reference']))
         {
-            throw new MissingEntityDetailException('You must provide a id, customer_id, date and reference to create a booking');
+            throw new MissingEntityDetailException('You must provide a id, customerId, date and reference to create a booking');
         }
 
         $date = new \DateTime($row['date']);
 
         $customer = new Booking();
-        $customer->setCustomerId($row['customer_id'])
+        $customer->setCustomerId($row['customerId'])
             ->setBookingDate($date)
             ->setBookingReference($row['reference'])
             ->setId($row['id']);

@@ -36,16 +36,16 @@ class CustomerRepository extends AbstractRepository implements RepositoryInterfa
         $insert = $queryFactory->newInsert();
         $insert->into($this->table)
             ->cols([
-                'first_name',
-                'last_name',
+                'firstName',
+                'lastName',
                 'address',
-                'twitter_alias',
+                'twitterAlias',
             ])
             ->bindValues([
-                'first_name' => $data['firstName'],
-                'last_name' => $data['lastName'],
+                'firstName' => $data['firstName'],
+                'lastName' => $data['lastName'],
                 'address' => $data['address'],
-                'twitter_alias' => $data['twitterAlias'] ?? null
+                'twitterAlias' => $data['twitterAlias'] ?? null
             ]);
 
 
@@ -55,21 +55,16 @@ class CustomerRepository extends AbstractRepository implements RepositoryInterfa
 
         // get the last insert ID
         $name = $insert->getLastInsertIdName('id');
-        $id = $this->db->lastInsertId($name);
+        $data['id'] = $this->db->lastInsertId($name);
 
-        return $this->hydrateObject([
-            'id' => $id,
-            'first_name' => $data['firstName'],
-            'last_name' => $data['lastName'],
-            'address' => $data['address'],
-            'twitterAlias' => $data['twitterAlias'],
-        ]);
+        return $this->hydrateObject($data);
     }
 
     /**
      * @param array $results
      *
-     * @return array|mixed
+     * @return ModelInterface
+     * @throws MissingEntityDetailException
      */
     public function hydrateObject(array $results): ModelInterface
     {

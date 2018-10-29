@@ -144,16 +144,16 @@ class Customer implements ModelInterface
      */
     public static function hydrate(array $row)
     {
-        if (!isset($row['id']) ||  !isset($row['first_name']) || !isset($row['last_name']) || !isset($row['address']))
+        if (!isset($row['id']) ||  !isset($row['firstName']) || !isset($row['lastName']))
         {
-            throw new MissingEntityDetailException('You must provide a first_name, last_name and address to create a customer');
+            throw new MissingEntityDetailException('You must provide a firstName and lastName to create a customer');
         }
 
         $customer = new Customer();
-        $customer->setFirstName($row['first_name'])
-            ->setLastName($row['last_name'])
+        $customer->setFirstName($row['firstName'])
+            ->setLastName($row['lastName'])
             ->setAddress($row['address'])
-            ->setTwitterAlias($row['twitter_alias'] ?? null)
+            ->setTwitterAlias($row['twitterAlias'] ?? null)
             ->setId($row['id'] ?? null);
 
         return $customer;

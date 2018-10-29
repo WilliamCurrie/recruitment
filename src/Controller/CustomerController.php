@@ -24,13 +24,9 @@ class CustomerController extends BaseController
     }
 
     /**
-     * @return string
      * @throws \Core\Error\MissingEntityDetailException
      * @throws \DI\DependencyException
      * @throws \DI\NotFoundException
-     * @throws \Twig_Error_Loader
-     * @throws \Twig_Error_Runtime
-     * @throws \Twig_Error_Syntax
      */
     public function saveAction()
     {

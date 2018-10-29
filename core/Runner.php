@@ -3,7 +3,6 @@
 namespace Core;
 
 use Core\Router\Router;
-use DI\Container;
 use FastRoute;
 
 require_once __DIR__ . '/../vendor/autoload.php';

@@ -4,6 +4,3 @@ db:
   password: password
   database: test
   host: database
-  driver: pdo
-
-

@@ -22,7 +22,7 @@
                     <tr>
                         <td>{{ booking.id }}</td>
                         <td><a href="/customer/{{ booking.customerId }}">View</a></td>
-                        <td>{{ booking.date | date('d/m/Y') }}</td>
+                        <td>{{ booking.bookingDate | date('d/m/Y') }}</td>
                         <td>{{ booking.bookingReference }}</td>
                     </tr>
                 {% endfor %}

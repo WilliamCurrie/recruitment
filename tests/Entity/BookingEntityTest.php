@@ -18,4 +18,18 @@ class BookingEntityTest extends \PHPUnit\Framework\TestCase
 
         $this->assertInstanceOf(\App\Entity\Booking::class, $booking);
     }
+
+    public function testHydrateException()
+    {
+        $this->expectException(\Core\Error\MissingEntityDetailException::class);
+
+        /** @var \App\Entity\Booking $entity */
+        $entity = new \App\Entity\Booking();
+
+        $data = [
+            'first_name' => 'John',
+        ];
+
+        $entity::hydrate($data);
+    }
 }

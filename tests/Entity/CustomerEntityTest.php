@@ -28,4 +28,18 @@ class CustomerEntityTest extends \PHPUnit\Framework\TestCase
 
         $this->assertInstanceOf(\App\Entity\Customer::class, $customer);
     }
+
+    public function testHydrateException()
+    {
+        $this->expectException(\Core\Error\MissingEntityDetailException::class);
+
+        /** @var \App\Entity\Customer $entity */
+        $entity = new \App\Entity\Customer();
+
+        $data = [
+            'first_name' => 'John',
+        ];
+
+        $entity::hydrate($data);
+    }
 }
