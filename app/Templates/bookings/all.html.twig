@@ -1,0 +1,38 @@
+{% extends 'main.html.twig' %}
+
+{% block title %}
+    Bookings
+{% endblock %}
+
+{% block content %}
+    {% if bookings is empty %}
+        No bookings
+    {% else %}
+        <table id="allBookings" class="display">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Customer</th>
+                    <th>Date</th>
+                    <th>Reference</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for booking in bookings %}
+                    <tr>
+                        <td>{{ booking.id }}</td>
+                        <td><a href="/customer/{{ booking.customerId }}">View</a></td>
+                        <td>{{ booking.date | date('d/m/Y') }}</td>
+                        <td>{{ booking.bookingReference }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+{% endblock %}
+
+{% block javascript %}
+$(document).ready( function () {
+    $('#allBookings').DataTable();
+} );
+{% endblock %}

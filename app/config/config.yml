@@ -1,0 +1,9 @@
+db:
+  port: 3306
+  username: testuser
+  password: password
+  database: test
+  host: database
+  driver: pdo
+
+

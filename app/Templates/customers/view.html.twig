@@ -1,0 +1,30 @@
+{% extends 'main.html.twig' %}
+
+{% block title %}
+    {{ customer.getFormattedName() }}
+{% endblock %}
+
+{% block content %}
+    <table>
+        <tr>
+            <th>ID</th>
+            <td>{{ customer.id }}</td>
+        </tr>
+        <tr>
+            <th>First Name</th>
+            <td>{{ customer.firstName }}</td>
+        </tr>
+        <tr>
+            <th>Last Name</th>
+            <td>{{ customer.lastName }}</td>
+        </tr>
+        <tr>
+            <th>Address</th>
+            <td>{{ customer.address }}</td>
+        </tr>
+        <tr>
+            <th>Twitter Alias</th>
+            <td>{{ customer.twitterAlias }}</td>
+        </tr>
+    </table>
+{% endblock %}

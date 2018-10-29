@@ -1,0 +1,26 @@
+{% extends 'main.html.twig' %}
+
+{% block title %}
+    Bookings for {{ customer.firstName }} {{ customer.lastName }}
+{% endblock %}
+
+{% block content %}
+    {% if bookings is empty %}
+        No bookings
+    {% else %}
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Date</th>
+                <th>Reference</th>
+            </tr>
+            {% for booking in bookings %}
+                <tr>
+                    <td>{{ booking.id }}</td>
+                    <td>{{ booking.date | date('d/m/Y') }}</td>
+                    <td>{{ booking.bookingReference }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% endif %}
+{% endblock %}
