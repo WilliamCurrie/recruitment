@@ -10,7 +10,7 @@ class BookingEntityTest extends \PHPUnit\Framework\TestCase
         $data = [
             'reference' => '11dsf3',
             'date' => '1/1/2018',
-            'customer_id' => 1,
+            'customerId' => 1,
             'id' => 999,
         ];
 
@@ -27,7 +27,7 @@ class BookingEntityTest extends \PHPUnit\Framework\TestCase
         $entity = new \App\Entity\Booking();
 
         $data = [
-            'first_name' => 'John',
+            'firstName' => 'John',
         ];
 
         $entity::hydrate($data);

@@ -18,8 +18,8 @@ class CustomerEntityTest extends \PHPUnit\Framework\TestCase
         $entity = new \App\Entity\Customer();
 
         $data = [
-            'first_name' => 'John',
-            'last_name' => 'Smith',
+            'firstName' => 'John',
+            'lastName' => 'Smith',
             'address' => '1 address rd',
             'id' => 999,
         ];
@@ -37,7 +37,7 @@ class CustomerEntityTest extends \PHPUnit\Framework\TestCase
         $entity = new \App\Entity\Customer();
 
         $data = [
-            'first_name' => 'John',
+            'firstName' => 'John',
         ];
 
         $entity::hydrate($data);
