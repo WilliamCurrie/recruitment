@@ -26,5 +26,9 @@
             <th>Twitter Alias</th>
             <td>{{ customer.twitterAlias }}</td>
         </tr>
+        <tr>
+            <th>Bookings</th>
+            <td><a href="/bookings/customer/{{ customer.id }}">View Bookings</a></td>
+        </tr>
     </table>
 {% endblock %}

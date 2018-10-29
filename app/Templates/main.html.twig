@@ -21,9 +21,10 @@
         <nav>
             {% include 'nav.html.twig' %}
         </nav>
-
-        <h2>{% block title %}{% endblock %}</h2>
-        {% block content %}{% endblock %}
+        <div class="container">
+            <h2>{% block title %}{% endblock %}</h2>
+            {% block content %}{% endblock %}
+        </div>
 
         <script>
             {% block javascript %}

@@ -26,6 +26,7 @@ class Runner
             $r->addRoute('POST', '/customer/create', 'Customer:save');
             $r->addRoute('GET', '/bookings/customer/{id:\d+}', 'Booking:getByCustomerId');
             $r->addRoute('GET', '/bookings', 'Booking:getAll');
+            $r->addRoute('GET', '/booking/create', 'Booking:create');
             $r->addRoute('GET', '/', 'Index:index');
         });
 
@@ -42,11 +43,11 @@ class Runner
         $routeInfo = $dispatcher->dispatch($httpMethod, $uri);
         switch ($routeInfo[0]) {
             case FastRoute\Dispatcher::NOT_FOUND:
-                echo '404 - Page not found';
+                echo Router::dispatch('Exception', 'exception404',  []);
                 break;
 
             case FastRoute\Dispatcher::METHOD_NOT_ALLOWED:
-                echo '405 - Method Not Allowed';
+                echo Router::dispatch('Exception', 'exception405',  []);
                 break;
 
             case FastRoute\Dispatcher::FOUND:
