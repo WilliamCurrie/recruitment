@@ -1,139 +1,97 @@
 <?php
-define('DB_PORT', 3306);
+declare(strict_types=1);
+namespace Wranx;
 
-class Customer
-{
+// Bootstrap
+use ArgumentCountError;
+use Exception;
 
-    public $title;
-    public $firstName;
-    public $last_name;
-    public $address;
+require  __DIR__ . '/../config/setup.php';
 
-    function saveCustomer(){
-        $db = new mysqli('database', 'testuser', 'password', 'test', DB_PORT);
-        $db->query('INSERT INTO customers (first_name, second_name) VALUES (\''.$this->firstName.'\', \''.$this->last_name.'\', \''.$this->address.'\')');
-    }
-    function get_our_customers_by_surname(){
-        $db = new \mysqli('database', 'testuser', "password", 'test', DB_PORT);
-        $res = $db->query('SELECT * FROM customers ORDER BY second_name');
-    while($result=$res->fetch_assoc()){
-        echo($this->formatNames($result['first_name'], $result['second_name']));
-    }
-    }
-
-    public function formatNames($firstName, $surname) {
-        $full_name = $firstName .= ' ';
-        $full_name .= $surname;
-
-
-
-        return $full_name;
-    }
-
-
-    function findById(string   $id)
-    {
-        $db = new \mysqli('127.0.0.1', 'testuser', 'password', 'test', DB_PORT);
-        $res = $db->query('SELECT * FROM customers WHERE id = \''.$id.'\'');
-        mysqli_close ($db);
-        return $res;
-    }
-
-            //Get all the customers from the database and output them
-            function getAllCustomers(){
-                $db = new \mysqli('127.0.0.1', 'testuser', 'password', 'test', DB_PORT);
-
-
-
-
-                $res = $db->query('SELECT * FROM customers');
-                print '<table>';
-                while ($result = $res->fetch_assoc()){
-                    echo '<TR>';
-                    echo '<TD>'.$result['first_name'].'</ td>';
-                    echo '<td>'.$result['second_name'].'</ TD>';
-                    echo '</tr>';
-                }
-
-
-
-
-                echo('</table>');
-            }
-
-
-
-
-
+session_start();
+if (isset($_SESSION['saved'])){
+    unset($_SESSION['saved']);
 }
+$_SESSION['saved'] = 0;
 
-
-
-
-class Booking {
-
-    public function GetBookings($id = false)
-    {
-        $sql = "SELCT * FROM bookings";
-        if ($id !== false ) {
-            $sql .= " WHERE customerID=" . $id;
-        }
-
-
-        $db = new \mysqli('127.0.0.1', 'testuser', 'password', 'test', DB_PORT);
-        $res = $db->query($sql);
-
-        while ($result = $res->fetch_assoc()){
-         $User = User::findById($result['customerID']);
-            $return[$result['id']]['customer_name'] = $User->first_name . ' ' . $User->last_name;
-            $return[$result['id']]['booking_reference'] = $result['booking_reference'];
-            $return[$result['id']]['booking_date'] = date('D dS M Y', result['booking_date']);
-        }
-
-        return $return;
-    }
-
-}
-
-
-
-
-?>
-
-
-<!doctype html>
-<html lang="en">
-
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>My Simple  App</title>
-    <link rel="stylesheet" href="css/style.css">
-</head>
-
-<body>
-<h1>Simple Database App</h1>
-
-<?php
 $customer = new Customer();
-$customer->firstName = "Jim";
-$customer->last_name = "Johnson";
-echo($customer->firstName);
-echo($customer->last_name);
-$customer->saveCustomer();
-$customer->get_our_customers_by_surname();
+$customer->setFirstName('Jim');
+$customer->setLastName('Jonson');
+$first = $customer->getFirstName();
+$last = $customer->getLastName();
 
-$customer->getAllCustomers();
-$bookings = new Booking();
-    $results = @$bookings->GetBookings($_GET['customerId']);
-    foreach ($results as $result):
-        echo $result['booking_reference'] . ' - '. $result['customer_name'] . $result['booking_date'];
-    endforeach;
+if ($_SESSION['saved'] === 0){
+    try {
+        $return = $customer->insert($first, $last);
+        $_SESSION['saved'] = 1;
+    } catch (ArgumentCountError $e){
+        echo "<p>Error inserting into the database." . $e->getMessage() . "</p>";
+    }
+}
 
-?>
+// We would use a templating engine in world world.
+// We are working with small data sets here, so fetching all at once.
+// Streaming examples can be seen in classes and unit tested.
 
-</body>
-</html>
+if ($_SESSION['saved'] === 1){
+    $header = <<<EOF
+    <!doctype html>
+    <html lang="en">
 
-<?php ?>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>My Simple  App</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mini.css/3.0.1/mini-default.min.css">
+    </head>
+
+    <body>
+    <h1>Simple Database App</h1>
+EOF;
+
+    $footer = '</body></html>';
+
+    $body = "<h3>Inserted: ";
+    $body .= htmlspecialchars($first, ENT_QUOTES) . ' ' . htmlspecialchars($last, ENT_QUOTES);
+    $body .= "</h3>";
+
+    try {
+        $tmp = $customer->getAllBySurname();
+
+        $body .= "<table style=\"width:100%\">";
+        $body .= "<caption>Customers by last name</caption><thead><th>Full Name</th></thead><tbody>";
+        $body .= "<tbody>";
+        foreach ($tmp as $k => $v){
+            $body .= "<tr>";
+            $body .= "<td>" . htmlspecialchars($v, ENT_QUOTES) . "</td>";
+            $body .= "</tr>";
+        }
+        unset($tmp);
+
+        $body .= "</tbody>";
+        $body .= "</table>";
+    } catch (Exception $e){
+        // log exception
+    }
+
+    $b = new Booking();
+    $tmp = $b->getAll();
+
+    $body .= "<table style=\"width:100%\">";
+    $body .= "<caption>Bookings</caption><thead><th>Reference</th><th>Customer</th><th>Date</th></thead><tbody>";
+    $body .= "<tbody>";
+    foreach ($tmp as $k => $v){
+        $body .= "<tr>";
+        $body .= "<td>" . htmlspecialchars($v['booking_reference']) . "</td>";
+        $body .= "<td>" . htmlspecialchars($v['customer_name']) . "</td>";
+        $body .= "<td>" . htmlspecialchars($v['booking_date']) . "</td>";
+        $body .= "</tr>";
+    }
+    unset($tmp);
+
+    $body .= "</tbody>";
+    $body .= "</table>";
+
+    echo $header . $body . $footer;
+}
