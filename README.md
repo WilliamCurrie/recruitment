@@ -1,16 +1,23 @@
-# Recruitment Exercise
-Please review src/refactor-me.php which contains code that desperately needs improving.  There are a number of bugs and design flaws in it that need addressing.
+# Recruitment Exercise - Refactored
 
-The task is to refactor this code so that it is functional and also much improved from its current state.  Feel free to refactor as much as you like but we'd ask that you don't use a full framework for your test, though we're happy for you to pull in selected components/libraries.  We want you to consider how the code can be improved; is it maintainable, how can it be made to adhere to best practice. 
+I've refactored the code into several files using a very basic MVC structure. No frameworks have been used.
+Oridnarily this would be more advanced to allow for full URLS, 404s etc.
 
-Note, to do well in this test you will need to refactor the code into multiple files.  We would anticipate that a good submission should take no longer than 2-4 hours though better submissions are likely to be towards the end of that.  Please note that submissions with automated tests are preferred. 
+I've also written a custom JS class (ES6) to handle AJAX requests for the "View Bookings" button on the page.
 
-To complete the exercise, please fork this repository and work directly in your fork. Once you've finished create a Pull Request back to this repository so we can view the diff.
+# Technical
 
-## Docker
-We have included a docker setup to allow you to get up and running quickly with this example, though you are under no obligation to use this.  After you have installed docker and forked the repository you will need to:
+Written using NetBeans for PHP 7.2 on a virtual machine with KDE Neon (Ubuntu) running Apache and MariaDB, although full testing was carried out using the PHP -S command.
 
-* Run `docker-compose up` 
-* The sample sql should automatically run 
-* Visit http://localhost:8080 in your browser
+The Javascript file (js/showoff.js) is written using ES6 syntax so will run on any modern browser _except_ IE11 and below. 
+
+#Finally
+
+Forgive the basic layout - my speciality is coding, _not_ design!
+
+
+
+
+
+
 
