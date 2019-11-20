@@ -1,6 +1,20 @@
 version: '3'
 
 services:
+  composer-base:
+    image: composer
+
+  composer:
+    build:
+      context: .
+      dockerfile: ComposerDockerfile
+    volumes:
+      - $PWD:/app
+#    working_dir: /app
+    depends_on:
+      - composer-base
+    command: ["composer", "install"]
+
   app:
     build:
       context: .
@@ -15,7 +29,7 @@ services:
     depends_on:
       - app
     volumes:
-      - ./:/var/www/test
+      - ./public:/var/www/test
       - ./nginx.conf:/etc/nginx/conf.d/default.conf
 
   database:

@@ -1,0 +1,9 @@
+#message {
+
+}
+#messages .info {
+    color: green;
+}
+#messages .warn {
+    color: darkred;
+}

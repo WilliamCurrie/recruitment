@@ -1,0 +1,55 @@
+{% extends "page.html.twig" %}
+
+{% block content %}
+    <h1>Simple Database App</h1>
+
+    <div id="messages">
+        {% for message in messages %}
+            <div class="{{ message.msg_class }}">{{ message.msg }}</div>
+        {% endfor %}
+    </div>
+
+    <form method="post">
+        <label>
+            First Name
+            <input name="first_name" type="text" value="Jim"/>
+        </label>
+        <label>
+            Second Name
+            <input name="second_name" type="text" value="Johnson"/>
+        </label>
+        <input type="submit" value="Add Customer"/>
+    </form>
+
+    {# Sorted Customers (sample) #}
+    <h2>Customers Sorted</h2>
+    {% for customer in customersBySurname %}
+        {{ customer.first_name }} {{ customer.second_name }}<br>
+    {% else %}
+        No customers have been found.
+    {% endfor %}
+
+    {# All Customers #}
+    <h2>Customers</h2>
+    <table>
+        {% for customer in customers %}
+            <tr>
+                <td>{{ customer.first_name }}</td>
+                <td>{{ customer.second_name }}</td>
+                <td><a href="/?customerId={{ customer.id }}">Filter Bookings</a></td>
+            </tr>
+        {% else %}
+            <tr><td colspan="3">No customers have been found.</td></tr>
+        {% endfor %}
+    </table>
+
+    {# Note - refactoring is not supposed to change things?? (bugfixing is ok)#}
+    <h2>Bookings</h2>
+    <table>
+        {% for booking in bookings %}
+            <tr><td>{{ booking.booking_reference }}</td><td>{{ booking.first_name }} {{ booking.second_name }}</td><td>{{ booking.booking_date|date('D jS M Y') }}</td></tr>
+        {% else %}
+            <tr><td colspan="3">No bookings have been found.</td></tr>
+        {% endfor %}
+    </table>
+{% endblock %}
