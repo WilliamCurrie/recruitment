@@ -253,17 +253,18 @@ final class TestIndex extends TestCase
             ->method('getAllCustomers')
             ->willReturnOnConsecutiveCalls($templateVars['customers'], $templateVars['customersBySurname']);
 
-//        $this->mockCustomers->expects($this->once())
-//            ->method('getCustomersBySurname')
-//            ->willReturn($templateVars['customersBySurname']);
-
         $this->indexController->get(['customerId' => 1]);
     }
 
     public function testGetPassesBookingListToTemplate()
     {
         $bookings = [
-            ['booking_reference' => 'JE122', 'first_name' => 'John', 'second_name' => 'Walker', 'booking_date' => '2019-01-01 11:11:11']
+            [
+                'booking_reference' => 'JE122',
+                'first_name' => 'John',
+                'second_name' => 'Walker',
+                'booking_date' => '2019-01-01 11:11:11'
+            ]
         ];
         
         $this->mockTemplate->expects($this->once())

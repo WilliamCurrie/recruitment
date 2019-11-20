@@ -1,10 +1,6 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Rich
- * Date: 16/11/2019
- * Time: 22:11
- */
+
+declare(strict_types=1);
 
 namespace WilliamCurrie\Recruitment;
 

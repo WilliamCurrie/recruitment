@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace WilliamCurrie\Recruitment\Templating;
 
 use WilliamCurrie\Recruitment\Exceptions\TemplatingException;

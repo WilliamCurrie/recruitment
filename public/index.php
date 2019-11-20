@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 use WilliamCurrie\Recruitment\App;
 use WilliamCurrie\Recruitment\Exceptions\UnexpectedRequestMethodException;
 use WilliamCurrie\Recruitment\Exceptions\UriNotFoundException;
 
 $composerAutoloader = __DIR__ . '/../vendor/autoload.php';
 
-// This would not be used in real world code it's just here to explain thing's if first page load is before composer installs dependencies.
+// This would not be used in real world code it's just here to explain thing's if first page load is before composer
+// installs dependencies.
 // A build pipeline would normally ensure dependencies were in place pre-deploy
 if (!file_exists($composerAutoloader)) {
     $message = '[wranx-dev-test] Dependencies not yet installed. ';

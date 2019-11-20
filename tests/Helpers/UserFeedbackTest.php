@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace WilliamCurrie\Tests\Helpers\UserFeedbackTest;
 
 use LogicException;
@@ -46,7 +48,7 @@ class UserFeedbackTest extends TestCase
     public function testUnknownMessageClassesAreRejectedWithException()
     {
         $this->expectException(LogicException::class);
-        $actualAddReturn = $this->userFeedback->add('My message.', 100001);
+        $this->userFeedback->add('My message.', 100001);
     }
 
     public function testEmptyArrayIsReturnedIfThereAreNoMessages()

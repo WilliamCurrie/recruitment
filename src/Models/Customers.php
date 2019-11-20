@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace WilliamCurrie\Recruitment\Models;
 
-use Exception;
 use PDO;
 use WilliamCurrie\Recruitment\Exceptions\DatabaseException;
 use WilliamCurrie\Recruitment\ValueObjects\Customer;
