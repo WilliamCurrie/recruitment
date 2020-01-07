@@ -1,11 +1,11 @@
 <?php
 require __DIR__ . '/../src/config/bootstrap.php';
 
-use Src\Models\Customer;
-use Src\Models\Booking;
+use Src\Repos\CustomerRepo;
+use Src\Repos\BookingRepo;
 
-$customers = new Customer();
-$bookings = new Booking();
+$customerRepo = new CustomerRepo();
+$bookingRepo = new BookingRepo();
 ?>
 
 <!doctype html>
@@ -33,12 +33,12 @@ $bookings = new Booking();
                 </tr>
             </thead>
             <tbody>
-                <?php foreach($customers->getAllCustomers() as $customer) { ?>
+                <?php foreach($customerRepo->list() as $customer) { ?>
                     <tr>
-                        <td><?= $customer['id'] ?></td>
-                        <td><?= $customer['first_name'] ?></td>
-                        <td><?= $customer['last_name'] ?></td>
-                        <td><?= $customer['address'] ?></td>
+                        <td><?= $customer->id ?></td>
+                        <td><?= $customer->first_name ?></td>
+                        <td><?= $customer->last_name ?></td>
+                        <td><?= $customer->address ?></td>
                     </tr>
                 <?php } ?>
             </tbody>
@@ -55,11 +55,11 @@ $bookings = new Booking();
                 </tr>
             </thead>
             <tbody>
-                <?php foreach($bookings->getBookings() as $booking) { ?>
+                <?php foreach($bookingRepo->getBookings() as $booking) { ?>
                     <tr>
-                        <td><?= $booking['booking_reference'] ?></td>
-                        <td><?= $booking['customer_name'] ?></td>
-                        <td><?= $booking['booking_date'] ?></td>
+                        <td><?= $booking->booking_reference ?></td>
+                        <td><?= $booking->customer->formattedName() ?></td>
+                        <td><?= $booking->booking_date ?></td>
                     </tr>
                 <?php } ?>
             </tbody>
