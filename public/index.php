@@ -1,11 +1,24 @@
 <?php
 require __DIR__ . '/../src/config/bootstrap.php';
 
+use Faker\Factory;
 use Src\Repos\CustomerRepo;
 use Src\Repos\BookingRepo;
+use Src\Models\Customer;
 
 $customerRepo = new CustomerRepo();
 $bookingRepo = new BookingRepo();
+$faker = Factory::create();
+
+// Normally wouldn't have this here but I wanted the data set to be a little more substantial
+if (count($customerRepo->list()) < 10) {
+    $customerRepo->save(new Customer([
+        'first_name' => $faker->firstName,
+        'last_name' => $faker->lastName,
+        'address' => $faker->address,
+        'twitter_alias' => $faker->word,
+    ]));
+}
 ?>
 
 <!doctype html>
@@ -16,7 +29,11 @@ $bookingRepo = new BookingRepo();
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>My Simple  App</title>
 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+    <link 
+        rel="stylesheet"
+        href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+        integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu"
+        crossorigin="anonymous">
 
   </head>
   <body>
@@ -33,7 +50,7 @@ $bookingRepo = new BookingRepo();
                 </tr>
             </thead>
             <tbody>
-                <?php foreach($customerRepo->list() as $customer) { ?>
+                <?php foreach ($customerRepo->list() as $customer) { ?>
                     <tr>
                         <td><?= $customer->id ?></td>
                         <td><?= $customer->first_name ?></td>
@@ -55,7 +72,7 @@ $bookingRepo = new BookingRepo();
                 </tr>
             </thead>
             <tbody>
-                <?php foreach($bookingRepo->getBookings() as $booking) { ?>
+                <?php foreach ($bookingRepo->getBookings() as $booking) { ?>
                     <tr>
                         <td><?= $booking->booking_reference ?></td>
                         <td><?= $booking->customer->formattedName() ?></td>
@@ -66,7 +83,13 @@ $bookingRepo = new BookingRepo();
         </table>
     </div>
 
-    <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
+    <script
+        src="https://code.jquery.com/jquery-1.12.4.min.js"
+        integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ"
+        crossorigin="anonymous"></script>
+    <script
+        src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"
+        integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd"
+        crossorigin="anonymous"></script>
   </body>
 </html>

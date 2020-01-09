@@ -1,3 +1,6 @@
+# Index
+Will create Customers until you have 10
+
 # Docker
 Didn't use it as I was coding on Windows 10 and was running Home not professional or enterprise. Because it has an index file should just be able to point an apache webserver to the public directory and it'll work.
 

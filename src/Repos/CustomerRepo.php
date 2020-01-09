@@ -22,11 +22,11 @@ class CustomerRepo
      */
     public function save(Customer $customer)
     {
-        $query = $this->db->prepare('INSERT INTO customers (first_name, second_name, `address`, twitter_alias) VALUES (?, ?, ?, ?)');
+        $query = $this->db->prepare('INSERT INTO customers (first_name, last_name, address, twitter_alias) VALUES (?, ?, ?, ?)');
         $query->bind_param(
             'ssss',
             $customer->first_name,
-            $customer->second_name,
+            $customer->last_name,
             $customer->address,
             $customer->twitter_alias
         );

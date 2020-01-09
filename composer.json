@@ -3,7 +3,8 @@
         "vlucas/phpdotenv": "^4.1",
         "php-di/php-di": "^6.0",
         "nesbot/carbon": "^2.28",
-        "twbs/bootstrap": "^4.4"
+        "twbs/bootstrap": "^4.4",
+        "fzaninotto/faker": "^1.9"
     },
     "autoload": {
         "psr-4": {
