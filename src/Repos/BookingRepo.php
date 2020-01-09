@@ -6,7 +6,8 @@ use Src\config\Database;
 use Src\Models\Booking;
 use Src\Repos\CustomerRepo;
 
-class BookingRepo {
+class BookingRepo
+{
     private $db;
     private $customerRepo;
 

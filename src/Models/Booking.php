@@ -5,7 +5,8 @@ namespace Src\Models;
 use Src\config\Database;
 use Carbon\Carbon;
 
-class Booking {
+class Booking
+{
     public $id;
     public $customer_id;
     public $booking_reference;

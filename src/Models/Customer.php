@@ -2,7 +2,8 @@
 
 namespace Src\Models;
 
-class Customer {
+class Customer
+{
     public $id;
     public $first_name;
     public $last_name;
@@ -18,7 +19,8 @@ class Customer {
         }
     }
 
-    public function formattedName() {
+    public function formattedName()
+    {
         return $this->first_name . ' ' . $this->last_name;
     }
 }
