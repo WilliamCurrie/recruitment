@@ -2,12 +2,18 @@
 
 use Faker\Factory;
 use PHPUnit\Framework\TestCase;
+use Src\config\Database;
 use Src\Models\Customer;
 use Src\Repos\CustomerRepo;
 
-final class EmailTest extends TestCase
+final class CustomerTest extends TestCase
 {
-    private $db;
+    private $customerRepo;
+
+    public function setUp(): void
+    {
+        $this->customerRepo = new CustomerRepo();
+    }
 
     /**
      * @dataProvider customerData
@@ -23,12 +29,15 @@ final class EmailTest extends TestCase
     /**
      * @dataProvider customerData
      */
-    public function testCannotBeCreatedWithIncorrectVariables($data, $shouldBeCreated): void
+    public function testCanCreateAndDeleteCustomers($data, $shouldBeCreated): void
     {
-        $this->markTestSkipped('Adds data to our `live` data. Skipped until fixed');
-        $customerRepo =  new CustomerRepo();
         $customer = new Customer($data);
-        $this->assertEquals($shouldBeCreated, $customerRepo->save($customer));
+        $id = $this->customerRepo->save($customer);
+        $created = (bool) $id;
+        $this->assertEquals($shouldBeCreated, $created);
+        if ($created) {
+            $this->assertTrue($this->customerRepo->delete($id));
+        }
     }
 
     public function customerData()

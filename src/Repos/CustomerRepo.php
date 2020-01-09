@@ -9,6 +9,10 @@ class CustomerRepo
 {
     private $db;
 
+    /**
+     * Contruct the customer data repository
+     *
+     */
     public function __construct()
     {
         $this->db = (new Database())->db;
@@ -18,7 +22,7 @@ class CustomerRepo
      * Save a customer into the database
      *
      * @param Customer $customer the instantiated Customer class you want to save
-     * @return Customer|bool
+     * @return int|bool
      */
     public function save(Customer $customer)
     {
@@ -29,6 +33,24 @@ class CustomerRepo
             $customer->last_name,
             $customer->address,
             $customer->twitter_alias
+        );
+        $result = $query->execute();
+        $query->close();
+        return $result ? $this->db->insert_id : $result;
+    }
+
+    /**
+     * Delete a customer from the database
+     *
+     * @param int $id the id of the customer to delete
+     * @return bool
+     */
+    public function delete(int $id)
+    {
+        $query = $this->db->prepare('DELETE FROM customers WHERE customers.id = ?');
+        $query->bind_param(
+            'i',
+            $id
         );
         $result = $query->execute();
         $query->close();
