@@ -9,16 +9,6 @@ use Src\Models\Customer;
 $customerRepo = new CustomerRepo();
 $bookingRepo = new BookingRepo();
 $faker = Factory::create();
-
-// Normally wouldn't have this here but I wanted the data set to be a little more substantial
-if (count($customerRepo->list()) < 10) {
-    $customerRepo->save(new Customer([
-        'first_name' => $faker->firstName,
-        'last_name' => $faker->lastName,
-        'address' => $faker->address,
-        'twitter_alias' => $faker->word,
-    ]));
-}
 ?>
 
 <!doctype html>
