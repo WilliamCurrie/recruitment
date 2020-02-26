@@ -4,9 +4,15 @@ services:
   app:
     build:
       context: .
-    volumes:
-      - ./:/var/www/test
+      dockerfile: build/Dockerfile
     working_dir: /var/www/test
+    environment:
+      - DEV_MODE=true
+      - APP_ENV=local
+      - DB_HOST=database
+      - DB_DATABASE=test
+      - DB_USER=testuser
+      - DB_PASSWORD=password
 
   nginx:
     image: nginx:1.13
@@ -16,13 +22,12 @@ services:
       - app
     volumes:
       - ./:/var/www/test
-      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+      - ./build/nginx.conf:/etc/nginx/conf.d/default.conf
 
   database:
     image: mysql:5.7
     volumes:
       - dbdata:/var/lib/mysql
-      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
     ports:
       - "33061:3306"
     environment:
@@ -32,4 +37,5 @@ services:
       - "MYSQL_ROOT_PASSWORD=verysecret"
 
 volumes:
-  dbdata: ~
+  dbdata:
+    driver: local

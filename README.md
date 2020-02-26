@@ -1,3 +1,17 @@
+# Refactoring notes
+
+The Docker files have been tweaked to allow the app to run in complete isolation. All you need on your local environment is Docker and Docker compose.
+
+Here are the steps to build and bootstrap the app:
+
+1. Build and run the container with `docker-compose up -d --build`
+2. Once built, access the shell of the container with `docker-compose run app /bin/sh`
+3. Inside the shell, build the schema and seed it with data using `sh build/init.sh`
+
+The app should be ready for viewing in the browser. http://localhost:8080
+
+You can run the unit tests inside the app shell using `vendor/bin/phpunit`
+
 # Recruitment Exercise
 Please review src/refactor-me.php which contains code that desperately needs improving.  There are a number of bugs and design flaws in it that need addressing.
 
