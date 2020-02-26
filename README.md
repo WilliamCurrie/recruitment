@@ -1,6 +1,6 @@
 # Refactoring notes
 
-The Docker files have been tweaked to allow the app to run in complete isolation. All you need on your local environment is Docker and Docker compose.
+The Docker files have been tweaked to allow the app to run in complete isolation. All you need on your local environment is Docker and Docker Compose.
 
 Here are the steps to build and bootstrap the app:
 
@@ -10,7 +10,7 @@ Here are the steps to build and bootstrap the app:
 
 The app should be ready for viewing in the browser. http://localhost:8080
 
-You can run the unit tests inside the app shell using `vendor/bin/phpunit`
+You can run the unit tests inside the app shell using `vendor/bin/phpunit`. The tests use an in-memory Sqlite database ensuring the MySql database is not written to.
 
 # Recruitment Exercise
 Please review src/refactor-me.php which contains code that desperately needs improving.  There are a number of bugs and design flaws in it that need addressing.
