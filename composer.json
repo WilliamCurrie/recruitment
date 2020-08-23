@@ -1,0 +1,28 @@
+{
+  "name": "rjpounder/wranx-test",
+  "description": "Code Test for Wranx",
+  "authors": [
+    {
+      "name": "Robert Pounder",
+      "email": "robert.j.pounder@gmail.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Framework\\": "framework/",
+      "Wranx\\": "src/"
+    },
+    "files": [
+      "framework/helpers.php"
+    ]
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Tests\\": "tests/"
+    }
+  },
+  "require": {
+  },
+  "repositories": [
+  ]
+}
