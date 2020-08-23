@@ -2,9 +2,7 @@
 
 namespace App\Controllers;
 
-use App\Models;
 use App\Views;
-use App\Languages\Language as Language;
 
 /**
  * The base Controller upon which all the other controllers are extended on
