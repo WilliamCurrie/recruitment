@@ -9,7 +9,7 @@ services:
     working_dir: /var/www/test
 
   nginx:
-    image: nginx:1.13
+    image: nginx:1.19
     ports:
       - 8080:80
     depends_on:
@@ -24,12 +24,12 @@ services:
       - dbdata:/var/lib/mysql
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
     ports:
-      - "33061:3306"
+      - "33061:${MYSQL_PORT}"
     environment:
-      - "MYSQL_DATABASE=test"
-      - "MYSQL_USER=testuser"
-      - "MYSQL_PASSWORD=password"
-      - "MYSQL_ROOT_PASSWORD=verysecret"
+      - "MYSQL_DATABASE=${MYSQL_DATABASE}"
+      - "MYSQL_USER=${MYSQL_USER}"
+      - "MYSQL_PASSWORD=${MYSQL_PASSWORD}"
+      - "MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}"
 
 volumes:
   dbdata: ~
