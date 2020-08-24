@@ -1,5 +1,7 @@
 <html>
-    <?php require_once(__DIR__ . '../../shared/header.php'); ?>
+    <?php require_once(__DIR__ . '../../shared/header.php');
+          require_once(__DIR__ . '/components/CustomerTable.php');
+          ?>
 
     <body class="container">
         <div class="row">
@@ -11,18 +13,11 @@
                             <th>First Name</th>
                             <th>Last Name</th>
                             <th>Address</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <?php
-                        foreach ($data['customers'] as $customer){
-                            print "<tr> 
-                                        <td>${customer['first_name']}</td> 
-                                        <td>${customer['second_name']}</td>
-                                        <td>${customer['address']}</td> 
-                                    </tr>";
-                        }
-                        ?>
+                        <?php echo generateTable($data['customers']) ?>
                     </tbody>
                 </table>
             </div>
@@ -41,7 +36,7 @@
                     <tbody>
                         <?php
                         if (empty($data['bookings'])) {
-                            echo "<tr><td colspan='2'>There is no bookings</td></tr>";
+                            echo "<tr><td colspan='2'>There is no bookings for this customer</td></tr>";
                         }
                         else {
                             foreach ($data['bookings'] as $booking){

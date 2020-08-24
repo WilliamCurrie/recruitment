@@ -28,9 +28,9 @@ class Customer extends Model
      * @param $customerData
      * @return bool
      */
-    public function createCustomer($firstName, $lastName) :bool
+    public function createCustomer(string $firstName, string $lastName, string $address) :bool
     {
-        return $this->db->create($this->tableName, ['', $firstName, $lastName], 'iss', 'id,first_name, second_name');
+        return $this->db->create($this->tableName, ['', $firstName, $lastName, $address], 'isss', 'id,first_name, second_name, address');
     }
 
     /**

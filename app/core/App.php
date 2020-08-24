@@ -43,13 +43,15 @@ class App
 
         // Parse the URL
         $this->parseUrl();
-
         try {
+            $url = ucfirst($this->url[1]);
+
             // Check if the controller exists
-            if (isset($this->url[0])) {
-                if (file_exists(__DIR__ . '/../controllers/' . $this->url[0] . '.php')) {
+            if (isset($url)) {
+
+                if (file_exists(__DIR__ . '/../controllers/' . $url .'Controller.php')) {
                     // Set the controller
-                    $this->controller = $this->url[1];
+                    $this->controller = $url.'Controller';
                 }
             }
             require_once(__DIR__ . '/../controllers/' . $this->controller . '.php');
@@ -60,13 +62,18 @@ class App
             $class = 'App\Controllers\\' . $this->controller;
             $this->controller = new $class($this->url);
 
-            // Check if a second parameter exists in the URL
-            if (isset($this->url[1])) {
-                $this->method = 'getInfoByID';
+            if (isset($this->url[2])) {
+                $this->method = 'getInfo';
+
             }
 
             // Call the method from the controller and pass the params
             $data = call_user_func_array([$this->controller, $this->method], $this->url);
+
+            if (!$data) {
+                header('HTTP/1.0 404 Not Found');
+
+            }
 
 
         } catch (HttpException $exception) {
@@ -93,5 +100,6 @@ class App
         if (isset($_GET['url'])) {
             $this->url = explode('/', rtrim($_GET['url'], '/'));
         }
+
     }
 }

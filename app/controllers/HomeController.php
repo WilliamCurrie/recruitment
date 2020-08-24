@@ -36,28 +36,11 @@ class HomeController extends Controller
     }
 
     /**
-     * @return array
-     * @throws HttpException
+     * Get Info method if it needet
      */
-    public function getInfoByID()
+    public function getInfo()
     {
-        $id = $this->url[1];
 
-        if(is_numeric($id)) {
-            $customers = $this->customers->getCustomerByID($id);
-        } else {
-            $customers = $this->customers->getCustomerBySurname($id);
-            $id = $customers[0]['id'];
-        }
-
-        if (empty($customers)) {
-            throw new HttpException('Customer not found');
-        }
-        $bookings = $this->bookings->getBookingById($id);
-
-        $data = ['bookings'=> $bookings,
-                'customers' => $customers];
-
-        return ['content' => $this->view->render($data, 'home/index')];
     }
+
 }

@@ -28,13 +28,13 @@ class HomeControllerTestCest
 
     public function errorPage(AcceptanceTester $I)
     {
-        $I->amOnPage('/thisIsAnInvalidRoute');
+        $I->amOnPage('/customer/43214');
         $I->see('Customer not found');
     }
 
     public function showCustomerDetailsWithBookings(AcceptanceTester $I)
     {
-        $I->amOnPage('/1');
+        $I->amOnPage('/customer/1');
         $I->see('23 Where I live, Liverpool, L1 3TF');
         $I->see('JE122');
         $I->see('JE125');
@@ -43,7 +43,7 @@ class HomeControllerTestCest
 
     public function showCustomerDetailsWithoutBookings(AcceptanceTester $I)
     {
-        $I->amOnPage('/2');
+        $I->amOnPage('/customer/2');
         $I->see('Maher');
         $I->see('Dave');
         $I->see('24 My House, Manchester, M1 3TF');
@@ -52,7 +52,7 @@ class HomeControllerTestCest
 
     public function showCustomerDetailsWithBookingsbyName(AcceptanceTester $I)
     {
-        $I->amOnPage('/Taylor');
+        $I->amOnPage('/customer/Taylor');
         $I->see('26 Palm Avenue, Newcastle, N1 3TF');
         $I->see('LT478');
         $I->see('LT791');
