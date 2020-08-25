@@ -19,8 +19,7 @@ abstract class Controller
     public function __construct(
         RequestContract $request,
         ViewContract $viewGenerator
-    )
-    {
+    ) {
         $this->request = $request;
         $this->viewGenerator = $viewGenerator;
     }

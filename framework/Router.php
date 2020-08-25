@@ -16,6 +16,10 @@ class Router implements RouterContract
     {
         $this->config = $config->get('routes.routes');
         $this->namespace = $config->get('routes.namespace');
+    }
+
+    public function boot()
+    {
         $router = new \Bramus\Router\Router();
         foreach ($this->config as $route => $methods) {
             foreach ($methods as $method => $properties) {

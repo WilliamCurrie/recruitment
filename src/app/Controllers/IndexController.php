@@ -48,7 +48,7 @@ class IndexController extends Controller
             'first_name' => "Jim",
             'second_name' => "Johnson",
         ];
-        if(!$this->customerRepository->save($newCustomer)){
+        if (!$this->customerRepository->save($newCustomer)) {
             throw new \Exception('Error Creating new user');
         }
 

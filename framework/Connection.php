@@ -15,19 +15,20 @@ class Connection implements ConnectionContract
     public function __construct(ConfigContract $config)
     {
         $this->config = $config->get('connection.'.$config->get('connection.use'));
-
         $capsule = new Capsule;
-        $capsule->addConnection([
+        $this->capsule = $capsule;
+    }
+
+    public function boot()
+    {
+        $this->capsule->addConnection([
             "driver" => $this->config['type'],
             "host" => $this->config['host'],
             "database" => $this->config['dbname'],
             "username" => $this->config['user'],
             "password" => $this->config['pass'],
         ]);
-
-        $capsule->setAsGlobal();
-
-        $capsule->bootEloquent();
-        $this->capsule = $capsule;
+        $this->capsule->setAsGlobal();
+        $this->capsule->bootEloquent();
     }
 }

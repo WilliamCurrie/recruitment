@@ -33,9 +33,8 @@ class BookingRepository implements BookingRepositoryContract
         return $this->booking->where('id', $bookingId)->exists();
     }
 
-    public function get($userId = false)
+    public function get($userId)
     {
-
-        return $userId ? $this->booking->where('customerID', $userId)->get() : false;
+        return $this->booking->where('customerID', $userId)->get();
     }
 }

@@ -44,49 +44,4 @@ class Customer extends Eloquent implements CustomerContract
     {
         return $this->first_name . ' ' . $this->second_name;
     }
-
-    public function saveCustomer()
-    {
-        $db = new mysqli('database', 'testuser', 'password', 'test', DB_PORT);
-        $db->query('INSERT INTO customers (, ) VALUES (\''.$this->firstName.'\', \''.$this->last_name.'\', \''.$this->address.'\')');
-    }
-    public function get_our_customers_by_surname()
-    {
-        $db = new \mysqli('database', 'testuser', "password", 'test', DB_PORT);
-        $res = $db->query('SELECT * FROM customers ORDER BY second_name');
-        while ($result=$res->fetch_assoc()) {
-            echo($this->fullName);
-        }
-    }
-
-    public function findById(string  $id)
-    {
-        $db = new \mysqli('database', 'testuser', 'password', 'test', DB_PORT);
-        $res = $db->query('SELECT * FROM customers WHERE id = \''.$id.'\'');
-        mysqli_close($db);
-        return $res;
-    }
-
-    //Get all the customers from the database and output them
-    public function getAllCustomers()
-    {
-        $db = new \mysqli('database', 'testuser', 'password', 'test', DB_PORT);
-
-
-
-
-        $res = $db->query('SELECT * FROM customers');
-        print '<table>';
-        while ($result = $res->fetch_assoc()) {
-            echo '<TR>';
-            echo '<TD>'.$result['first_name'].'</ td>';
-            echo '<td>'.$result['second_name'].'</ TD>';
-            echo '</tr>';
-        }
-
-
-
-
-        echo('</table>');
-    }
 }

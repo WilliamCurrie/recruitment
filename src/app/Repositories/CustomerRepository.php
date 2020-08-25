@@ -43,11 +43,8 @@ class CustomerRepository implements CustomerRepositoryContract
         return  $this->model->get();
     }
 
-    public function exists($id = null){
-        if(!$id){
-            return false;
-        }
-
+    public function exists($id)
+    {
         return $this->model->where('id', $id)->exists();
     }
 }
