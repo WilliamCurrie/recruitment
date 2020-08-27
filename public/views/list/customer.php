@@ -28,7 +28,7 @@
             <td><a class="btn btn-outline-primary" href="/edit/customer/<?= $customer['customerId']; ?>">Edit</a></td>
         </tr>
         <tr <?= count($this->data['customers']) > 1 ? 'class="collapse"' : ''; ?>>
-            <td colspan="5">
+            <td colspan="6">
                 <table class="table table-dark">
                     <thead>
                         <?php if($customer['bookings']): ?>
