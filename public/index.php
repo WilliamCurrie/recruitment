@@ -17,8 +17,8 @@ $app = require __DIR__.'/../bootstrap/app.php';
 
 try {
     $bookings   = $app->make(BookingApp::class);
-    // Save a new User
 
+    // Save a new User
     $customer = $bookings->saveCustomer(['first_name'   => 'Jim', 'second_name' => 'Johnson']);
     echo '<h1>New Customer ID: '.$customer->first().'</h1>';
 
@@ -31,7 +31,10 @@ try {
 
     // Get All Customers
     echo '<h1>Get All Customers</h1>';
-    $customerId = 1;//array_filter($_GET['customerId'], FILTER_SANITIZE_NUMBER_INT) ?: 1;
+    $customerId = 1;
+    if (array_key_exists('customerId', $_GET)) {
+        $customerId = array_filter($_GET['customerId'], FILTER_SANITIZE_NUMBER_INT);
+    }
     $allCustomers   = $bookings->getAllCustomers($customerId);
     echo '<table>';
     foreach ($allCustomers->toArray() as $value){
