@@ -1,0 +1,28 @@
+{
+    "name": "amineabri/recruitment",
+    "require": {
+        "php": ">=7.4",
+        "ext-pdo": "*",
+        "symfony/dotenv": "^3.4",
+        "psr/container": "^1.0",
+      "ext-json": "*"
+    },
+    "autoload": {
+        "files": [
+            "bootstrap/helpers.php"
+        ],
+        "psr-4": {
+            "Wranx\\": "src/",
+            "Wranx\\Application\\": "app/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Wranx\\Tests\\": "tests/"
+        }
+    },
+    "require-dev": {
+        "mockery/mockery": "^1.0",
+        "phpunit/phpunit": "^7.5"
+    }
+}

@@ -1,0 +1,23 @@
+name: Wranx Tech Test
+
+on:
+  pull_request:
+  push:
+    branches:
+      - AMINE-ABRI
+jobs:
+  build:
+    name: Build the application files
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+
+      # Install dependencies
+      - name: Run Composer install
+        run: composer install -q --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist
+      # Configure Application
+      - name: Prepare The Application
+        run: php -r "file_exists('.env') || copy('.env.example', '.env');"
+      # Unit Test
+      - name: Run PHPUnit Test
+        run: vendor/bin/phpunit
