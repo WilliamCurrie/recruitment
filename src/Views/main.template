@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>My Simple  App</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <h1>Simple Database App</h1>
+
+    <h2>All Customers</h2>
+    <?php echo $this->customer_table; ?>
+
+    <h2>Bookings for customer id:&nbsp;<strong><?php echo $this->customer_id;?></stong></h2>
+    <?php echo $this->bookings_table; ?>
+</body>
+</html>

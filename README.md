@@ -14,3 +14,15 @@ We have included a docker setup to allow you to get up and running quickly with 
 * The sample sql should automatically run 
 * Visit http://localhost:8080 in your browser
 
+# Paul Riley Refactor
+The code was refactored in an MVC layout.
+A very simplistic template system was used, rather than importing a package.
+The tests are more functional than unit as they run against the test data 
+
+It wasn't totally clear what the screen layout should be for the final version, so I left that alone and would ask for more information.
+
+ 
+ ##Installation
+The refactored code used Composer Autoload, so a 'composer install' is required
+The entry point is public/index.php - there is only one route
+
