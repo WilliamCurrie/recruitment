@@ -1,0 +1,9 @@
+# Views
+
+# Generator
+class: \Jenssegers\Blade\Blade
+
+# Locations base dir is `app/`
+locations:
+  views: Views
+  cache: Cache

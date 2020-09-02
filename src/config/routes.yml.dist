@@ -1,0 +1,14 @@
+# Routing
+
+# Controller namespace
+namespace: \Wranx\Controllers\
+
+# Routes
+routes:
+  /:
+    GET:
+      controller: IndexController
+      action: index
+    POST:
+      controller: IndexController
+      action: store

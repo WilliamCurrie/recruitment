@@ -1,0 +1,10 @@
+# Connection details
+
+use: production
+
+production:
+  type: mysql
+  host: database
+  user: testuser
+  pass: password
+  dbname: test

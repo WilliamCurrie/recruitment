@@ -8,3 +8,11 @@ RUN docker-php-ext-install \
     pdo \
     pdo_mysql \
     mysqli
+
+RUN php -r "readfile('http://getcomposer.org/installer');" | php -- --install-dir=/usr/bin/ --filename=composer
+
+WORKDIR /var/www/test/
+
+COPY . .
+
+CMD bash -c "composer install"
