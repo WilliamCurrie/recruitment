@@ -16,3 +16,61 @@ We have included a docker setup to allow you to get up and running quickly with 
 * The sample sql should automatically run 
 * Visit http://localhost:8080 in your browser
 
+<!-- TABLE OF CONTENTS -->
+## Table of Contents
+
+* [About the Project](#about-the-project)
+  * [Built With](#built-with)
+* [Getting Started](#getting-started)
+  * [Prerequisites](#prerequisites)
+  * [Installation](#installation)
+
+<!-- ABOUT THE PROJECT -->
+## About The Project
+
+The task is to refactor this code so that it is functional and also much improved from its current state. Feel free to refactor as much as you like but we'd ask that you don't use a full framework for your test, though we're happy for you to pull in selected components/libraries. We want you to consider how the code can be improved; is it maintainable, how can it be made to adhere to best practice.
+
+### Built With
+* Vanilla PHP
+
+
+<!-- GETTING STARTED -->
+## Getting Started
+
+On this task I paid more attention to refactoring the code as you requested.
+
+I followed some design patterns to upgrade the current coding functionality and structure with adhering to best practices.
+
+I have used two packages to help me build the core functionality which are (**psr/container**) and (**symfony/dotenv**).
+
+The first package mainly assists with dependency injection, while the later to read the environment variables.
+
+However, this task you may know can also be built using a separation of concerns, but I skipped the view layer because I want to focus on refactoring the code.
+
+
+### Prerequisites
+
+* COMPOSER
+* PHP +7.2
+* PDO MYSQL
+
+### Installation
+
+After configuring the website with the web server of your choice, the database etc, a few commands need to be run:
+
+1. Clone the repo
+   ```sh
+    git clone https://github.com/amineabri/recruitment.git
+   ```
+      
+2. Copy the .env.example to .env and configure necessary settings:
+   ```
+    cp .env.example .env
+   ```
+   
+3. Import init.sql to your database :
+
+4. Install dependencies:
+   ```
+    composer install
+   ```

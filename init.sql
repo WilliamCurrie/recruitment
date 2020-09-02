@@ -6,12 +6,12 @@ SET FOREIGN_KEY_CHECKS = 0;
 -- ----------------------------
 DROP TABLE IF EXISTS `customers`;
 CREATE TABLE `customers` (
-  `id` int(10) NOT NULL auto_increment,
-  `first_name` varchar(30) NOT NULL,
-  `second_name` varchar(30) NOT NULL,
-  `address` varchar(255) NULL,
-  `twitter_alias` varchar(255) NULL,
-  PRIMARY KEY  (`id`)
+                             `id` int(10) NOT NULL auto_increment,
+                             `first_name` varchar(30) NOT NULL,
+                             `second_name` varchar(30) NOT NULL,
+                             `address` varchar(255) NULL,
+                             `twitter_alias` varchar(255) NULL,
+                             PRIMARY KEY  (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
@@ -19,11 +19,11 @@ CREATE TABLE `customers` (
 -- ----------------------------
 DROP TABLE IF EXISTS `bookings`;
 CREATE TABLE `bookings` (
-  `id` int(10) NOT NULL auto_increment,
-  `customerID` int(11) NOT NULL,
-  `booking_reference` varchar(15) NOT NULL,
-  `booking_date` DATETIME NOT NULL,
-  PRIMARY KEY  (`id`)
+                            `id` int(10) NOT NULL auto_increment,
+                            `customerID` int(11) NOT NULL,
+                            `booking_reference` varchar(15) NOT NULL,
+                            `booking_date` DATETIME NOT NULL,
+                            PRIMARY KEY  (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 INSERT INTO `customers` (id, first_name, second_name, address) VALUES
