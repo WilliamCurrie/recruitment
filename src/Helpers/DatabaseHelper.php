@@ -5,15 +5,15 @@ namespace Bff\Helpers;
 use Exception;
 use mysqli;
 
-define('DB_PORT', 3306);
+define('DB_PORT', 33061);
 
 class DatabaseHelper
 {
     private static $db = null;
     private static $host = '127.0.0.1';
-    private static $user = 'root'; //testuser
-    private static $password = 'root'; //'password'
-    private static $dbname = 'wranx'; // test
+    private static $user = 'testuser';
+    private static $password = 'password';
+    private static $dbname = 'test';
 
     public function __construct()
     {
@@ -44,6 +44,7 @@ class DatabaseHelper
 
     private static function connection()
     {
+
         if (is_null(self::$db)) {
             self::$db = new mysqli(self::$host, self::$user, self::$password, self::$dbname, DB_PORT);
         }
