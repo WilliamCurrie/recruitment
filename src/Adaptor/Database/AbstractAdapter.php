@@ -15,6 +15,7 @@ class AbstractAdapter implements DatabaseInterface
      * This method is only present as an example. Left deliberate 'TODO'.
      *
      * @param  string $required
+     *
      * @return void
      */
     public function escapeString(string $required)

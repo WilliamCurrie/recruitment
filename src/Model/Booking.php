@@ -29,7 +29,7 @@ class Booking
      */
     public function getBookingID(): int
     {
-        return $this->bookingID;
+        return (int)$this->bookingID;
     }
 
     /**
@@ -39,7 +39,7 @@ class Booking
      */
     public function setBookingID($bookingID): Booking
     {
-        $this->bookingID = $bookingID;
+        $this->bookingID = (int)$bookingID;
 
         return $this;
     }

@@ -49,7 +49,7 @@ class IndexControllerFactory /**
      *
      * @return IndexController
      */
-    public function getController()
+    public function getController(): IndexController
     {
         return new IndexController(
             $this->config,

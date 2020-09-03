@@ -9,6 +9,9 @@ namespace Application\Model;
  */
 class Customer
 {
+    /** @var int $customerID */
+    protected $customerID;
+
     /** @var string $firstName */
     protected $firstName;
 
@@ -100,6 +103,26 @@ class Customer
     public function setAddress(string $address): Customer
     {
         $this->address = $address;
+
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getCustomerID(): int
+    {
+        return (int)$this->customerID;
+    }
+
+    /**
+     * @param int $customerID
+     *
+     * @return Customer
+     */
+    public function setCustomerID(int $customerID): Customer
+    {
+        $this->customerID = (int)$customerID;
 
         return $this;
     }
