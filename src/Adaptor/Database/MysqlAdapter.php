@@ -14,11 +14,7 @@ use mysqli_result;
  */
 class MysqlAdapter extends AbstractAdapter
 {
-    /**
-     * 
-     *
-     * @var mysqli $db 
-     */
+    /** @var mysqli $db */
     protected $db;
 
     /**

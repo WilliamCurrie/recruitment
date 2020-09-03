@@ -29,7 +29,7 @@ use Application\Repository\CustomerRepository;
 foreach ($customerRepository->getOurCustomersBySecondName() as $customer) {
     /** NB: this would use a Template engine foreach helper but for brevity raw PHP used */
     echo '<p>' . $customer->formatNames() . '</p>';
-    /** NB: minimal template formatting added, just raw output */
+    /** NB: minimal template formatting added, just raw output pending UI design input */
 }
 
 ?>

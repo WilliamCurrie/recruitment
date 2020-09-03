@@ -15,11 +15,7 @@ use PHPUnit\Framework\TestCase;
  */
 class IndexControllerFactoryTest extends TestCase
 {
-    /**
-     * 
-     *
-     * @var array $config 
-     */
+    /** @var array $config */
     protected $config;
 
     /**

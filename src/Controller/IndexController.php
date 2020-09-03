@@ -18,25 +18,13 @@ use Application\Repository\CustomerRepository;
  */
 class IndexController
 {
-    /**
-     *
-     *
-     * @var array $config
-     */
+    /** @var array $config */
     protected $config;
 
-    /**
-     *
-     *
-     * @var BookingRepository $bookingRepository
-     */
+    /** @var BookingRepository $bookingRepository */
     protected $bookingRepository;
 
-    /**
-     *
-     *
-     * @var CustomerRepository $customerRepository
-     */
+    /** @var CustomerRepository $customerRepository */
     protected $customerRepository;
 
     /**

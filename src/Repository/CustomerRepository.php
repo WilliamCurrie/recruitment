@@ -83,8 +83,9 @@ class CustomerRepository extends AbstractRepository
     function saveCustomer(Customer $customer)
     {
         /**
-         * NB: raw data should be parsed with Input Filters and Validators before building query params.
-         * NB: raw query left for brevity, but this should be built as PDO statement for execution with params bound.
+         * NB: raw data should be parsed with Input Filters and Validators before building query params
+         * NB: raw query left for brevity, but this should be built as PDO statement for execution with params bound
+         *  or explicitly using framework query builder and unit tests
          * NB: for speed a manual sprintf and mysqli_escape_string have been used to build string. DO NOT USE THIS!
          */
         $sql = sprintf(
@@ -110,8 +111,9 @@ class CustomerRepository extends AbstractRepository
         }
 
         /**
-         * NB: raw data should be parsed with Input Filters and Validators before building query params.
-         * NB: raw query left for brevity, but this should be built as PDO statement for execution with params bound.
+         * NB: raw data should be parsed with Input Filters and Validators before building query params
+         * NB: raw query left for brevity, but this should be built as PDO statement for execution with params bound
+         *  or explicitly using framework query builder and unit tests
          * NB: for speed a manual sprintf and mysqli_escape_string have been used to build string. DO NOT USE THIS!
          */
         $res = $this->dbAdapter->query(sprintf("SELECT * FROM customers WHERE id = %d", (int)$id));

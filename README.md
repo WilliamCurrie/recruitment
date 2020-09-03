@@ -1,22 +1,22 @@
 # Changes applied
-* I've tried to keep all code "framework agnostic" to ensure refactor does not add excess code
+* I've tried to keep all code "framework agnostic" to ensure refactor does not add excess code to PR
 * I've added a rudimentary application bootstrap `public/index.php` in the absence of a framework
 * I've added basic `Factory` classes; I would expect that some convention would be used from framework 
 * Moved classes to PSR-4 name spaces
-* As company coding styles are not known, I have implemented a camelCase convention for methods and properties (PSR-FIG)
+* As company coding styles are not known, I have implemented a camelCase convention for methods and properties
 * PSR naming conventions used for classes and methods
-* DB naming convention changed, I normally use snake_case. Added migrations. Charset, FK and engine change. Server defaults should be checked.
-* Removed error suppression `@` but have not specifically added try..catch although could be used in several places
+* DB naming convention changed, to use snake_case. Added migrations. Charset, FK and engine change. Server defaults should be checked.
+* Removed error suppression `@` but have not specifically added try..catch which could be used in several places
 * Moved `refactor-me.php` to `public` folder but file is redundant now, left for reference.
 * Updated `nginx.conf`
-* NB: not all potential Domain structures are in place, for brevity and they could adhere to the main codebase conventions and coding styles
-* Added some basic tests. Normally the framework will include several Abstract TestCase classes to assist with code coverage
+* NB: not all potential Domain structures are in place, for brevity, and they should adhere to the main codebase conventions and coding styles
+* Added two basic tests. Normally the framework will include several Abstract TestCase classes to assist with code coverage, dispatch and DI handling
 * execute tests with `composer test`
-* phinx migrations added for SQL schema update if required in production environment
+* Phinx migrations added for SQL schema update if required in production environment although not engine and charset changes which have greater repercussions
 
 # Changes Ignored
-* No `Router` has been added; I've assumed this would be part of chosen framework
-* Basic database adapter / service has been added, but not PDO; I have utilised a `Repository` which would have access to a specific vendor `Adapter`
+* No `Router` has been added; I've assumed this would be part of chosen framework for this single view
+* Basic database adapter / service has been added, but not PDO (server capabilities not known); I have utilised a `Repository` which would have access to a specific vendor `Adapter`
 * I've not applied any styling to the page view but would presume this should be rendered with Bootstrap or JS framework as required
 * Reference to `User` object; I've assumed that this was meant to be `Customer` rather than a new model which may be a derivative of `Customer`
 
