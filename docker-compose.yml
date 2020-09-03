@@ -7,6 +7,14 @@ services:
     volumes:
       - ./:/var/www/test
     working_dir: /var/www/test
+    depends_on:
+      - database
+    environment:
+      - "MYSQL_HOST=database"
+      - "MYSQL_PORT=3306"
+      - "MYSQL_DATABASE=test"
+      - "MYSQL_USER=testuser"
+      - "MYSQL_PASSWORD=password"
 
   nginx:
     image: nginx:1.13

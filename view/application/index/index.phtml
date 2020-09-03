@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>My Simple App</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+<h1>Simple Database Application</h1>
+
+<?php
+
+use Application\Model\Booking;
+use Application\Model\Customer;
+use Application\Repository\CustomerRepository;
+
+?>
+<p>New Customer:
+    <?php
+    /** @var Customer $customer */
+    echo $customer->getFirstName() . ' ' . $customer->getSecondName();
+    ?></p><?php
+
+/** @var CustomerRepository $customerRepository */
+foreach ($customerRepository->getOurCustomersBySecondName() as $customer) {
+    /** NB: this would use a Template engine foreach helper but for brevity raw PHP used */
+    echo '<p>' . $customer->formatNames() . '</p>';
+    /** NB: minimal template formatting added, just raw output */
+}
+
+?>
+<table><?php
+    foreach ($customerRepository->getAllCustomers() as $customer) { ?>
+        <tr>
+            <td><?php echo $customer->getFirstName(); ?></td>
+            <td><?php echo $customer->getSecondName(); ?></td>
+        </tr>
+    <?php } ?>
+</table><?php
+
+if (!empty($bookings)) {
+    /** @var Booking[] $bookings */
+    foreach ($bookings as $booking) {
+        $names = !empty($booking->getCustomer()) ? $booking->getCustomer()->formatNames() : '';
+        ?><p><?php
+        echo $booking->getBookingReference() . ' - ' . $names . ' - '
+            . $booking->getBookingDate();
+        ?></p><?php
+    }
+} ?>
+
+</body>
+</html>

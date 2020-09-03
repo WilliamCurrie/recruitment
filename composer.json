@@ -1,0 +1,32 @@
+{
+  "name": "billw/recruitment-master",
+  "type": "project",
+  "license": "unlicensed",
+  "authors": [
+    {
+      "name": "BillW",
+      "email": "billw@digify.co.uk"
+    }
+  ],
+  "minimum-stability": "stable",
+  "require": {
+    "ext-mysqli": "*",
+    "phpunit/phpunit": "^8",
+    "robmorgan/phinx": "^0.11.7"
+  },
+  "autoload": {
+    "psr-4": {
+      "Application\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "ApplicationTest\\": "tests/"
+    }
+  },
+  "scripts": {
+    "serve-comment": "php -v 'Builtin web server for local testing only'",
+    "serve": "php -S 0.0.0.0:8080 -t public",
+    "test": "vendor/bin/phpunit tests"
+  }
+}
