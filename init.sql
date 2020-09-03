@@ -33,7 +33,7 @@ INSERT INTO `customers` (`customer_id`, `first_name`, `second_name`, `address`) 
 (3, 'Susan', 'Lewis', '25 Skelmer Road, London, LN1 3TF'),
 (4, 'Lorraine', 'Taylor', '26 Palm Avenue, Newcastle, N1 3TF');
 
-INSERT INTO `bookings` (`customer_id`, booking_reference, booking_date) VALUES
+INSERT INTO `bookings` (`customer_id`, `booking_reference`, `booking_date`) VALUES
 (1, 'JE122', '2017-01-01'),
 (1, 'JE125', '2017-03-02'),
 (4, 'LT478', '2017-02-15'),

@@ -9,10 +9,7 @@ namespace Application\Adaptor\Database;
  */
 class AbstractAdapter implements DatabaseInterface
 {
-    /**
-     * 
-     * framework would provide standard adapter methods and properties 
-     */
+    /** framework would provide standard adapter methods and properties */
 
     /**
      * This method is only present as an example. Left deliberate 'TODO'.

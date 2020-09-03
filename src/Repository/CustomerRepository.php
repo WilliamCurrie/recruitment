@@ -16,7 +16,7 @@ class CustomerRepository extends AbstractRepository
     /**
      * CustomerRepository constructor.
      *
-     * @param array[] $config
+     * @param array $config
      */
     public function __construct(array $config)
     {
@@ -78,7 +78,7 @@ class CustomerRepository extends AbstractRepository
     /**
      * @param Customer $customer
      *
-     * @return bool|mysqli_result[]
+     * @return bool|mysqli_result
      */
     function saveCustomer(Customer $customer)
     {

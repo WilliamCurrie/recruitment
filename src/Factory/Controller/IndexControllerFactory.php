@@ -18,7 +18,7 @@ class IndexControllerFactory /**
  * NB: this would normally extend a frameworks Abstract Factory class for DI etc.
  */
 {
-    /** @var array[] $config */
+    /** @var array $config */
     protected $config;
 
     /** @var BookingRepository $bookRepository */

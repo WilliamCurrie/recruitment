@@ -23,7 +23,7 @@ class BookingRepository extends AbstractRepository
     /**
      * BookingRepository constructor.
      *
-     * @param array[] $config
+     * @param array $config
      */
     public function __construct(array $config)
     {

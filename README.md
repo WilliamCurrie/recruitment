@@ -7,7 +7,6 @@
 * PSR naming conventions used for classes and methods
 * DB naming convention changed, to use snake_case. Added migrations. Charset, FK and engine change. Server defaults should be checked.
 * Removed error suppression `@` but have not specifically added try..catch which could be used in several places
-* Moved `refactor-me.php` to `public` folder but file is redundant now, left for reference.
 * Updated `nginx.conf`
 * NB: not all potential Domain structures are in place, for brevity, and they should adhere to the main codebase conventions and coding styles
 * Added two basic tests. Normally the framework will include several Abstract TestCase classes to assist with code coverage, dispatch and DI handling
