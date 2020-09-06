@@ -6,19 +6,12 @@ class Customer
 {
     public $title;
     public $firstName;
-    public $last_name;
+    public $secondName;
     public $address;
 
-    function saveCustomer() {
-        $db = new \mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME, DB_PORT);
-        if (!$db) {
-            die("STOP OPPOP");
-            throw new \RuntimeException("Couldn't connect to DB");
-        }
-        $db->query("
-            INSERT INTO customers (first_name, second_name)
-            VALUES ('{$this->firstName}', '{$this->last_name}', '{$this->address}'
-        ");
+    public function toString(): string
+    {
+        return "{$this->firstName} {$this->secondName}";
     }
 
     function get_our_customers_by_surname() {
@@ -43,19 +36,4 @@ class Customer
         mysqli_close ($db);
         return $res;
     }
-
-    // Get all the customers from the database and output them
-    function getAllCustomers() {
-        $db = new \mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME, DB_PORT);
-        $res = $db->query('SELECT * FROM customers');
-        print '<table>';
-        while ($result = $res->fetch_assoc()){
-            echo '<TR>';
-            echo '<TD>'.$result['first_name'].'</ td>';
-            echo '<td>'.$result['second_name'].'</ TD>';
-            echo '</tr>';
-        }
-        echo('</table>');
-    }
 }
-

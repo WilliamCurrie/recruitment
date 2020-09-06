@@ -28,7 +28,7 @@ spl_autoload_register(function ($className) {
 
     $filename = SRC_DIR.DIRECTORY_SEPARATOR.str_replace("\\", "/", $className) . '.php';
     if (!file_exists($filename)) {
-        throw new \RuntimeException("AAAAAAA");
+        throw new \RuntimeException("Couldn't load file '{$filename}'");
     }
 
     require_once $filename;

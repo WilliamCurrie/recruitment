@@ -2,6 +2,16 @@
 require_once '../src/common.php';
 
 use App\Entity\Customer;
+use App\Repository\CustomerRepository;
+
+$customerRepository = new CustomerRepository();
+
+$newCustomer = new Customer();
+$newCustomer->firstName = "Jim";
+$newCustomer->secondName = "Johnson";
+$customerRepository->save($newCustomer);
+
+$customers = $customerRepository->getAllCustomers();
 
 ?>
 <!doctype html>
@@ -19,16 +29,8 @@ use App\Entity\Customer;
 <h1>Simple Database App</h1>
 
 <?php
-$customer = new Customer();
-$customer->firstName = "Jim";
-$customer->last_name = "Johnson";
-echo($customer->firstName);
-echo($customer->last_name);
-$customer->saveCustomer();
 /*
-$customer->get_our_customers_by_surname();
 
-$customer->getAllCustomers();
 $bookings = new Booking();
     $results = @$bookings->GetBookings($_GET['customerId']);
     foreach ($results as $result):
@@ -37,6 +39,27 @@ $bookings = new Booking();
 
 */
 ?>
+
+    <p>
+        <strong>Saved customer: </strong>
+        <?= $newCustomer->firstName ?> <?= $newCustomer->secondName ?>
+    </p>
+
+    <p>
+        <strong>All customers: </strong>
+    </p>
+    <table>
+        <tr>
+            <th>First name</th>
+            <th>Last name</th>
+        </tr>
+        <?php foreach ($customers as $customer): ?>
+            <tr>
+                <td><?= $customer->firstName ?></td>
+                <td><?= $customer->secondName ?></td>
+            </tr>
+        <?php endforeach ?>
+    </table>
 
 </body>
 </html>
