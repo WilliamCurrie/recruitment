@@ -15,6 +15,23 @@ class CustomerRepository
         }
     }
 
+    public function findById(int $id): Customer
+    {
+        $res = $this->db->query("SELECT * FROM customers WHERE id = '{$id}'");
+        if (!$res) {
+            throw new \RuntimeException("Failed to save customer: " . $customer->getFullName());
+        }
+
+        $row = $res->fetch_assoc();
+        $customer = new Customer();
+        $customer->id = $row['id'];
+        $customer->firstName = $row['first_name'];
+        $customer->secondName = $row['second_name'];
+        $customer->address = $row['address'];
+
+        return $customer;
+    }
+
     /**
      * @throws \RuntimeException on DB error
      */
@@ -26,7 +43,7 @@ class CustomerRepository
         ");
 
         if (!$res) {
-            throw new \RuntimeException("Failed to save customer: " . $customer->toString());
+            throw new \RuntimeException("Failed to save customer: " . $customer->getFullName());
         }
     }
 
@@ -40,10 +57,16 @@ class CustomerRepository
         $customers = [];
         while ($row = $result->fetch_assoc()) {
             $customer = new Customer();
+            $customer->id = $row['id'];
             $customer->firstName = $row['first_name'];
             $customer->secondName = $row['second_name'];
             $customers[] = $customer;
         }
         return $customers;
+    }
+
+    public function __destruct()
+    {
+        mysqli_close($this->db);
     }
 }

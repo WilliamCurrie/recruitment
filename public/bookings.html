@@ -1,0 +1,53 @@
+<?php
+require_once '../src/common.php';
+
+use App\Repository\CustomerRepository;
+use App\Repository\BookingRepository;
+
+$customerRepository = new CustomerRepository();
+$bookingRepository = new BookingRepository();
+
+$customerId = (int)($_GET['customerId']) ?? null;
+$customer = $customerRepository->findById($customerId);
+
+$bookings = [];
+if ($customerId) {
+    $bookings = $bookingRepository->getBookingsForCustomerId($customerId);
+}
+
+?>
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>My Simple  App</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <h1>Simple Database App</h1>
+
+    <h2>Bookings for <?= $customer->firstName ?> <?= $customer->secondName ?></h2>
+    <table>
+        <tr>
+            <th>Date</th>
+            <th>Reference</th>
+        </tr>
+        <?php foreach ($bookings as $booking): ?>
+            <tr>
+                <td><?= $booking->bookingDate->format('jS M Y') ?></td>
+                <td><?= $booking->bookingReference ?></td>
+            </tr>
+        <?php endforeach ?>
+    </table>
+
+    <p>
+        <td><a href="index.html">Back to index</a></td>
+    </p>
+
+</body>
+</html>
+

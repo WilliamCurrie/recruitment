@@ -3,8 +3,11 @@ require_once '../src/common.php';
 
 use App\Entity\Customer;
 use App\Repository\CustomerRepository;
+use App\Repository\BookingRepository;
 
 $customerRepository = new CustomerRepository();
+
+$customerId = $_GET['customerId'] ?? null;
 
 $newCustomer = new Customer();
 $newCustomer->firstName = "Jim";
@@ -26,19 +29,7 @@ $customers = $customerRepository->getAllCustomers();
 </head>
 
 <body>
-<h1>Simple Database App</h1>
-
-<?php
-/*
-
-$bookings = new Booking();
-    $results = @$bookings->GetBookings($_GET['customerId']);
-    foreach ($results as $result):
-        echo $result['booking_reference'] . ' - '. $result['customer_name'] . $result['booking_date'];
-    endforeach;
-
-*/
-?>
+    <h1>Simple Database App</h1>
 
     <p>
         <strong>Saved customer: </strong>
@@ -52,11 +43,13 @@ $bookings = new Booking();
         <tr>
             <th>First name</th>
             <th>Last name</th>
+            <th></th>
         </tr>
         <?php foreach ($customers as $customer): ?>
             <tr>
                 <td><?= $customer->firstName ?></td>
                 <td><?= $customer->secondName ?></td>
+                <td><a href="bookings.html?customerId=<?= $customer->id ?>">View Booking</a></td>
             </tr>
         <?php endforeach ?>
     </table>

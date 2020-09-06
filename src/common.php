@@ -13,9 +13,6 @@ define('ENVIRONMENT', getenv('ENVIRONMENT'));
 define('BASE_DIR', '..');
 define('SRC_DIR', BASE_DIR.'/src');
 
-/**
- * @todo Make sure this is only displaying exception message in dev mode
- */
 set_exception_handler(function (\Exception $e) {
     if (defined('ENVIRONMENT') && ENVIRONMENT === 'development') {
         echo "<p>EXCEPTION: ".$e->getMessage()." </p>";
