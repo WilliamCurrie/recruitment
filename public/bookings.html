@@ -30,7 +30,7 @@ if ($customerId) {
 <body>
     <h1>Simple Database App</h1>
 
-    <h2>Bookings for <?= $customer->firstName ?> <?= $customer->secondName ?></h2>
+    <h2>Bookings for <?= htmlspecialchars($customer->firstName) ?> <?= htmlspecialchars($customer->secondName) ?></h2>
     <table>
         <tr>
             <th>Date</th>
@@ -39,7 +39,7 @@ if ($customerId) {
         <?php foreach ($bookings as $booking): ?>
             <tr>
                 <td><?= $booking->bookingDate->format('jS M Y') ?></td>
-                <td><?= $booking->bookingReference ?></td>
+                <td><?= htmlspecialchars($booking->bookingReference) ?></td>
             </tr>
         <?php endforeach ?>
     </table>

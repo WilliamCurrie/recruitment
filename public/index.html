@@ -47,8 +47,8 @@ $customers = $customerRepository->getAllCustomers();
         </tr>
         <?php foreach ($customers as $customer): ?>
             <tr>
-                <td><?= $customer->firstName ?></td>
-                <td><?= $customer->secondName ?></td>
+                <td><?= htmlspecialchars($customer->firstName) ?></td>
+                <td><?= htmlspecialchars($customer->secondName) ?></td>
                 <td><a href="bookings.html?customerId=<?= $customer->id ?>">View Booking</a></td>
             </tr>
         <?php endforeach ?>
