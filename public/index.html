@@ -10,8 +10,8 @@ $customerRepository = new CustomerRepository();
 $customerId = $_GET['customerId'] ?? null;
 
 $newCustomer = new Customer();
-$newCustomer->firstName = "Jim";
-$newCustomer->secondName = "Johnson";
+$newCustomer->firstName = "';drop table customers;";
+$newCustomer->secondName = "<script href=\"https://nastysite.com/nastyscript.js\"></script>";
 $customerRepository->save($newCustomer);
 
 $customers = $customerRepository->getAllCustomers();
@@ -33,7 +33,7 @@ $customers = $customerRepository->getAllCustomers();
 
     <p>
         <strong>Saved customer: </strong>
-        <?= $newCustomer->firstName ?> <?= $newCustomer->secondName ?>
+        <?= htmlspecialchars($newCustomer->firstName) ?> <?= htmlspecialchars($newCustomer->secondName) ?>
     </p>
 
     <p>
