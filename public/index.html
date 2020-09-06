@@ -1,5 +1,8 @@
 <?php
-require_once '../src/refactor-me.php';
+require_once '../src/common.php';
+
+use App\Entity\Customer;
+
 ?>
 <!doctype html>
 <html lang="en">
@@ -16,13 +19,13 @@ require_once '../src/refactor-me.php';
 <h1>Simple Database App</h1>
 
 <?php
-/*
 $customer = new Customer();
 $customer->firstName = "Jim";
 $customer->last_name = "Johnson";
 echo($customer->firstName);
 echo($customer->last_name);
 $customer->saveCustomer();
+/*
 $customer->get_our_customers_by_surname();
 
 $customer->getAllCustomers();

@@ -1,9 +1,6 @@
 <?php
-define('DB_HOST', getenv('DB_HOST'));
-define('DB_USER', getenv('DB_USER'));
-define('DB_PASS', getenv('DB_PASS'));
-define('DB_NAME', getenv('DB_NAME'));
-define('DB_PORT', getenv('DB_PORT'));
+
+namespace App\Entity;
 
 class Customer
 {
@@ -14,6 +11,10 @@ class Customer
 
     function saveCustomer() {
         $db = new \mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME, DB_PORT);
+        if (!$db) {
+            die("STOP OPPOP");
+            throw new \RuntimeException("Couldn't connect to DB");
+        }
         $db->query("
             INSERT INTO customers (first_name, second_name)
             VALUES ('{$this->firstName}', '{$this->last_name}', '{$this->address}'
@@ -55,29 +56,6 @@ class Customer
             echo '</tr>';
         }
         echo('</table>');
-    }
-}
-
-class Booking
-{
-    public function GetBookings($id = false)
-    {
-        $sql = "SELECT * FROM bookings";
-        if ($id !== false ) {
-            $sql .= " WHERE customerID=" . $id;
-        }
-
-        $db = new \mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME, DB_PORT);
-        $res = $db->query($sql);
-
-        while ($result = $res->fetch_assoc()){
-            $User = User::findById($result['customerID']);
-            $return[$result['id']]['customer_name'] = $User->first_name . ' ' . $User->last_name;
-            $return[$result['id']]['booking_reference'] = $result['booking_reference'];
-            $return[$result['id']]['booking_date'] = date('D dS M Y', result['booking_date']);
-        }
-
-        return $return;
     }
 }
 
