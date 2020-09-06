@@ -1,9 +1,9 @@
 <?php
-define('DB_HOST', '127.0.0.1');
-define('DB_USER', 'testuser');
-define('DB_PASS', 'password');
-define('DB_NAME', 'test');
-define('DB_PORT', 3306);
+define('DB_HOST', getenv('DB_HOST'));
+define('DB_USER', getenv('DB_USER'));
+define('DB_PASS', getenv('DB_PASS'));
+define('DB_NAME', getenv('DB_NAME'));
+define('DB_PORT', getenv('DB_PORT'));
 
 class Customer
 {
