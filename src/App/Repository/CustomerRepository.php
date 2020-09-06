@@ -37,9 +37,12 @@ class CustomerRepository
      */
     public function save(Customer $customer): void
     {
+        $firstName = $this->db->real_escape_string($customer->firstName);
+        $secondName = $this->db->real_escape_string($customer->secondName);
+        $address = $this->db->real_escape_string($customer->address);
         $res = $this->db->query("
             INSERT INTO customers (first_name, second_name, address)
-            VALUES ('{$customer->firstName}', '{$customer->secondName}', '{$customer->address}')
+            VALUES ('{$firstName}', '{$secondName}', '{$address}')
         ");
 
         if (!$res) {
