@@ -22,4 +22,23 @@ Will go to my faithful linux server, set up environment there (with Apache), dat
 
 14:35 - got a working environment. Had problems with SSL, so due to lack of time I'm just using apache's default dir virtualhost on port 80.
 
+18:30 finished
+
+Result at: http://williamcurrie.themapps.com/index.html
+
+====
+
+Further work:
+
+- needs a proper DB abstraction layer or ORM
+- constructors on entities
+- base class for repositories
+- templating obviously
+- get rid of "SELECT *" and only select what's needed
+- proper bootstrapping / routing / controllers etc
+
+
+
+
+
 
