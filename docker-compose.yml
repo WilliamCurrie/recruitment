@@ -1,22 +1,35 @@
 version: '3'
-
 services:
   app:
     build:
       context: .
     volumes:
-      - ./:/var/www/test
-    working_dir: /var/www/test
-
+      - ./:/app
+    working_dir: /app
+  composer:
+    image: composer:1.9.3
+    environment:
+      - "COMPOSER_CACHE_DIR=/app/.cache/composer"
+    volumes:
+      - .:/app
+    restart: "no"
+  phpunit:
+    image: php:7.4-cli
+    restart: "no"
+    volumes:
+      - .:/app
+    working_dir: /app
+    entrypoint: vendor/bin/phpunit
   nginx:
-    image: nginx:1.13
+    image: nginx:1.17.8-alpine
     ports:
       - 8080:80
     depends_on:
       - app
     volumes:
-      - ./:/var/www/test
-      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+      - .:/app
+      - ./var/log/nginx:/var/log/nginx
+      - .conf/nginx/site.conf:/etc/nginx/conf.d/default.conf
 
   database:
     image: mysql:5.7
