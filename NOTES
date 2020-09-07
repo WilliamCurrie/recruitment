@@ -1,0 +1,44 @@
+Forked repo at about 13:10
+
+Docker broken, wouldn't start (this problem: https://www.google.com/search?q=docker+archlinux+The+unit+docker.socket+has+entered+the+%27failed%27+state+with+result+%27service-start-limit-hit%27.+2020&oq=docker&aqs=chrome.0.69i59l3j69i57j69i60l3.2159j0j1&sourceid=chrome&ie=UTF-8)
+(It was working fine for months, I last used it about 3 weeks ago.)
+
+Reboot appeared to fix it (docker appears to start), but 'docker-compose up' gave this error:
+    Creating network "recruitment_default" with the default driver
+    Creating volume "recruitment_dbdata" with default driver
+    Building app
+    ERROR: Error processing tar file(exit status 1): Error cleaning up after pivot: remove /.pivot_root754256099: device or resource busy
+
+and 'docker ps' gives: Cannot connect to the Docker daemon at unix:///var/run/docker.sock. Is the docker daemon running?
+
+Failed to fix within 30 minutes. Uninstalled docker, tried to reinstall. No dice, complaining about /etc/mtab not existing, which it does.
+
+This system's knackered I think. Will take time to fix. Will try and install docker on win 10...
+
+13:55 - after reading how to install docker on my particular version of windows (Home, version 1909) it promises to be an adventure I'd rather not go on at the moment!
+
+Will go to my faithful linux server, set up environment there (with Apache), database, wrestle with selinux etc...
+
+
+14:35 - got a working environment. Had problems with SSL, so due to lack of time I'm just using apache's default dir virtualhost on port 80.
+
+18:30 finished
+
+Result at: http://williamcurrie.themapps.com/index.html
+
+====
+
+Further work:
+
+- needs a proper DB abstraction layer or ORM
+- constructors on entities
+- base class for repositories
+- templating obviously
+- get rid of "SELECT *" and only select what's needed
+- proper bootstrapping / routing / controllers etc
+
+
+
+
+
+
