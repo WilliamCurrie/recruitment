@@ -1,0 +1,13 @@
+{
+    "autoload": {
+        "psr-4": { "Mfisher\\": "src/" }
+    },
+    "autoload-dev": {
+        "psr-4": { "Mfisher\\Tests\\": "tests/" }
+    },
+    "require": {
+        "doctrine/orm": "^2.7",
+        "php-di/php-di": "^6.2",
+        "vlucas/phpdotenv": "^5.1"
+    }
+}
