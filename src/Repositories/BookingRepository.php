@@ -11,6 +11,8 @@ use Doctrine\ORM\EntityRepository;
 class BookingRepository extends EntityRepository
 {
     /**
+     * Fetches bookings by customer id
+     *
      * @param integer $customerId
      *
      * @return Booking[]
