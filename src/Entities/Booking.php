@@ -7,9 +7,8 @@ use DateTime;
 /**
  * Customer object
  *
- * @Entity
+ * @ORM\Entity(repositoryClass="Mfisher\Repositories\BookingRepository")
  * @Table(name="bookings")
- *
  */
 class Booking
 {
