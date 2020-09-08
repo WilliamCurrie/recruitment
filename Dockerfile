@@ -1,4 +1,4 @@
-FROM php:7.1-fpm
+FROM php:7.4-fpm
 
 RUN buildDeps="libpq-dev libzip-dev libicu-dev" && \
     apt-get update && \
@@ -7,4 +7,6 @@ RUN buildDeps="libpq-dev libzip-dev libicu-dev" && \
 RUN docker-php-ext-install \
     pdo \
     pdo_mysql \
-    mysqli
+    mysqli && docker-php-ext-enable mysqli
+
+
