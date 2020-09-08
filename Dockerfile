@@ -7,4 +7,6 @@ RUN buildDeps="libpq-dev libzip-dev libicu-dev" && \
 RUN docker-php-ext-install \
     pdo \
     pdo_mysql \
-    mysqli
+    mysqli && docker-php-ext-enable mysqli
+
+
