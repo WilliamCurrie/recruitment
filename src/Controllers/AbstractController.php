@@ -16,6 +16,11 @@ abstract class AbstractController
      */
     private $renderEngine;
 
+    /**
+     * Constructor for AbstractController
+     *
+     * @param Mustache_Engine $renderEngine
+     */
     public function __construct(Mustache_Engine $renderEngine)
     {
         $this->renderEngine = $renderEngine;
@@ -28,7 +33,7 @@ abstract class AbstractController
      * @param array  $args
      * @return ResponseInterface
      */
-    protected function render(string $templateName, array $args): ResponseInterface
+    protected function render(string $templateName, array $args = []): ResponseInterface
     {
         $template = $this->renderEngine->loadTemplate($templateName);
         $page = $template->render($args);
