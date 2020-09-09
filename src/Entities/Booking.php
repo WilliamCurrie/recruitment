@@ -16,7 +16,7 @@ class Booking
     public const REPOSITORY_NAME = 'Mfisher\Entities\Booking';
 
     /** @var string */
-    private const SHORT_DATE_FORMAT = 'd/m/Y';
+    private const DATE_FORMAT = 'D dS M Y';
 
     /**
      * @var int|null
@@ -120,7 +120,7 @@ class Booking
     */
     public function getBookingDateFormated(): ?string
     {
-        return $this->getBookingDate()->format(self::SHORT_DATE_FORMAT);
+        return $this->getBookingDate()->format(self::DATE_FORMAT);
     }
 
     /**
