@@ -7,10 +7,12 @@ namespace Mfisher\Entities;
  *
  * @Entity
  * @Table(name="customers")
- *
  */
 class Customer
 {
+    /** @var string */
+    public const REPOSITORY_NAME = 'Mfisher\Entities\Customer';
+
     /**
      * @var int|null
      * 
@@ -30,9 +32,9 @@ class Customer
     /**
      * @var string|null
      *
-     * @Column(type="string", length=30, name="last_name")
+     * @Column(type="string", length=30, name="second_name")
      */
-    private $lastName;
+    private $secondName;
 
     /**
      * @var string|null
@@ -53,7 +55,7 @@ class Customer
      */
     public function getId(): ?int
     {
-        return $this->getId();
+        return $this->id;
     }
 
     /**
@@ -89,19 +91,19 @@ class Customer
     /**
      * @return string|null
      */
-    public function getLastName(): ?string
+    public function getSecondName(): ?string
     {
-        return $this->lastName;
+        return $this->secondName;
     }
 
     /**
-     * @param string $lastName
+     * @param string $secondName
      *
      * @return Customer
      */
-    public function setLastName(string $lastName): Customer
+    public function setSecondName(string $secondName): Customer
     {
-        $this->lastName = $lastName;
+        $this->secondName = $secondName;
 
         return $this;
     }
