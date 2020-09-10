@@ -7,7 +7,7 @@ use Mfisher\Entities\Customer;
 use PHPUnit\Framework\TestCase;
 
 /**
- * Booking tests
+ * Customer tests
  */
 class CustomerTest extends TestCase
 {
