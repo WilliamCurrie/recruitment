@@ -116,11 +116,15 @@ class Booking
     }
 
     /**
-     * @return string|null
+     * @return string
     */
-    public function getBookingDateFormated(): ?string
+    public function getBookingDateFormated(): string
     {
-        return $this->getBookingDate()->format(self::DATE_FORMAT);
+        if (!is_null($this->bookingDate)) {
+            return $this->getBookingDate()->format(self::DATE_FORMAT);
+        }
+
+        return '';
     }
 
     /**

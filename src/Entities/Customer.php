@@ -46,7 +46,7 @@ class Customer
     /**
      * @var string|null
      *
-     * @Column(type="string", length=255, name="twitter_alias")
+     * @Column(type="string", length=255, name="twitter_alias", nullable=true)
      */
     private $twitterAlias;
 
