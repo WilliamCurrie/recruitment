@@ -54,7 +54,7 @@ class Booking
     */
     public function getId(): ?int
     {
-        return $this->getId();
+        return $this->id;
     }
 
     /**

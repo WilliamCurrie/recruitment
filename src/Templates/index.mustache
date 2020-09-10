@@ -12,9 +12,11 @@
     <h1>Customers</h1>
     <table>
         {{# customers }}
-            <td>{{ getFirstName }}</td>
-            <td>{{ getSecondName }}</td>
-            <td><a href="/customer/{{ getId }}/bookings">See bookings</a></td>     
+            <tr>
+                <td>{{ getFirstName }}</td>
+                <td>{{ getSecondName }}</td>
+                <td><a href="/customer/{{ getId }}/bookings">See bookings</a></td>
+            </tr>  
         {{/ customers }}
     </table>
 </html>
