@@ -17,6 +17,7 @@
         "laminas/laminas-httphandlerrunner": "^1.2"
     },
     "require-dev": {
+        "ext-pdo_sqlite": "*",
         "phpunit/phpunit": "^8.5"
     }
 }
